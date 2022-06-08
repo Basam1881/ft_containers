@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/05/28 16:41:40 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/03 14:08:20 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
-template < class T >
-void					vector<T>::func() {
-	
+template < class T, class Alloc = std::allocator<T> >
+void vector<T, std::allocator<T> >::func()
+{
+	std::cout << "FUNC" << std::endl;
 }
 
 
