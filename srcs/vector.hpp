@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/13 20:27:13 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/15 11:13:37 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 # include <string>
 # include <memory>
 # include <cstddef>
+# include <stdexcept>
 # include "iterator.hpp"
+# include "distance.hpp"
+# include "copy.hpp"
 
 namespace ft
 {
@@ -42,9 +45,9 @@ namespace ft
 			typedef size_t																																	           	size_type;
 			
       /* ************************************** Constructors ************************************** */
-			explicit vector (const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(0), _capacity(0) 
+			explicit vector (const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
-			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(n), _capacity(n * 2)
+			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
       {
         _arr = _alloc.allocate(n);
         for (size_t i = 0; i < n; i++)
@@ -55,7 +58,7 @@ namespace ft
       {
         size_type n = ft::distance(first, last);
         _size = n;
-        _capacity = n * 2;
+        _capacity = n;
         _arr = _alloc.allocate(n);
         for (size_t i = 0; i < n; i++)
           _alloc.construct(_arr + i, *first++);
@@ -66,18 +69,15 @@ namespace ft
       }
 			~vector()
       {
-        for (size_type i = 0; i < _size; i++) {
+        for (size_type i = 0; i < _size; i++)
           _alloc.destroy(_arr + i);
-        }
         _alloc.deallocate(_arr, _capacity);
       }
-      
-
 
       /* ************************************** Operators ************************************** */
 			vector &		operator=( vector const & rhs )
       {
-        if (this != rhs)
+        if (this != &rhs)
         {
           if (rhs._size > _capacity)
           {
@@ -87,15 +87,16 @@ namespace ft
             }
             _alloc.deallocate(_arr, _size);
             _arr = _alloc.allocate(rhs._capacity);
-            for (i = 0 ; i != rhs._size; i++) {
+            for (i = 0 ; i < rhs._size; i++) {
               _arr[i] = rhs._arr[i];
             }
           }
           else
           {
             size_type i = 0;
-            for ( ; i < rhs._size; i++)
+            for ( ; i < rhs._size; i++) {
               _arr[i] = rhs._arr[i];
+            }
           }
           _size = rhs._size;
           _capacity = rhs._capacity;
@@ -104,33 +105,34 @@ namespace ft
       }
 
       /* ************************************** Iterators ************************************** */
-			iterator					        	begin() { return _arr; }
-			const_iterator 		        	begin() const { return _arr; }
-			iterator					        	end() { return (_arr + size()); }
-			const_iterator 		        	end() const { return (_arr + size()); }
-			reverse_iterator						rbegin() { return (_arr + size()); }
-			const_reverse_iterator 			rbegin() const { return (_arr + size()); }
-			reverse_iterator						rend() { return _arr; }
-			const_reverse_iterator 			rend() const { return _arr; }
+			iterator					        	begin() { return iterator(_arr); }
+			const_iterator 		        	begin() const { return iterator(_arr); }
+			iterator					        	end() { return iterator(_arr + _size); }
+			const_iterator 		        	end() const { return iterator(_arr + _size); }
+			reverse_iterator						rbegin() { return reverse_iterator(_arr + _size - 1); }
+			const_reverse_iterator 			rbegin() const { return reverse_iterator(_arr + _size - 1); }
+			reverse_iterator						rend() { return reverse_iterator(_arr - 1); }
+			const_reverse_iterator 			rend() const { return reverse_iterator(_arr - 1); }
 
       /* ************************************** Capacity ************************************** */
       size_type size() const { return _size; }
-      size_type max_size() const { return (sizeof(void *) * 8); }
+      size_type max_size() const { return (size_t)(-1) / sizeof(T);/* (sizeof(void *) * 8); */ }
       size_type capacity() const { return _capacity; }
       bool      empty() const { return (_size != 0 ? false : true); }
       void      resize(size_type n, value_type val = value_type())
       {
         if (n > _size && n > _capacity)
         {
-          T * tmp = _alloc.allocate(_size);
+          T * tmp = _alloc.allocate(_capacity);
           size_type i = 0;
-          for ( ; i != _size ; i++) {
+          for ( ; i != _capacity ; i++) {
             tmp[i] = _arr[i];
             _alloc.destroy(_arr + i);
           }
-          _alloc.deallocate(_arr, _size);
+          _alloc.deallocate(_arr, _capacity);
+          _capacity = _size * 2;
           _size = n;
-          _arr = _alloc.allocate(_size);
+          _arr = _alloc.allocate(_capacity);
           size_type j = 0;
           for ( ; j != i; j++) {
             _arr[j] = tmp[j];
@@ -156,8 +158,120 @@ namespace ft
         }
       }
 
+      void reserve (size_type n)
+      {
+        if (n > _capacity)
+        {
+          T * tmp = _alloc.allocate(_capacity);
+          size_type i = 0;
+          // tmp = ft::copy(iterator(begin()), iterator(end()), iterator(tmp));
+          for ( ; i != _size ; i++) {
+            tmp[i] = _arr[i];
+            _alloc.destroy(_arr + i);
+          }
+          _alloc.deallocate(_arr, _capacity);
+          _capacity = n;
+          _arr = _alloc.allocate(_capacity);
+          size_type j = 0;
+          for ( ; j != i; j++) {
+            _arr[j] = tmp[j];
+            _alloc.destroy(tmp + j);
+          }
+          _alloc.deallocate(tmp, _capacity);
+          for ( ; j != _capacity; j++)
+            _arr[j] = value_type();
+        }
+      }
+
       /* ************************************** Element Access ************************************** */
+      reference operator[] (size_type n) { return _arr[n]; }
+      const_reference operator[] (size_type n) const { return _arr[n]; }
+      reference at (size_type n)
+      {
+        if (n >= _size)
+          throw std::out_of_range("ft_vector\n");
+        return _arr[n];
+      }
+      const_reference at (size_type n) const
+      {
+        if (n >= _size)
+          throw std::out_of_range("ft_vector\n");
+        return _arr[n];
+      }
+      reference front() { return *_arr; }
+      const_reference front() const;
+      reference back() { return *(_arr + size() - 1); }
+      const_reference back() const;
+
       /* ************************************** Modifiers ************************************** */
+      template <class InputIterator>
+      void assign (InputIterator first, InputIterator last)
+      {
+        size_type n = ft::distance(first, last);
+        if (n > _capacity) {
+          for (size_type i = 0; i < _capacity ; i++)
+            _alloc.destroy(_arr + i);
+          _alloc.deallocate(_arr, _capacity);
+          _capacity = n;
+          _size = n;
+          _arr = _alloc.allocate(_capacity);
+          for (size_type i = 0; i < _capacity ; i++, first++)
+            _alloc.construct(_arr + i, *first);
+        }
+        else {
+          _size = n;
+          for (size_type i = 0; i < _size; i++) {
+            _alloc.destroy(_arr + i);
+            if (i < n)
+              _arr[i] = *first;
+          }
+        }
+      }
+      void assign (size_type n, const value_type& val) 
+      {
+        if (n > _capacity) {
+          for (size_type i = 0; i < _capacity ; i++)
+            _alloc.destroy(_arr + i);
+          _alloc.deallocate(_arr, _capacity);
+          _capacity = n;
+          _size = n;
+          _arr = _alloc.allocate(_capacity);
+          for (size_type i = 0; i < _capacity ; i++)
+            _arr[i] = val;
+        }
+        else {
+          for (size_type i = 0; i < _capacity; i++) {
+            _alloc.destroy(_arr + i);
+            if (i < n)
+              _arr[i] = val;
+          }
+          _size = n;
+        }
+      }
+
+      void push_back (const value_type& val)
+      {
+        if (_size == _capacity) {
+          T * tmp = _alloc.allocate(_capacity);
+          size_type i = 0;
+          for ( ; i != _capacity ; i++) {
+            tmp[i] = _arr[i];
+            _alloc.destroy(_arr + i);
+          }
+          _alloc.deallocate(_arr, _capacity);
+          _capacity = _size * 2;
+          _size += 1;
+          _arr = _alloc.allocate(_capacity);
+          size_type j = 0;
+          for ( ; j != i; j++) {
+            _arr[j] = tmp[j];
+            _alloc.destroy(tmp + j);
+          }
+          _alloc.deallocate(tmp, _size);
+          _arr[j] = val;
+        }
+      }
+      
       /* ************************************** Allocator ************************************** */
       
 		private:
