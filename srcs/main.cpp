@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/15 11:19:50 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/15 20:31:06 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int main() {
   std::cout << "back    : " << v.back() << std::endl;
   std::cout << "----------------------- v1 -----------------------\n";
   std::vector<int> v1(v);
-  v1.assign(10, 300);
+  v1.assign(5, 300);
+  v1.insert(v1.begin() + 2, 5, 5);
   std::cout << "v       : ";
   for (std::vector<int>::iterator it1(v1.begin()); it1 != v1.end(); it1++)
     std::cout << *it1 << " ";
@@ -74,9 +75,10 @@ int main() {
 
   std::cout << "---------------------- ft_v1 ----------------------\n";
   ft::vector<int> ft_v1(ft_v);
-  // ft::vector<int>::iterator iit = ft_it + it ;
-  ft_v1.assign(v1.begin(), v1.end());
-  ft_v1.push_back(50);
+  // ft_v1.reserve(20);
+  ft_v1.insert(ft_v1.begin() + 2, 5, 5);
+  // ft::vector<int>::const_iterator ft_itc(ft_v1.begin());
+  // ft::vector<int>::const_iterator ft_itc1 = ft_v1.begin();
   ft::vector<int>::iterator ft_it1(ft_v1.begin());
   std::cout << "ft_v1   : ";
   for ( ; ft_it1 != ft_v1.end(); ft_it1++)

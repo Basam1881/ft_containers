@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy.hpp                                           :+:      :+:    :+:   */
+/*   copy_backward.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 17:26:56 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/15 16:38:15 by bnaji            ###   ########.fr       */
+/*   Created: 2022/06/15 16:11:53 by bnaji             #+#    #+#             */
+/*   Updated: 2022/06/15 20:11:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COPY_HPP
-# define COPY_HPP
+#ifndef COPY_BACKWARD_HPP
+# define COPY_BACKWARD_HPP
 
 # include <iostream>
 # include <string>
@@ -21,16 +21,12 @@
 
 namespace ft
 {
-  template<class InputIterator, class OutputIterator>
-    OutputIterator copy (InputIterator first, InputIterator last, OutputIterator result)
+  template<class BidirectionalIterator1, class BidirectionalIterator2>
+  BidirectionalIterator2 copy_backward ( BidirectionalIterator1 first, BidirectionalIterator1 last, BidirectionalIterator2 result )
   {
-    while (first!=last) {
-      *result = *first;
-      ++result; ++first;
-    }
+    while (last!=first) *(--result) = *(--last);
     return result;
   }
 }
 
-#endif /* ********************************************************** COPY_H */
-
+#endif /* ********************************************************** COPY_BACKWARD_H */

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/15 11:13:37 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/15 20:32:17 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "iterator.hpp"
 # include "distance.hpp"
 # include "copy.hpp"
+# include "copy_backward.hpp"
 
 namespace ft
 {
@@ -178,8 +179,8 @@ namespace ft
             _alloc.destroy(tmp + j);
           }
           _alloc.deallocate(tmp, _capacity);
-          for ( ; j != _capacity; j++)
-            _arr[j] = value_type();
+          // for ( ; j != _capacity; j++)
+          //   _arr[j] = value_type();
         }
       }
 
@@ -272,6 +273,53 @@ namespace ft
         }
       }
       
+      void pop_back()
+      {
+        _alloc.destroy(_arr + _size-- - 1);
+      }
+
+      iterator insert (iterator position, const value_type& val)
+      {
+        if (_size == _capacity) {
+          iterator itmp = begin();
+          // size_type tmp = ft::distance(itmp, position);
+          size_type i = 0;
+          for( ; itmp != position; itmp++, i++);
+          reserve(_size * 2);
+          position = begin() + i;
+        }
+        ++_size;
+        printArr();
+        ft::copy_backward(position , end() - 1, end() );
+        std::cout << ":";
+        
+        printArr();
+        *position = val;
+        return begin();
+      }
+
+      void insert (iterator position, size_type n, const value_type& val)
+      {     
+        // std::cout << "size    : " << _size << std::endl;
+        // std::cout << "capacity: " << _capacity << std::endl;
+        for ( size_type i = 0; i < n; i++) {
+          insert(position + i, val);
+        // std::cout << "size    : " << _size << std::endl;
+        // std::cout << "capacity: " << _capacity << std::endl;
+          // insert(position, val);
+          printArr();
+          // (void)position;
+          // (void)val;
+          // (void)n;
+        }
+      }
+      // template <class InputIterator>
+      // void insert (iterator position, InputIterator first, InputIterator last)
+      // {
+        
+      // }
+      
+      
       /* ************************************** Allocator ************************************** */
       
 		private:
@@ -279,6 +327,13 @@ namespace ft
 			T *							_arr;
 			size_type				_size;
 			size_type				_capacity;
+      void printArr() {
+        size_type i = 0;
+        for (; i != size(); i++)
+          std::cout << _arr[i] << ' ';
+        std::cout << _arr[i] << ' ';
+        std::cout << std::endl;
+      }
 
 	};
 }
