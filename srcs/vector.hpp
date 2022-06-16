@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/15 20:32:17 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/16 02:17:19 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,35 +289,29 @@ namespace ft
           position = begin() + i;
         }
         ++_size;
-        printArr();
         ft::copy_backward(position , end() - 1, end() );
-        std::cout << ":";
-        
-        printArr();
         *position = val;
         return begin();
       }
 
       void insert (iterator position, size_type n, const value_type& val)
-      {     
-        // std::cout << "size    : " << _size << std::endl;
-        // std::cout << "capacity: " << _capacity << std::endl;
-        for ( size_type i = 0; i < n; i++) {
-          insert(position + i, val);
-        // std::cout << "size    : " << _size << std::endl;
-        // std::cout << "capacity: " << _capacity << std::endl;
-          // insert(position, val);
-          printArr();
-          // (void)position;
-          // (void)val;
-          // (void)n;
-        }
+      {
+        iterator itmp = begin();
+        size_type i = 0;
+        for( ; itmp != position; itmp++, i++);
+        for ( size_type j = 0; j < n; j++)
+          insert(begin() + i + j, val);
       }
-      // template <class InputIterator>
-      // void insert (iterator position, InputIterator first, InputIterator last)
-      // {
-        
-      // }
+      
+      template <class InputIterator>
+      void insert (iterator position, InputIterator first, InputIterator last)
+      {
+        iterator itmp = begin();
+        size_type i = 0;
+        for( ; itmp != position; itmp++, i++);
+        for ( size_type j = 0; first != last; first++, j++)
+          insert(begin() + i + j, *first);
+      }
       
       
       /* ************************************** Allocator ************************************** */
@@ -331,7 +325,6 @@ namespace ft
         size_type i = 0;
         for (; i != size(); i++)
           std::cout << _arr[i] << ' ';
-        std::cout << _arr[i] << ' ';
         std::cout << std::endl;
       }
 
