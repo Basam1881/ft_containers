@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/17 12:14:52 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/17 18:57:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "distance.hpp"
 # include "copy.hpp"
 # include "copy_backward.hpp"
+# include "enable_if.hpp"
+# include "is_integral.hpp"
 
 namespace ft
 {
@@ -54,18 +56,21 @@ namespace ft
         for (size_t i = 0; i < n; i++)
           _alloc.construct(_arr + i, val);
       }
-			// template <class InputIterator>
-			// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _arr(NULL)
-      // {
-      //   size_type n = ft::distance(first, last);
-      //   // size_type n = 5;
-      //   // (void)last;
-      //   _size = n;
-      //   _capacity = n;
-      //   _arr = _alloc.allocate(n);
-      //   for (size_t i = 0; i < n; i++)
-      //     _alloc.construct(_arr + i, *first++);
-      // }
+			template <class InputIterator>
+			vector (InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _arr(NULL)
+      {
+        // size_type n = ft::distance(first, last);
+        size_type n = 0;
+        iterator it = first;
+        for ( ; it != last; it++, n++);
+        // size_type n = 5;
+        // (void)last;
+        _size = n;
+        _capacity = n;
+        _arr = _alloc.allocate(n);
+        for (size_t i = 0; i < n; i++)
+          _alloc.construct(_arr + i, *first++);
+      }
 			vector (const vector & x) : _alloc(allocator_type()), _arr(NULL), _size(0), _capacity(0)
       {
         *this = x;
