@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:02:46 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/14 14:22:46 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/16 09:29:38 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ namespace ft
 {
   template<class RandomAccessIterator>
   typename iterator_traits<RandomAccessIterator>::difference_type
-  distance (RandomAccessIterator first, RandomAccessIterator last,  std::random_access_iterator_tag)
+  distance (RandomAccessIterator first, RandomAccessIterator last,  ft::random_access_iterator_tag)
   {
     return last - first;
   }
 
   template<class InputIterator>
   typename iterator_traits<InputIterator>::difference_type
-  distance (InputIterator first, InputIterator last, std::input_iterator_tag)
+  distance (InputIterator first, InputIterator last, ft::input_iterator_tag)
   {
     typename iterator_traits<InputIterator>::difference_type diff;
     for(diff = 0; first != last; first++, diff++);

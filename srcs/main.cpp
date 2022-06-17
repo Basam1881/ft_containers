@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/16 02:11:06 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/17 12:13:13 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 #include <string>
 #include <vector>
 #include "vector.hpp"
+#include "vectorTests.hpp"
 
 int main() {
+  vectorBasic(true);
+  std::cout << "\n\n\n" << std::endl;
   std::cout << "----------------------- v -----------------------\n";
   std::vector<int> v(5, 500);
   size_t i = 0;
@@ -41,13 +44,15 @@ int main() {
   std::cout << "----------------------- v1 -----------------------\n";
   std::vector<int> v1(v);
   v1.assign(5, 300);
-  // for(int i = 0; i < 1; i++)
+  // for(int i = 0; i < 8; i++)
   //   v1.push_back(5);
-  v1.insert(v1.begin() , v1.begin() + 2, v1.end());
+  v1.insert(v1.begin() + v1.size() , v.begin() + 2 , v.end());
+  v1.erase(v1.begin(), v1.begin() + 5);
   std::cout << "v       : ";
   for (std::vector<int>::iterator it1(v1.begin()); it1 != v1.end(); it1++)
     std::cout << *it1 << " ";
   std::cout << std::endl;
+  std::cout << "size: " << v1.size() << std::endl;
   std::cout << "capacity: " << v1.capacity() << std::endl;
 
   std::cout << "---------------------- ft_v ----------------------\n";
@@ -77,12 +82,15 @@ int main() {
 
   std::cout << "---------------------- ft_v1 ----------------------\n";
   ft::vector<int> ft_v1(ft_v);
+  // ft_v.assign(5, 500);
   // ft_v1.reserve(20);
-  ft_v1.insert(ft_v1.begin() + 5 , 6, 5);
+  ft_v1.insert(ft_v1.begin() + ft_v1.size() , ft_v.begin() + 2 , ft_v.end());
+  // std::vector<int>::const_iterator ft_itc(v1.begin());
+  // *ft_itc = *(v1.begin());
   // ft::vector<int>::const_iterator ft_itc(ft_v1.begin());
   // ft::vector<int>::const_iterator ft_itc1 = ft_v1.begin();
   ft::vector<int>::iterator ft_it1(ft_v1.begin());
-  std::cout << "ft_v1   : ";
+    std::cout << "ft_v1   : ";
   for ( ; ft_it1 != ft_v1.end(); ft_it1++)
     std::cout << *ft_it1 << " ";
   std::cout << std::endl;

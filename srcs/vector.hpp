@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/16 02:17:19 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/17 12:14:52 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ namespace ft
 			typedef typename allocator_type::const_reference																          	const_reference;
 			typedef typename allocator_type::pointer																				          	pointer;
 			typedef typename allocator_type::const_pointer																	          	const_pointer;
-			typedef typename ft::iterator<std::random_access_iterator_tag, value_type>			            iterator;
-			typedef typename ft::iterator<std::random_access_iterator_tag, const value_type>            const_iterator;
-			typedef typename ft::reverse_iterator<std::random_access_iterator_tag, value_type>          reverse_iterator;
-			typedef typename ft::reverse_iterator<std::random_access_iterator_tag, const value_type>    const_reverse_iterator;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, value_type>			            iterator;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, const value_type>            const_iterator;
+			typedef typename ft::reverse_iterator<ft::random_access_iterator_tag, value_type>          reverse_iterator;
+			typedef typename ft::reverse_iterator<ft::random_access_iterator_tag, const value_type>    const_reverse_iterator;
 			typedef ptrdiff_t																																           	difference_type;
 			typedef size_t																																	           	size_type;
 			
@@ -54,16 +54,18 @@ namespace ft
         for (size_t i = 0; i < n; i++)
           _alloc.construct(_arr + i, val);
       }
-			template <class InputIterator>
-			vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _arr(NULL)
-      {
-        size_type n = ft::distance(first, last);
-        _size = n;
-        _capacity = n;
-        _arr = _alloc.allocate(n);
-        for (size_t i = 0; i < n; i++)
-          _alloc.construct(_arr + i, *first++);
-      }
+			// template <class InputIterator>
+			// vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _arr(NULL)
+      // {
+      //   size_type n = ft::distance(first, last);
+      //   // size_type n = 5;
+      //   // (void)last;
+      //   _size = n;
+      //   _capacity = n;
+      //   _arr = _alloc.allocate(n);
+      //   for (size_t i = 0; i < n; i++)
+      //     _alloc.construct(_arr + i, *first++);
+      // }
 			vector (const vector & x) : _alloc(allocator_type()), _arr(NULL), _size(0), _capacity(0)
       {
         *this = x;
@@ -107,13 +109,13 @@ namespace ft
 
       /* ************************************** Iterators ************************************** */
 			iterator					        	begin() { return iterator(_arr); }
-			const_iterator 		        	begin() const { return iterator(_arr); }
+			const_iterator 		        	begin() const { return const_iterator(_arr); }
 			iterator					        	end() { return iterator(_arr + _size); }
-			const_iterator 		        	end() const { return iterator(_arr + _size); }
+			const_iterator 		        	end() const { return const_iterator(_arr + _size); }
 			reverse_iterator						rbegin() { return reverse_iterator(_arr + _size - 1); }
-			const_reverse_iterator 			rbegin() const { return reverse_iterator(_arr + _size - 1); }
+			const_reverse_iterator 			rbegin() const { return const_reverse_iterator(_arr + _size - 1); }
 			reverse_iterator						rend() { return reverse_iterator(_arr - 1); }
-			const_reverse_iterator 			rend() const { return reverse_iterator(_arr - 1); }
+			const_reverse_iterator 			rend() const { return const_reverse_iterator(_arr - 1); }
 
       /* ************************************** Capacity ************************************** */
       size_type size() const { return _size; }
@@ -290,6 +292,7 @@ namespace ft
         }
         ++_size;
         ft::copy_backward(position , end() - 1, end() );
+        // printArr();
         *position = val;
         return begin();
       }
@@ -302,17 +305,48 @@ namespace ft
         for ( size_type j = 0; j < n; j++)
           insert(begin() + i + j, val);
       }
-      
+
       template <class InputIterator>
       void insert (iterator position, InputIterator first, InputIterator last)
       {
-        iterator itmp = begin();
         size_type i = 0;
-        for( ; itmp != position; itmp++, i++);
-        for ( size_type j = 0; first != last; first++, j++)
-          insert(begin() + i + j, *first);
+        bool exist = false;
+        for(iterator itmp = begin(); itmp != position; itmp++, i++);
+        for (iterator it = position; it != end(); it++)
+          if (it == first)
+            exist = true;
+        for ( size_type j = 0; first != last  ; first++, j++) {
+          size_type f = 0;
+          size_type n = 0;
+          if (exist) {
+            for(iterator itmp = begin(); itmp != first; itmp++, f++);
+            for(iterator itmp = first; itmp != last; itmp++, n++);
+          }
+          // printArr();
+          T tmp = *first;
+          insert(begin() + i + j, tmp);
+          if (exist) {
+            first = begin() + f;
+            last = first + n;
+          }
+          // std::cout << "HERE\n";
+          // insert(begin() + i + j, first);
+          // std::cout << "HERE\n";
+          // break;
+        }
       }
-      
+
+      // iterator erase (iterator position)
+      // {
+      //   size_type i = store(position);
+      //   reserve(_capacity);
+      //   i = 
+        
+      // }
+      // iterator erase (iterator first, iterator last)
+      // {
+        
+      // }
       
       /* ************************************** Allocator ************************************** */
       
@@ -326,6 +360,13 @@ namespace ft
         for (; i != size(); i++)
           std::cout << _arr[i] << ' ';
         std::cout << std::endl;
+      }
+      
+      size_type store(iterator it) {
+        iterator tmp = begin();
+        size_type i = 0;
+        for( ; tmp != it; tmp++, i++);
+        return i;
       }
 
 	};
