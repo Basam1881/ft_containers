@@ -24,7 +24,7 @@ PROJECT_NAME = ft_containers
 # Starting Date of the project
 DATE = 27 - 05 - 2022
 
-CPP_FILES = main.cpp vectorTests.cpp
+CPP_FILES = main.cpp vectorTests.cpp vTBasic.cpp
 
 SRC_NAME = $(addprefix $(OBJ_DIR), ${CPP_FILES})
 
@@ -36,7 +36,7 @@ OBJ_NAME = $(addprefix $(OBJ_DIR), ${CPP_FILES:%.cpp=%.o})
 OBJ_DIR = objs/
 
 # Compiliation command
-CXX = c++
+CXX = c++ -g
 
 # Compilation flags
 CXX_FLAGS = -Wall -Wextra -Werror -std=c++98

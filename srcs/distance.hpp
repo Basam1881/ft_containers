@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:02:46 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/16 09:29:38 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/18 08:43:26 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ namespace ft
   typename iterator_traits<RandomAccessIterator>::difference_type
   distance (RandomAccessIterator first, RandomAccessIterator last,  ft::random_access_iterator_tag)
   {
-    return last - first;
+    return last.base() - first.base();
   }
 
   template<class InputIterator>

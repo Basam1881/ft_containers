@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:06 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/17 18:51:03 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/18 14:24:14 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ namespace ft
   template <class _Tp> struct is_integral                     : public false_type {};
   template <>          struct is_integral<bool>               : public true_type {};
   template <>          struct is_integral<char>               : public true_type {};
-  template <>          struct is_integral<char16_t>           : public true_type {};
-  template <>          struct is_integral<char32_t>           : public true_type {};
   template <>          struct is_integral<wchar_t>            : public true_type {};
   template <>          struct is_integral<signed char>        : public true_type {};
   template <>          struct is_integral<short>              : public true_type {};

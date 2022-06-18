@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/17 11:09:04 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/18 11:31:24 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,48 @@ void  printAll(std::vector<T> v, ft::vector<T> ft_v);
 #include "vTPrinter.tpp"
 
 template<typename T>
-bool cmpVecs(std::vector<T> v, ft::vector<T> ft_v);
+bool cmpVecs(std::vector<T> & v, ft::vector<T> & ft_v);
 
 template<typename T>
-bool  cmpVecsSize(std::vector<T> v, ft::vector<T> ft_v);
+bool  cmpVecsSize(std::vector<T> & v, ft::vector<T> & ft_v);
 
 template<typename T>
-bool  cmpVecsCap(std::vector<T> v, ft::vector<T> ft_v);
+bool  cmpVecsCap(std::vector<T> & v, ft::vector<T> & ft_v);
 
 template<typename T>
-bool  cmpAll(std::vector<T> v, ft::vector<T> ft_v);
+bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v);
 
 #include "vTCmp.tpp"
+
+std::string testType(size_t testnum);
+
+template<typename T>
+bool  test(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t testnum) {
+  bool test = false;
+  std::cout << WHITE << testnum << BLUE << testType(testnum) << RESET;
+  if (cmpAll<T>(v, ft_v)) {
+    test = true;
+    std::cout << GREEN << "OK" << RESET << std::endl;
+  }
+  else
+    std::cout << RED << "KO" << RESET << std::endl;
+  if (!test || printAllTests)
+    printAll<T>(v, ft_v);
+  std::cout << std::endl;
+  return test;
+}
+
+
+bool  vBasicTest1(bool printAllTests);
+bool  vBasicTest2(bool printAllTests);
+bool  vBasicTest3(bool printAllTests);
+bool  vBasicTest4(bool printAllTests);
+bool  vBasicTest5(bool printAllTests);
+bool  vBasicTest6(bool printAllTests);
+bool  vBasicTest7(bool printAllTests);
+bool  vBasicTest8(bool printAllTests);
+bool  vBasicTest9(bool printAllTests);
+bool  vBasicTest10(bool printAllTests);
 
 bool  vectorBasic(bool printAllTests);
 

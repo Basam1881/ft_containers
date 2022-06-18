@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/16 14:12:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/18 18:53:37 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,17 @@ namespace ft
 
       pointer                   base() const { return _p; }
 
-      const_iterator &		            operator = ( const_iterator const & rhs ) { if (this != &rhs) { _p  = rhs._p; } return *this; }
-      const_iterator  		            operator + ( difference_type n ) const { return (_p + n); }
-      const_iterator  		            operator - ( difference_type n ) const { return (_p - n); }
+      const_iterator &          operator = ( const_iterator const & rhs ) { if (this != &rhs) { _p  = rhs._p; } return *this; }
+      const_iterator            operator + ( difference_type n ) const { return (_p + n); }
+      const_iterator            operator - ( difference_type n ) const { return (_p - n); }
 
-      const_iterator &                operator += (difference_type n) { _p = _p + n; return *this; }
-      const_iterator &                operator ++ () { ++_p; return *this; }
-      const_iterator                  operator ++ (int) { const_iterator tmp(*this); _p++; return (tmp); }
+      const_iterator &          operator += (difference_type n) { _p = _p + n; return *this; }
+      const_iterator &          operator ++ () { ++_p; return *this; }
+      const_iterator            operator ++ (int) { const_iterator tmp(*this); _p++; return (tmp); }
 
-      const_iterator &                operator -= (difference_type n) { _p = _p - n; return *this; }
-      const_iterator &                operator -- () { --_p; return *this; }
-      const_iterator                  operator -- (int) { const_iterator tmp(*this); _p--; return (tmp); }
+      const_iterator &          operator -= (difference_type n) { _p = _p - n; return *this; }
+      const_iterator &          operator -- () { --_p; return *this; }
+      const_iterator            operator -- (int) { const_iterator tmp(*this); _p--; return (tmp); }
 
       bool                    	operator == ( const_iterator const & rhs ) { return (_p == rhs._p); }
       bool             	      	operator != ( const_iterator const & rhs ) { return (_p != rhs._p); }
@@ -124,9 +124,10 @@ namespace ft
       iterator() : const_iterator<Category, T>(){}
       iterator(pointer p) : const_iterator<Category, T>(p) {}
       iterator(iterator<Category, T> const & src) : const_iterator<Category, T>(src) { *this = src; }
+      // iterator(const_iterator<Category, T> & src) : const_iterator<Category, T>(src) { *this = src; }
       ~iterator() {}
 
-      pointer                   base() const { return this->_p; }
+      // pointer                   base() const { return this->_p; }
 
       iterator &		            operator = ( iterator const & rhs ) { if (this != &rhs) { this->_p  = rhs._p; } return *this; }
       iterator  		            operator + ( difference_type n ) const { return (this->_p + n); }
@@ -147,16 +148,14 @@ namespace ft
       // bool             	      	operator > ( iterator const & rhs ) { return (this->_p > rhs._p); }
       // bool             	      	operator < ( iterator const & rhs ) { return (this->_p < rhs._p); }
 
-      reference                 operator * () const { return *(this->_p); }
-      pointer                   operator -> () const { return this->_p; }
+      // reference                 operator * () const { return *(this->_p); }
+      // pointer                   operator -> () const { return this->_p; }
 
       // reference                 operator [] (difference_type const & n) { return this->_p[n]; }
       // template<class iterator>
       // friend typename iterator<ft::random_access_iterator_tag, int>::difference_type operator- (
       //   const iterator<ft::random_access_iterator_tag, int>& lhs,
       //   const iterator<ft::random_access_iterator_tag, int>& rhs);
-    // private:
-    //   pointer     _p;
 	};
 
   
