@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 16:27:05 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/18 17:36:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ namespace ft
 			typedef typename allocator_type::pointer																				          	pointer;
 			typedef typename allocator_type::const_pointer																	          	const_pointer;
 			typedef typename ft::iterator<ft::random_access_iterator_tag, value_type>			              iterator;
-			typedef typename ft::const_iterator<ft::random_access_iterator_tag, const value_type>       const_iterator;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, const value_type>       const_iterator;
 			typedef typename ft::reverse_iterator<ft::random_access_iterator_tag, value_type>           reverse_iterator;
 			typedef typename ft::reverse_iterator<ft::random_access_iterator_tag, const value_type>     const_reverse_iterator;
 			typedef ptrdiff_t																																           	difference_type;

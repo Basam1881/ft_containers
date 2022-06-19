@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 18:56:10 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/18 17:53:28 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 #include "vectorTests.hpp"
 
 int main() {
-  vectorBasic(true);
-  // std::vector<int> v(4);
-  // ft::vector<int>::const_iterator it;
-  // ft::vector<int>::iterator it1(it);
+  // vectorBasic(true);
+  std::vector<int> v(4);
+  ft::vector<int>::const_iterator it;
+  ft::vector<int>::iterator it1 = it;
+  // std::cout << "Here\n";
   // std::is_integral<int>::value;
   
   

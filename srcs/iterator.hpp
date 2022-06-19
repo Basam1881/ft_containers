@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 18:53:37 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/19 02:26:14 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,58 +61,58 @@ namespace ft
   //   return (lhs._p - rhs._p);
   // }
   
-  template <class Category, class T, class Distance = std::ptrdiff_t,
-	  	class Pointer = T*, class Reference = T&>
-	class const_iterator
-  {
-    public:
-        typedef T                                value_type;
-        typedef Distance                         difference_type;
-        typedef Pointer                          pointer;
-        typedef Reference                        reference;
-        typedef Category                         iterator_category;
+  // template <class Category, class T, class Distance = std::ptrdiff_t,
+	//   	class Pointer = T*, class Reference = T&>
+	// class const_iterator
+  // {
+  //   public:
+  //       typedef T                                value_type;
+  //       typedef Distance                         difference_type;
+  //       typedef Pointer                          pointer;
+  //       typedef Reference                        reference;
+  //       typedef Category                         iterator_category;
         
-      const_iterator() : _p(NULL) {}
-      const_iterator(pointer p) : _p(p) {}
-      const_iterator(const_iterator const & src) : _p(NULL) { *this = src; }
-      ~const_iterator() {}
+  //     const_iterator() : _p(NULL) {}
+  //     const_iterator(pointer p) : _p(p) {}
+  //     const_iterator(const_iterator const & src) : _p(NULL) { *this = src; }
+  //     ~const_iterator() {}
 
-      pointer                   base() const { return _p; }
+  //     pointer                   base() const { return _p; }
 
-      const_iterator &          operator = ( const_iterator const & rhs ) { if (this != &rhs) { _p  = rhs._p; } return *this; }
-      const_iterator            operator + ( difference_type n ) const { return (_p + n); }
-      const_iterator            operator - ( difference_type n ) const { return (_p - n); }
+  //     const_iterator &          operator = ( const_iterator const & rhs ) { if (this != &rhs) { _p  = rhs._p; } return *this; }
+  //     const_iterator            operator + ( difference_type n ) const { return (_p + n); }
+  //     const_iterator            operator - ( difference_type n ) const { return (_p - n); }
 
-      const_iterator &          operator += (difference_type n) { _p = _p + n; return *this; }
-      const_iterator &          operator ++ () { ++_p; return *this; }
-      const_iterator            operator ++ (int) { const_iterator tmp(*this); _p++; return (tmp); }
+  //     const_iterator &          operator += (difference_type n) { _p = _p + n; return *this; }
+  //     const_iterator &          operator ++ () { ++_p; return *this; }
+  //     const_iterator            operator ++ (int) { const_iterator tmp(*this); _p++; return (tmp); }
 
-      const_iterator &          operator -= (difference_type n) { _p = _p - n; return *this; }
-      const_iterator &          operator -- () { --_p; return *this; }
-      const_iterator            operator -- (int) { const_iterator tmp(*this); _p--; return (tmp); }
+  //     const_iterator &          operator -= (difference_type n) { _p = _p - n; return *this; }
+  //     const_iterator &          operator -- () { --_p; return *this; }
+  //     const_iterator            operator -- (int) { const_iterator tmp(*this); _p--; return (tmp); }
 
-      bool                    	operator == ( const_iterator const & rhs ) { return (_p == rhs._p); }
-      bool             	      	operator != ( const_iterator const & rhs ) { return (_p != rhs._p); }
-      bool             	      	operator >= ( const_iterator const & rhs ) { return (_p >= rhs._p); }
-      bool             	      	operator <= ( const_iterator const & rhs ) { return (_p <= rhs._p); }
-      bool             	      	operator > ( const_iterator const & rhs ) { return (_p > rhs._p); }
-      bool             	      	operator < ( const_iterator const & rhs ) { return (_p < rhs._p); }
+  //     bool                    	operator == ( const_iterator const & rhs ) { return (_p == rhs._p); }
+  //     bool             	      	operator != ( const_iterator const & rhs ) { return (_p != rhs._p); }
+  //     bool             	      	operator >= ( const_iterator const & rhs ) { return (_p >= rhs._p); }
+  //     bool             	      	operator <= ( const_iterator const & rhs ) { return (_p <= rhs._p); }
+  //     bool             	      	operator > ( const_iterator const & rhs ) { return (_p > rhs._p); }
+  //     bool             	      	operator < ( const_iterator const & rhs ) { return (_p < rhs._p); }
 
-      reference                 operator * () const { return *(_p); }
-      pointer                   operator -> () const { return _p; }
+  //     reference                 operator * () const { return *(_p); }
+  //     pointer                   operator -> () const { return _p; }
 
-      reference                 operator [] (difference_type const & n) { return _p[n]; }
-      // template<class const_iterator>
-      // friend typename const_iterator<ft::random_access_const_iterator_tag, int>::difference_type operator- (
-      //   const const_iterator<ft::random_access_const_iterator_tag, int>& lhs,
-      //   const const_iterator<ft::random_access_const_iterator_tag, int>& rhs);
-    protected:
-      pointer     _p;
-  };
+  //     reference                 operator [] (difference_type const & n) { return _p[n]; }
+  //     // template<class const_iterator>
+  //     // friend typename const_iterator<ft::random_access_const_iterator_tag, int>::difference_type operator- (
+  //     //   const const_iterator<ft::random_access_const_iterator_tag, int>& lhs,
+  //     //   const const_iterator<ft::random_access_const_iterator_tag, int>& rhs);
+  //   protected:
+  //     pointer     _p;
+  // };
   
   template <class Category, class T, class Distance = std::ptrdiff_t,
 	  	class Pointer = T*, class Reference = T&>
-	class iterator : public const_iterator<Category, T>
+	class iterator /* : public const_iterator<Category, T> */
 	{
     public:
         typedef T                                value_type;
@@ -121,15 +121,23 @@ namespace ft
         typedef Reference                        reference;
         typedef Category                         iterator_category;
         
-      iterator() : const_iterator<Category, T>(){}
-      iterator(pointer p) : const_iterator<Category, T>(p) {}
-      iterator(iterator<Category, T> const & src) : const_iterator<Category, T>(src) { *this = src; }
-      // iterator(const_iterator<Category, T> & src) : const_iterator<Category, T>(src) { *this = src; }
+      // iterator() : const_iterator<Category, T>(){}
+      // iterator(pointer p) : const_iterator<Category, T>(p) {}
+      // iterator(iterator<Category, T> const & src) : const_iterator<Category, T>(src) { *this = src; }
+      // iterator(iterator<Category, const T> & src) : const_iterator<Category, T>(src) { *this = src; }
+      // ~iterator() {}
+
+      iterator() : _p(NULL) {}
+      iterator(pointer p) : _p(p) {}
+      // iterator(iterator const & src) : _p(NULL) { *this = src; }
+      iterator(iterator<Category, const T> const & src) : _p(NULL) { *this = src; }
       ~iterator() {}
 
+      pointer                   base() const { return this->_p; }
       // pointer                   base() const { return this->_p; }
 
-      iterator &		            operator = ( iterator const & rhs ) { if (this != &rhs) { this->_p  = rhs._p; } return *this; }
+      // iterator &		            operator = ( iterator const & rhs ) { if (this != &rhs) { this->_p  = rhs._p; } return *this; }
+      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { /* if (this != &rhs) */ this->_p  = rhs.base(); return *this; }
       iterator  		            operator + ( difference_type n ) const { return (this->_p + n); }
       iterator  		            operator - ( difference_type n ) const { return (this->_p - n); }
 
@@ -141,21 +149,23 @@ namespace ft
       iterator &                operator -- () { --this->_p; return *this; }
       iterator                  operator -- (int) { iterator tmp(*this); this->_p--; return (tmp); }
 
-      // bool                    	operator == ( iterator const & rhs ) { return (this->_p == rhs._p); }
-      // bool             	      	operator != ( iterator const & rhs ) { return (this->_p != rhs._p); }
-      // bool             	      	operator >= ( iterator const & rhs ) { return (this->_p >= rhs._p); }
-      // bool             	      	operator <= ( iterator const & rhs ) { return (this->_p <= rhs._p); }
-      // bool             	      	operator > ( iterator const & rhs ) { return (this->_p > rhs._p); }
-      // bool             	      	operator < ( iterator const & rhs ) { return (this->_p < rhs._p); }
+      bool                    	operator == ( iterator const & rhs ) { return (this->_p == rhs._p); }
+      bool             	      	operator != ( iterator const & rhs ) { return (this->_p != rhs._p); }
+      bool             	      	operator >= ( iterator const & rhs ) { return (this->_p >= rhs._p); }
+      bool             	      	operator <= ( iterator const & rhs ) { return (this->_p <= rhs._p); }
+      bool             	      	operator > ( iterator const & rhs ) { return (this->_p > rhs._p); }
+      bool             	      	operator < ( iterator const & rhs ) { return (this->_p < rhs._p); }
 
-      // reference                 operator * () const { return *(this->_p); }
-      // pointer                   operator -> () const { return this->_p; }
+      reference                 operator * () const { return *(this->_p); }
+      pointer                   operator -> () const { return this->_p; }
 
-      // reference                 operator [] (difference_type const & n) { return this->_p[n]; }
+      reference                 operator [] (difference_type const & n) { return this->_p[n]; }
       // template<class iterator>
       // friend typename iterator<ft::random_access_iterator_tag, int>::difference_type operator- (
       //   const iterator<ft::random_access_iterator_tag, int>& lhs,
       //   const iterator<ft::random_access_iterator_tag, int>& rhs);
+      private:
+        pointer     _p;
 	};
 
   

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_integral.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:06 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 14:24:14 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/19 02:16:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ namespace ft
   template <>          struct is_integral<unsigned int>       : public true_type {};
   template <>          struct is_integral<unsigned long>      : public true_type {};
   template <>          struct is_integral<unsigned long long> : public true_type {};
+
+  template<class T>    struct is_const                        : public false_type {};
+  template<class T>    struct is_const<const T>               : public true_type {};
 }
 
 #endif
