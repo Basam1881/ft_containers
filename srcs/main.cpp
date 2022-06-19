@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/19 15:54:08 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/19 18:18:28 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ int main() {
   ft::vector<int>::const_reverse_iterator it6(it4);
   ft::vector<int>::const_reverse_iterator it7;
   ft::vector<int>::reverse_iterator it8 = it4;
+  std::cout << std::endl;
   std::cout << it6[0] << std::endl;
   std::cout << it6[1] << std::endl;
-  it = 2 + it;
+  std::cout << it6[2] << std::endl;
+  it8 = 2 + it8;
   std::cout << std::endl << *it8 << std::endl;
   *it6++;
   // *it6++;
