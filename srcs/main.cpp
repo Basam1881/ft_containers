@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 17:53:28 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/19 15:54:08 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,34 @@
 #include "vectorTests.hpp"
 
 int main() {
-  // vectorBasic(true);
-  std::vector<int> v(4);
-  ft::vector<int>::const_iterator it;
-  ft::vector<int>::iterator it1 = it;
+  vectorBasic(true);
+  ft::vector<int> v(4, 500);
+  v.push_back(100);
+  ft::vector<int>::iterator it = v.begin();
+  ft::vector<int>::iterator it3 = it;
+  ft::vector<int>::const_iterator it1(it);
+  ft::vector<int>::const_iterator it2;
+  // *it = 2;
+  // *it1++;
+  // *it1++;
+  if (it3  == v.begin())
+    std::cout << *it1++ << ' ' << *it1 << std::endl; 
+  ft::vector<int> v1(4, 500);
+  v1.push_back(100);
+  ft::vector<int>::reverse_iterator it4 = v1.rbegin();
+  ft::vector<int>::reverse_iterator it5 = it4;
+  ft::vector<int>::const_reverse_iterator it6(it4);
+  ft::vector<int>::const_reverse_iterator it7;
+  ft::vector<int>::reverse_iterator it8 = it4;
+  std::cout << it6[0] << std::endl;
+  std::cout << it6[1] << std::endl;
+  it = 2 + it;
+  std::cout << std::endl << *it8 << std::endl;
+  *it6++;
+  // *it6++;
+  // if ()
+  // if (it5  == it6)
+  //   std::cout << *it6++ << ' ' << *it6 << std::endl; 
   // std::cout << "Here\n";
   // std::is_integral<int>::value;
   

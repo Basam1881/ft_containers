@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   is_integral.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 15:11:06 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/19 02:16:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/19 15:08:22 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IS_INTEGRAL_HPP
 # define IS_INTEGRAL_HPP
-
 namespace ft
 {
   template <class T, T v>
@@ -40,8 +39,9 @@ namespace ft
   template <>          struct is_integral<unsigned long>      : public true_type {};
   template <>          struct is_integral<unsigned long long> : public true_type {};
 
-  template<class T>    struct is_const                        : public false_type {};
-  template<class T>    struct is_const<const T>               : public true_type {};
+  // template<class T>
+  // template <class ft::vector<ft::random_access_iterator_tag, T>::iterator>    struct is_rev_it                        : public false_type {};
+  // template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>    struct is_rev_it<const T>               : public true_type {};
 }
 
 #endif
