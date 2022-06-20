@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 15:17:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 17:59:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ namespace ft
 	{
 
 		public:
-
 			typedef T																																				          	value_type;
 			typedef Alloc																																		          	allocator_type;
 			typedef typename allocator_type::reference																			          	reference;
@@ -50,33 +49,26 @@ namespace ft
       /* ************************************** Constructors ************************************** */
 			explicit vector (const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
-			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
+			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type())
+          : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
       {
-        if (n)
-          _arr = _alloc.allocate(n);
-        for (size_t i = 0; i < n; i++)
-          _alloc.construct(_arr + i, val);
+        allocMe(*this, n, val);
       }
 			template <class InputIterator>
-			vector (InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last, const allocator_type& alloc = allocator_type()) : _alloc(alloc), _arr(NULL)
+			vector (InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last,
+        const allocator_type& alloc = allocator_type())
+          : _alloc(alloc), _arr(NULL), _size(ft::distance(first, last)), _capacity(_size)
       {
-        size_type n = ft::distance(first, last);
-        _capacity = n;
-        _size = n;
-        _arr = _alloc.allocate(n);
-        for (iterator it = begin(); it != end(); it++)
-          _alloc.construct(it.base(), *first++);
+        allocMe(*this, _capacity, first, last);
       }
-			vector (const vector & x) : _alloc(x.get_allocator()), _arr(NULL), _size(0), _capacity(0)
+			vector (const vector & x)
+          : _alloc(x.get_allocator()), _arr(NULL), _size(0), _capacity(0)
       {
         *this = x;
       }
 			~vector()
       {
-        // clearMe(*this);
-        for (size_type i = 0; i < _size; i++)
-          _alloc.destroy(_arr + i);
-        _alloc.deallocate(_arr, _capacity);
+        clearMe(*this);
       }
 
       /* ************************************** Operators ************************************** */
@@ -354,10 +346,10 @@ namespace ft
       
 		private:
 			allocator_type	_alloc;
-			T *							_arr;
+			pointer					_arr;
 			size_type				_size;
 			size_type				_capacity;
-
+      
       void printArr() {
         size_type i = 0;
         for (; i != size(); i++)
@@ -372,13 +364,26 @@ namespace ft
         return i;
       }
 
+      void  allocMe(vector & v, size_t & n, const value_type & val) {
+        if (n)
+          _arr = _alloc.allocate(n);
+        for (size_t i = 0; i < n; i++)
+          v.get_allocator().construct(v.begin().base() + i, val);
+      }
+
+      void  allocMe(vector & v, size_t & n, iterator & first, iterator & last) {
+        if (n)
+          _arr = _alloc.allocate(n);
+        ft::copy(first, last, v.begin(), v.get_allocator());
+      }
+
+      void clearMe(vector & v) {
+        for (iterator it = v.begin(); it < v.end(); it++)
+          _alloc.destroy(it.base());
+        _alloc.deallocate(v.begin().base(), v.capacity());
+      }
       
 
-      // void clearMe(vector & v) {
-      //   for (iterator it = v.begin(); it < v.end(); it++)
-      //     _alloc.destroy(it.base());
-      //   _alloc.deallocate(v.begin(), v.capacity());
-      // }
 
 	};
 }

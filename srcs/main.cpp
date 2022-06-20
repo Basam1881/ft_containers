@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 15:36:13 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 18:58:38 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@
 
 int main() {
   vectorBasic(true);
-  
+
+  // ft::vector<int> v(5, 100);
+  // ft::vector<int>::reverse_iterator it = v.rbegin();
+  // v.insert(v.rbegin(), 10);
+  // for (int i = 0; i < 5; i++)
+  //   std::cout << v[i] << std::endl;
   // double sum = 0;
   // double add = 1;
 

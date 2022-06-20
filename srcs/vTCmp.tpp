@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:39:23 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 16:43:56 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 17:13:31 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ bool cmpVecs(std::vector<T> & v, ft::vector<T> & ft_v) {
 
 template<typename T>
 bool  cmpVecsSize(std::vector<T> & v, ft::vector<T> & ft_v) {
-  return (v.size() == ft_v.size() ? true : false);
+  return (v.size() == ft_v.size());
 }
 
 template<typename T>
 bool  cmpVecsCap(std::vector<T> & v, ft::vector<T> & ft_v) {
-  return (v.capacity() == ft_v.capacity() ? true : false);
+  return (v.capacity() == ft_v.capacity());
 }
 
 template<typename T, typename vec>
@@ -76,6 +76,7 @@ bool  cmpPerformance(size_t testnum, bool printAllTests, T value) {
   if (printAllTests) {
     std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 * 1e+6 << WHITE << " Ms" << RESET << std::endl;
     std::cout << PURPLE << "Faster by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed / elapsed1 << WHITE << " (ft_v/v)" << RESET<< std::endl;
+    std::cout << PURPLE << "Slower by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 / elapsed << WHITE << " (v/ft_v)" << RESET<< std::endl;
   }
   return (!(elapsed1 / elapsed) || elapsed1 / elapsed < 20);
 }
