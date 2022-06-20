@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/19 17:36:01 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 15:17:39 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ namespace ft
       {}
 			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
       {
-        _arr = _alloc.allocate(n);
+        if (n)
+          _arr = _alloc.allocate(n);
         for (size_t i = 0; i < n; i++)
           _alloc.construct(_arr + i, val);
       }
@@ -63,8 +64,6 @@ namespace ft
         _capacity = n;
         _size = n;
         _arr = _alloc.allocate(n);
-        // if (!_arr)
-        //   std::cout << "n: " << n << std::endl;
         for (iterator it = begin(); it != end(); it++)
           _alloc.construct(it.base(), *first++);
       }
@@ -325,7 +324,6 @@ namespace ft
             for(iterator itmp = begin(); itmp != first; itmp++, f++);
             for(iterator itmp = first; itmp != last; itmp++, n++);
           }
-          // printArr();
           T tmp = *first;
           insert(begin() + i + j, tmp);
           if (exist) {
@@ -359,6 +357,7 @@ namespace ft
 			T *							_arr;
 			size_type				_size;
 			size_type				_capacity;
+
       void printArr() {
         size_type i = 0;
         for (; i != size(); i++)

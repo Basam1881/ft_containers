@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.tpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/03 14:08:20 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 12:59:36 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
-template < class T, class Alloc = std::allocator<T> >
-void vector<T, std::allocator<T> >::func()
-{
-	std::cout << "FUNC" << std::endl;
-}
 
 
 /*

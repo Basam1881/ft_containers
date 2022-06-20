@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:05:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 13:34:03 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 15:35:02 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,37 +45,37 @@ std::string testType(size_t testnum) {
 bool  vBasicTest1(bool printAllTests) {
   std::vector<int> v;
   ft::vector<int> ft_v;
-  return test<int>(v, ft_v, printAllTests, 1);
+  return test<int>(v, ft_v, printAllTests, 1, 1000);
 }
 
 bool  vBasicTest2(bool printAllTests) {
   std::vector<std::string> v;
   ft::vector<std::string> ft_v;
-  return test<std::string>(v, ft_v, printAllTests, 2);
+  return test<std::string>(v, ft_v, printAllTests, 2, "Bnaji");
 }
 
 bool  vBasicTest3(bool printAllTests) {
   std::vector<int> v(3);
   ft::vector<int> ft_v(3);
-  return test<int>(v, ft_v, printAllTests, 3);
+  return test<int>(v, ft_v, printAllTests, 3, 1000);
 }
 
 bool  vBasicTest4(bool printAllTests) {
   std::vector<std::string> v(4);
   ft::vector<std::string> ft_v(4);
-  return test<std::string>(v, ft_v, printAllTests, 4);
+  return test<std::string>(v, ft_v, printAllTests, 4, "Bnaji");
 }
 
 bool  vBasicTest5(bool printAllTests) {
   std::vector<int> v(5, 500);
   ft::vector<int> ft_v(5 , 500);
-  return test<int>(v, ft_v, printAllTests, 5);
+  return test<int>(v, ft_v, printAllTests, 5, 1000);
 }
 
 bool  vBasicTest6(bool printAllTests) {
   std::vector<std::string> v(6, "Bnaji");
   ft::vector<std::string> ft_v(6, "Bnaji");
-  return test<std::string>(v, ft_v, printAllTests, 6);
+  return test<std::string>(v, ft_v, printAllTests, 6, "Bnaji");
 }
 
 bool  vBasicTest7(bool printAllTests) {
@@ -83,7 +83,7 @@ bool  vBasicTest7(bool printAllTests) {
   ft::vector<int> ft_v1(7, 700);
   std::vector<int> v(v1.begin(), v1.end());
   ft::vector<int> ft_v(ft_v1.begin(), ft_v1.end());
-  return test<int>(v, ft_v, printAllTests, 7);
+  return test<int>(v, ft_v, printAllTests, 7, 1000);
 }
 
 bool  vBasicTest8(bool printAllTests) {
@@ -91,7 +91,7 @@ bool  vBasicTest8(bool printAllTests) {
   ft::vector<std::string> ft_v1(8, "Bnaji");
   std::vector<std::string> v(v1.begin(), v1.end());
   ft::vector<std::string> ft_v(ft_v1.begin(), ft_v1.end());
-  return test<std::string>(v, ft_v, printAllTests, 8);
+  return test<std::string>(v, ft_v, printAllTests, 8, "Bnaji");
 }
 
 bool  vBasicTest9(bool printAllTests) {
@@ -99,7 +99,7 @@ bool  vBasicTest9(bool printAllTests) {
   ft::vector<int> ft_v1(9, 900);
   std::vector<int> v(v1);
   ft::vector<int> ft_v(ft_v1);
-  return test<int>(v, ft_v, printAllTests, 9);
+  return test<int>(v, ft_v, printAllTests, 9, 1000);
 
 }
 
@@ -108,5 +108,5 @@ bool  vBasicTest10(bool printAllTests) {
   ft::vector<std::string> ft_v1(10, "Bnaji");
   std::vector<std::string> v(v1);
   ft::vector<std::string> ft_v(ft_v1);  
-  return test<std::string>(v, ft_v, printAllTests, 10);
+  return test<std::string>(v, ft_v, printAllTests, 10, "Bnaji");
 }

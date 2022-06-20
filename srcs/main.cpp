@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/19 18:18:28 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 15:36:13 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,81 @@
 #include <vector>
 #include "vector.hpp"
 #include "vectorTests.hpp"
+#include "limits.h"
+#include <sys/time.h>
 
 int main() {
   vectorBasic(true);
-  ft::vector<int> v(4, 500);
-  v.push_back(100);
-  ft::vector<int>::iterator it = v.begin();
-  ft::vector<int>::iterator it3 = it;
-  ft::vector<int>::const_iterator it1(it);
-  ft::vector<int>::const_iterator it2;
-  // *it = 2;
-  // *it1++;
-  // *it1++;
-  if (it3  == v.begin())
-    std::cout << *it1++ << ' ' << *it1 << std::endl; 
-  ft::vector<int> v1(4, 500);
-  v1.push_back(100);
-  ft::vector<int>::reverse_iterator it4 = v1.rbegin();
-  ft::vector<int>::reverse_iterator it5 = it4;
-  ft::vector<int>::const_reverse_iterator it6(it4);
-  ft::vector<int>::const_reverse_iterator it7;
-  ft::vector<int>::reverse_iterator it8 = it4;
-  std::cout << std::endl;
-  std::cout << it6[0] << std::endl;
-  std::cout << it6[1] << std::endl;
-  std::cout << it6[2] << std::endl;
-  it8 = 2 + it8;
-  std::cout << std::endl << *it8 << std::endl;
-  *it6++;
+  
+  // double sum = 0;
+  // double add = 1;
+
+  // // Start measuring time
+  // struct timeval begin, end;
+  // gettimeofday(&begin, 0);
+  
+  // int iterations = 10000;
+  // for (int i=0; i<iterations; i++) {
+  //     sum += add;
+  //     add /= 2.0;
+  // }
+  
+  // // Stop measuring time and calculate the elapsed time
+  // gettimeofday(&end, 0);
+  // long seconds = end.tv_sec - begin.tv_sec;
+  // long microseconds = end.tv_usec - begin.tv_usec;
+  // double elapsed = seconds + microseconds*1e-6;
+  
+  // printf("Result: %.20f\n", sum);
+  
+  // printf("Time measured: %.10f seconds.\n", elapsed);
+
+  // gettimeofday(&begin, 0);
+  
+  // iterations = 1000;
+  // for (int i=0; i<iterations; i++) {
+  //     sum += add;
+  //     add /= 2.0;
+  // }
+  
+  // // Stop measuring time and calculate the elapsed time
+  // gettimeofday(&end, 0);
+  // seconds = end.tv_sec - begin.tv_sec;
+  // microseconds = end.tv_usec - begin.tv_usec;
+  // double elapsed1 = seconds + microseconds*1e-6;
+  
+  // printf("Result: %.20f\n", sum);
+  
+  // printf("Time measured: %.10f seconds.\n", elapsed1);
+
+  // printf("\nratio (v / ft_v): %.10f seconds.\n", elapsed / elapsed1);
+  
+  // ft::vector<int> v(4, 500);
+  // v.push_back(100);
+  // ft::vector<int>::iterator it = v.begin();
+  // ft::vector<int>::iterator it3 = it;
+  // ft::vector<int>::const_iterator it1(it);
+  // ft::vector<int>::const_iterator it2;
+  // // *it = 2;
+  // // *it1++;
+  // // *it1++;
+  // if (it3  == v.begin())
+  //   std::cout << *it1++ << ' ' << *it1 << std::endl; 
+  // ft::vector<int> v1(4, 500);
+  // v1.push_back(100);
+  // ft::vector<int>::reverse_iterator it4 = v1.rbegin();
+  // ft::vector<int>::reverse_iterator it5 = it4;
+  // ft::vector<int>::const_reverse_iterator it6(it4);
+  // ft::vector<int>::const_reverse_iterator it7;
+  // ft::vector<int>::reverse_iterator it8 = it4;
+  // std::cout << std::endl;
+  // std::cout << it6[0] << std::endl;
+  // std::cout << it6[1] << std::endl;
+  // std::cout << it6[2] << std::endl;
+  // it8 = 2 + it8;
+  // std::cout << std::endl << *it8 << std::endl;
   // *it6++;
+  // // *it6++;
   // if ()
   // if (it5  == it6)
   //   std::cout << *it6++ << ' ' << *it6 << std::endl; 

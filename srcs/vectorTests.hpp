@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/18 11:31:24 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/20 15:33:13 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define RED "\033[1;31m"
 # define PURPLE "\033[1;35m"
 # define RESET "\033[m"
+
+#include <sys/time.h>
+#include <iomanip>
 
 template<typename T>
 void printStdVec(std::vector<T> v);
@@ -53,25 +56,33 @@ bool  cmpVecsSize(std::vector<T> & v, ft::vector<T> & ft_v);
 template<typename T>
 bool  cmpVecsCap(std::vector<T> & v, ft::vector<T> & ft_v);
 
+template<typename T, typename vec>
+void  cmpPerformanceHelper(size_t testnum, T value);
+
 template<typename T>
-bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v);
+bool  cmpPerformance(size_t testnum, bool printAllTests, T value);
+
+template<typename T>
+bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v, T value);
 
 #include "vTCmp.tpp"
 
 std::string testType(size_t testnum);
 
 template<typename T>
-bool  test(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t testnum) {
+bool  test(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t testnum, T value) {
   bool test = false;
   std::cout << WHITE << testnum << BLUE << testType(testnum) << RESET;
-  if (cmpAll<T>(v, ft_v)) {
+  if (cmpAll<T>(v, ft_v, testnum, value)) {
     test = true;
     std::cout << GREEN << "OK" << RESET << std::endl;
   }
   else
     std::cout << RED << "KO" << RESET << std::endl;
-  if (!test || printAllTests)
+  if (!test || printAllTests) {
     printAll<T>(v, ft_v);
+    cmpPerformance<T>(testnum, true, value);
+  }
   std::cout << std::endl;
   return test;
 }
