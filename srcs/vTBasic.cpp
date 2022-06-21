@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:05:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 18:32:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/21 18:26:42 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@
 std::string testType(size_t testnum) {
   switch (testnum){
     case 1:
-      return " : Default Constructor<int>                   : ";
+      return " : Default Constructor<int>                           : ";
     case 2:
-      return (" : Default Constructor<std::string>           : ");
+      return " : Default Constructor<std::string>                   : ";
     case 3:
-      return " : Fill Constructor<int> (one Param)          : ";
+      return " : Fill Constructor<int> (one Param)                  : ";
     case 4:
-      return " : Fill Constructor<std::string> (one Param)  : ";
+      return " : Fill Constructor<std::string> (one Param)          : ";
     case 5:
-      return " : Fill Constructor<int> (two Params)         : ";
+      return " : Fill Constructor<int> (two Params)                 : ";
     case 6:
-      return " : Fill Constructor<std::string> (two Params) : ";
+      return " : Fill Constructor<std::string> (two Params)         : ";
     case 7:
-      return " : Range Constructor<int>                     : ";
+      return " : Range Constructor<int>                             : ";
     case 8:
-      return " : Range Constructor<std::string>             : ";
+      return " : Range Constructor<std::string>                     : ";
     case 9:
-      return " : Copy Constructor<int>                      : ";
+      return " : Copy Constructor<int>                              : ";
     case 10:
-      return ": Copy Constructor<std::string>              : ";
+      return ": Copy Constructor<std::string>                      : ";
   }
   return NULL;
 }

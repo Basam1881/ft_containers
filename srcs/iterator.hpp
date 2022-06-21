@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 18:25:41 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/21 19:02:21 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ namespace ft
 	{
     public:
         
-        typedef T                                value_type;
-        typedef Distance                         difference_type;
-        typedef Pointer                          pointer;
-        typedef Reference                        reference;
-        typedef Category                         iterator_category;
+      typedef T                                value_type;
+      typedef Distance                         difference_type;
+      typedef Pointer                          pointer;
+      typedef Reference                        reference;
+      typedef Category                         iterator_category;
 
       iterator() : _p(NULL) {}
       iterator(pointer p) : _p(p) {}
@@ -150,25 +150,11 @@ namespace ft
 
   template <class Iterator>
   Iterator operator+ (typename Iterator::difference_type n,
-             const Iterator& it) { return (it.base() + n); }
-
-  template <class Iterator>
-  Iterator operator- (typename Iterator::difference_type n,
-             const Iterator& it) { return (it.base() - n); }
+             const Iterator& it) { return (it + n); }
 
   template <class Iterator>
   typename Iterator::difference_type operator- (const Iterator& lhs,
-             const Iterator& rhs) { return (lhs.base() - rhs.base()); }
-
-  template <class Iterator>
-  reverse_iterator<Iterator> operator+ (
-             typename reverse_iterator<Iterator>::difference_type n,
-             const reverse_iterator<Iterator>& rev_it) { return rev_it.base() - n; }
-
-  template <class Iterator>
-  reverse_iterator<Iterator> operator- (
-             typename reverse_iterator<Iterator>::difference_type n,
-             const reverse_iterator<Iterator>& rev_it) { return rev_it.base() + n; }
+             const Iterator& rhs) { return abs(lhs.base() - rhs.base()); }
 
 }
 

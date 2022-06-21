@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:10 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 18:45:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/21 17:40:49 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ void  printMyVecSize(ft::vector<T> ft_v) {
 template<typename T>
 void  printMyVecCap(ft::vector<T> ft_v) {
   std::cout << PURPLE << "ft_v capacity : " << YELLOW << ft_v.capacity() << RESET << std::endl;
+}
+
+template<typename T>
+void printVecIters(T ft_it, T it) {
+  std::cout << PURPLE << "it    : " << YELLOW << it << RESET << std::endl;
+  std::cout << PURPLE << "ft_it : " << YELLOW << ft_it << RESET << std::endl;
 }
 
 template<typename T>

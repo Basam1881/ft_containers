@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 18:58:38 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/21 19:22:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 
 int main() {
   vectorBasic(true);
+  std::cout << std::endl << std::endl;
+  vectorIterators(true);
+  std::cout << std::endl << std::endl;
+  vectorConstIterators(true);
+  std::cout << std::endl << std::endl;
+  vectorReverseIterators(true);
 
   // ft::vector<int> v(5, 100);
   // ft::vector<int>::reverse_iterator it = v.rbegin();
