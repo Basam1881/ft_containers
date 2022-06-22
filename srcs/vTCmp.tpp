@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:39:23 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 13:43:36 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 16:58:41 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void  cmpPerformanceHelper(size_t testnum, T value) {
 }
 
 template<typename T>
-bool  cmpPerformance(size_t testnum, bool printAllTests, T value) {
+bool  cmpBasicPerformance(size_t testnum, bool printAllTests, T value) {
   struct timeval begin, end;
   gettimeofday(&begin, 0);
   cmpPerformanceHelper<T, std::vector<T> >(testnum, value);
@@ -103,6 +103,6 @@ bool  cmpPerformance(size_t testnum, bool printAllTests, T value) {
 }
 
 template<typename T>
-bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v, size_t testnum, T value) {
-    return (cmpVecs<T>(v, ft_v) && cmpVecsSize<T>(v, ft_v) && cmpVecsCap<T>(v, ft_v) && cmpPerformance<T>(testnum, false, value));
+bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v) {
+    return (cmpVecs<T>(v, ft_v) && cmpVecsSize<T>(v, ft_v) && cmpVecsCap<T>(v, ft_v));
 }

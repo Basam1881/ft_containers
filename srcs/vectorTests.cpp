@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 15:01:20 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 16:25:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,5 +159,21 @@ bool  vectorElementAccess(bool printAllTests) {
     && vectorElementAccessTest8(v, ft_v, printAllTests, 8)
     && vectorElementAccessTest9(v, ft_v, printAllTests, 9)
     && vectorElementAccessTest10(v, ft_v, printAllTests, 10)
+    );
+}
+
+bool  vectorCapacity(bool printAllTests) {
+  std::cout << PURPLE << "<====================" << WHITE << " vector Capacity Test " << PURPLE << "====================>" << RESET << std::endl;
+  return (
+    vectorCapacityTest1(printAllTests, 1)
+    && vectorCapacityTest2(printAllTests, 2)
+    && vectorCapacityTest3(printAllTests, 3)
+    && vectorCapacityTest4(printAllTests, 4)
+    && vectorCapacityTest5(printAllTests, 5)
+    // && vectorCapacityTest6(printAllTests, 6)
+    // && vectorCapacityTest7(printAllTests, 7)
+    // && vectorCapacityTest8(printAllTests, 8)
+    // && vectorCapacityTest9(printAllTests, 9)
+    // && vectorCapacityTest10(printAllTests, 10)
     );
 }

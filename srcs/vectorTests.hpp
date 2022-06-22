@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 15:01:12 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 16:59:39 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ template<typename T, typename vec>
 void  cmpPerformanceHelper(size_t testnum, T value);
 
 template<typename T>
-bool  cmpPerformance(size_t testnum, bool printAllTests, T value);
+bool  cmpBasicPerformance(size_t testnum, bool printAllTests, T value);
 
 template<typename T>
-bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v, T value);
+bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v);
 
 #include "vTCmp.tpp"
 
@@ -83,7 +83,7 @@ template<typename T>
 bool  vBasictest(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t testnum, T value) {
   bool test = false;  
   std::cout << WHITE << testnum << BLUE << vBasictestType(testnum) << RESET;
-  if (cmpAll<T>(v, ft_v, testnum, value)) {
+  if (cmpAll<T>(v, ft_v) && cmpBasicPerformance<T>(testnum, false, value)) {
     test = true;
     std::cout << GREEN << "OK" << RESET << std::endl;
   }
@@ -98,7 +98,7 @@ bool  vBasictest(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, s
     }
     else
       printAll<T>(v, ft_v);
-    cmpPerformance<T>(testnum, true, value);
+    cmpBasicPerformance<T>(testnum, true, value);
   }
   std::cout << std::endl;
   return test;
@@ -199,6 +199,18 @@ bool  vectorElementAccessTest8(std::vector<int> const & v, ft::vector<int> const
 bool  vectorElementAccessTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorElementAccessTest10(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
 bool  vectorElementAccess(bool printAllTests);
+
+bool  vectorCapacityTest1(bool printAllTests, size_t testnum);
+bool  vectorCapacityTest2(bool printAllTests, size_t testnum);
+bool  vectorCapacityTest3(bool printAllTests, size_t testnum);
+bool  vectorCapacityTest4(bool printAllTests, size_t testnum);
+bool  vectorCapacityTest5(bool printAllTests, size_t testnum);
+// bool  vectorCapacityTest6(bool printAllTests, size_t testnum);
+// bool  vectorCapacityTest7(bool printAllTests, size_t testnum);
+// bool  vectorCapacityTest8(bool printAllTests, size_t testnum);
+// bool  vectorCapacityTest9(bool printAllTests, size_t testnum);
+// bool  vectorCapacityTest10(bool printAllTests, size_t testnum);
+bool  vectorCapacity(bool printAllTests);
 
 
 

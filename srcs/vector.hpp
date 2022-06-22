@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 14:52:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 19:02:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,41 +90,26 @@ namespace ft
       bool      empty() const { return (_size != 0 ? false : true); }
       void      resize(size_type n, value_type val = value_type())
       {
-        if (n > _size && n > _capacity)
-        {
-          T * tmp = _alloc.allocate(_capacity);
-          size_type i = 0;
-          for ( ; i != _capacity ; i++) {
-            tmp[i] = _arr[i];
-            _alloc.destroy(_arr + i);
-          }
-          _alloc.deallocate(_arr, _capacity);
-          _capacity = _size * 2;
-          _size = n;
-          _arr = _alloc.allocate(_capacity);
-          size_type j = 0;
-          for ( ; j != i; j++) {
-            _arr[j] = tmp[j];
-            _alloc.destroy(tmp + j);
-          }
-          _alloc.deallocate(tmp, _size);
-          for ( ; j != _size; j++)
-            _arr[j] = val;
-        }
-        else if (n > _size && n <= _capacity)
-        {
-          size_type i = 0;
-          for ( ; i + _size < n; i++)
-            _arr[i] = val;
-          _size += i;
-        }
-        else if (n < _size)
+        if (n < _size)
         {
           size_type i = _size - 1;
           for ( ; i > n; i--)
-            _arr[i] = value_type();
-          _size = i;
+            _alloc.construct(_arr + i, val);
         }
+        else if (n <= _capacity)
+        {
+          size_type i = 0;
+          for ( ; i + _size < n; i++)
+            _alloc.construct(_arr + i, val);
+        }
+        else
+        {
+          size_type i = size();
+          reserve(n);
+          for ( ; i < n; i++)
+            _alloc.construct(_arr + i, val);
+        }
+        _size = n;
       }
 
       void reserve (size_type n)
@@ -135,7 +120,7 @@ namespace ft
           size_type i = 0;
           // tmp = ft::copy(iterator(begin()), iterator(end()), iterator(tmp));
           for ( ; i != _size ; i++) {
-            tmp[i] = _arr[i];
+            _alloc.construct(tmp + i, _arr[i]);
             _alloc.destroy(_arr + i);
           }
           _alloc.deallocate(_arr, _capacity);
@@ -143,7 +128,7 @@ namespace ft
           _arr = _alloc.allocate(_capacity);
           size_type j = 0;
           for ( ; j != i; j++) {
-            _arr[j] = tmp[j];
+            _alloc.construct(_arr + j, tmp[j]);
             _alloc.destroy(tmp + j);
           }
           _alloc.deallocate(tmp, _capacity);
@@ -335,9 +320,9 @@ namespace ft
           v.get_allocator().construct(v.begin().base() + i, val);
       }
 
-      void  allocMe(vector & v, size_t & n, iterator & first, iterator & last) {
+      void  allocMe(vector & v, size_t & n, iterator first, iterator last) {
         if (n)
-          _arr = _alloc.allocate(n);
+          v._arr = v.get_allocator().allocate(n);
         ft::copy(first, last, v.begin(), v.get_allocator());
       }
 
