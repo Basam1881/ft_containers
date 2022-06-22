@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTCRIterators.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 19:03:30 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 02:30:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 09:56:29 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ bool  vectorConstReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & 
 
 bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : const_rev_iterator= ptrdiff_t + const_rev_iterator: " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE << " : constRevIterator = ptrdiff_t + constRevIterator   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rbegin();
   ft_it = testnum + ft_it;
   std::vector<int>::const_reverse_iterator it = v.rbegin();
@@ -192,7 +192,7 @@ bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & 
 
 bool  vectorConstReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ptrdiff_t= const_rev_iterator - const_rev_iterator: " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE << " : ptrdiff_t = constRevIterator - constRevIterator   : " << RESET;
   size_t mt;
   ft::vector<int>::const_reverse_iterator ft_it1 = ft_v.rbegin();
   ft::vector<int>::const_reverse_iterator ft_it2 = ft_v.rend();

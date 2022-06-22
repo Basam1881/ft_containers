@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 17:59:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 14:52:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ namespace ft
 	{
 
 		public:
+    
+      /* ************************************** Types ************************************** */
 			typedef T																																				          	value_type;
 			typedef Alloc																																		          	allocator_type;
 			typedef typename allocator_type::reference																			          	reference;
@@ -47,69 +49,39 @@ namespace ft
 			typedef size_t																																	           	size_type;
 			
       /* ************************************** Constructors ************************************** */
-			explicit vector (const allocator_type & alloc = allocator_type()) : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
+
+			explicit vector (const allocator_type & alloc = allocator_type())
+          : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
+      
 			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
-      {
-        allocMe(*this, n, val);
-      }
+      { allocMe(*this, n, val); }
+
 			template <class InputIterator>
 			vector (InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last,
         const allocator_type& alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(ft::distance(first, last)), _capacity(_size)
-      {
-        allocMe(*this, _capacity, first, last);
-      }
+      { allocMe(*this, _capacity, first, last); }
+
 			vector (const vector & x)
           : _alloc(x.get_allocator()), _arr(NULL), _size(0), _capacity(0)
-      {
-        *this = x;
-      }
-			~vector()
-      {
-        clearMe(*this);
-      }
+      { *this = x; }
 
-      /* ************************************** Operators ************************************** */
-			vector &		operator=( vector const & rhs )
-      {
-        if (this != &rhs)
-        {
-          if (rhs._capacity > _capacity)
-          {
-            for (size_type i = 0; i != _size ; i++)
-              _alloc.destroy(_arr + i);
-            if (_capacity)
-              _alloc.deallocate(_arr, _size);
-            _arr = _alloc.allocate(rhs._capacity);        
-            for (size_type i = 0; i < rhs._size; i++) 
-              _alloc.construct(_arr + i, rhs._arr[i]);
-            // for (iterator it1 = begin(), it2 = rhs.begin() ; it1 != end() && it2 != rhs.end(); it1++, it2++)
-            //   *it1 = *it2;
-          }
-          else
-          {
-            size_type i = 0;
-            for ( ; i < rhs._size; i++) {
-              _arr[i] = rhs._arr[i];
-            }
-          }
-          _size = rhs._size;
-          _capacity = rhs._capacity;
-        }
-        return *this;
-      }
+			~vector()
+      { clearMe(*this); }
+
+			vector &		operator=( vector const & rhs );
 
       /* ************************************** Iterators ************************************** */
-			iterator					        	begin() { return iterator(_arr); }
-			const_iterator 		        	begin() const { return const_iterator(_arr); }
-			iterator					        	end() { return iterator(_arr + _size); }
-			const_iterator 		        	end() const { return const_iterator(_arr + _size); }
-			reverse_iterator						rbegin() { return reverse_iterator(_arr + _size - 1); }
-			const_reverse_iterator 			rbegin() const { return const_reverse_iterator(_arr + _size - 1); }
-			reverse_iterator						rend() { return reverse_iterator(_arr - 1); }
-			const_reverse_iterator 			rend() const { return const_reverse_iterator(_arr - 1); }
+			iterator					        	begin();
+			const_iterator 		        	begin() const;
+			iterator					        	end();
+			const_iterator 		        	end() const;
+			reverse_iterator						rbegin();
+			const_reverse_iterator 			rbegin() const;
+			reverse_iterator						rend();
+			const_reverse_iterator 			rend() const;
 
       /* ************************************** Capacity ************************************** */
       size_type size() const { return _size; }
@@ -181,24 +153,16 @@ namespace ft
       }
 
       /* ************************************** Element Access ************************************** */
-      reference operator[] (size_type n) { return _arr[n]; }
-      const_reference operator[] (size_type n) const { return _arr[n]; }
-      reference at (size_type n)
-      {
-        if (n >= _size)
-          throw std::out_of_range("ft_vector\n");
-        return _arr[n];
-      }
-      const_reference at (size_type n) const
-      {
-        if (n >= _size)
-          throw std::out_of_range("ft_vector\n");
-        return _arr[n];
-      }
-      reference front() { return *_arr; }
+      reference operator[] (size_type n);
+      const_reference operator[] (size_type n) const;
+      reference at (size_type n);
+      const_reference at (size_type n) const;
+      reference front();
       const_reference front() const;
-      reference back() { return *(_arr + size() - 1); }
+      reference back();
       const_reference back() const;
+      pointer data();
+      const_pointer data() const;
 
       /* ************************************** Modifiers ************************************** */
       template <class InputIterator>
@@ -387,6 +351,7 @@ namespace ft
 
 	};
 }
-  /* ************************************** Non-member functions Overloads ************************************** */
+
+#include "vector.tpp"
 
 #endif /* ********************************************************** VECTOR_H */

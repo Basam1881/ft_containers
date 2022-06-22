@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 02:23:13 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 14:39:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "vectorTests.hpp"
 
 bool  vectorBasic(bool printAllTests) {
-  std::cout << PURPLE << "-------------------- vector Basic Test --------------------" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE << " vector Basic Test " << PURPLE << "====================>" << RESET << std::endl;
   return (
     vBasicTest1(printAllTests)
     && vBasicTest2(printAllTests)
@@ -29,11 +29,18 @@ bool  vectorBasic(bool printAllTests) {
     && vBasicTest8(printAllTests)
     && vBasicTest9(printAllTests)
     && vBasicTest10(printAllTests)
+    && vBasicTest11(printAllTests)
+    && vBasicTest12(printAllTests)
+    && vBasicTest13(printAllTests)
+    && vBasicTest14(printAllTests)
+    && vBasicTest15(printAllTests)
+    && vBasicTest16(printAllTests)
+    && vBasicTest17(printAllTests)
   );
 }
 
 bool  vectorIterators(bool printAllTests) {
-  std::cout << PURPLE << "-------------------- vector Iterators Test --------------------" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE << " vector Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -59,7 +66,7 @@ bool  vectorIterators(bool printAllTests) {
 }
 
 bool  vectorConstIterators(bool printAllTests) {
-  std::cout << PURPLE << "-------------------- vector Const Iterators Test --------------------" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE << " vector Const Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -85,7 +92,7 @@ bool  vectorConstIterators(bool printAllTests) {
 }
 
 bool  vectorReverseIterators(bool printAllTests) {
-  std::cout << PURPLE << "-------------------- vector Reverse Iterators Test --------------------" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE << " vector Reverse Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -111,7 +118,7 @@ bool  vectorReverseIterators(bool printAllTests) {
 }
 
 bool  vectorConstReverseIterators(bool printAllTests) {
-  std::cout << PURPLE << "-------------------- vector Reverse Iterators Test --------------------" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE << " vector Const Reverse Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -133,5 +140,26 @@ bool  vectorConstReverseIterators(bool printAllTests) {
     && vectorConstReverseIteratorsTest13(v, ft_v, printAllTests, 13)
     && vectorConstReverseIteratorsTest14(v, ft_v, printAllTests, 14)
     && vectorConstReverseIteratorsTest15(v, ft_v, printAllTests, 15)
+    );
+}
+
+bool  vectorElementAccess(bool printAllTests) {
+  std::cout << PURPLE << "<====================" << WHITE << " vector Element Access Test " << PURPLE << "====================>" << RESET << std::endl;
+  size_t n = 20;
+  std::vector<int> v(n); ft::vector<int> ft_v(n);
+  for (size_t i = 0; i < n; i++) {
+    v[i] = i; ft_v[i] = i;
+  }
+  return (
+    vectorElementAccessTest1(v, ft_v, printAllTests, 1)
+    && vectorElementAccessTest2(v, ft_v, printAllTests, 2)
+    && vectorElementAccessTest3(v, ft_v, printAllTests, 3)
+    && vectorElementAccessTest4(v, ft_v, printAllTests, 4)
+    && vectorElementAccessTest5(v, ft_v, printAllTests, 5)
+    && vectorElementAccessTest6(v, ft_v, printAllTests, 6)
+    && vectorElementAccessTest7(v, ft_v, printAllTests, 7)
+    && vectorElementAccessTest8(v, ft_v, printAllTests, 8)
+    && vectorElementAccessTest9(v, ft_v, printAllTests, 9)
+    && vectorElementAccessTest10(v, ft_v, printAllTests, 10)
     );
 }

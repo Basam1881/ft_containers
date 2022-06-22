@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 02:24:29 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 14:39:38 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,36 @@
 #include <sys/time.h>
 #include <iomanip>
 
+
+/* ************************************** Printers ************************************** */
 template<typename T>
-void printStdVec(std::vector<T> v);
+void printStdVec(std::vector<T> const & v);
 
 template<typename T>
-void  printStdVecSize(std::vector<T> v);
+void  printStdVecSize(std::vector<T> const & v);
 
 template<typename T>
-void  printStdVecCap(std::vector<T> v);
+void  printStdVecCap(std::vector<T> const & v);
 
 template<typename T>
-void printMyVec(ft::vector<T> ft_v); 
+void printMyVec(ft::vector<T> const & ft_v); 
 
 template<typename T>
-void  printMyVecSize(ft::vector<T> ft_v);
+void  printMyVecSize(ft::vector<T> const & ft_v);
 
 template<typename T>
-void  printMyVecCap(ft::vector<T> ft_v);
+void  printMyVecCap(ft::vector<T> const & ft_v);
 
 template<typename T>
 void printVecIters(T it, T ft_it);
 
 template<typename T>
-void  printAll(std::vector<T> v, ft::vector<T> ft_v);
+void  printAll(std::vector<T> const & v, ft::vector<T> const & ft_v);
 
 #include "vTPrinter.tpp"
+
+
+/* ************************************** Cmparators ************************************** */
 
 template<typename T>
 bool cmpVecs(std::vector<T> & v, ft::vector<T> & ft_v);
@@ -70,12 +75,13 @@ bool  cmpAll(std::vector<T> & v, ft::vector<T> & ft_v, T value);
 
 #include "vTCmp.tpp"
 
-std::string testType(size_t testnum);
 
+
+std::string vBasictestType(size_t testnum);
 template<typename T>
-bool  test(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t testnum, T value) {
-  bool test = false;
-  std::cout << WHITE << testnum << BLUE << testType(testnum) << RESET;
+bool  vBasictest(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t testnum, T value) {
+  bool test = false;  
+  std::cout << WHITE << testnum << BLUE << vBasictestType(testnum) << RESET;
   if (cmpAll<T>(v, ft_v, testnum, value)) {
     test = true;
     std::cout << GREEN << "OK" << RESET << std::endl;
@@ -83,13 +89,37 @@ bool  test(std::vector<T> & v, ft::vector<T> & ft_v, bool printAllTests, size_t 
   else
     std::cout << RED << "KO" << RESET << std::endl;
   if (!test || printAllTests) {
-    printAll<T>(v, ft_v);
+    if (testnum == 16) {
+      printStdVecSize<T>(v);
+      printMyVecSize<T>(ft_v);
+      printStdVecCap<T>(v);
+      printMyVecCap<T>(ft_v);
+    }
+    else
+      printAll<T>(v, ft_v);
     cmpPerformance<T>(testnum, true, value);
   }
   std::cout << std::endl;
   return test;
 }
-
+bool  vBasicTest1(bool printAllTests);
+bool  vBasicTest2(bool printAllTests);
+bool  vBasicTest3(bool printAllTests);
+bool  vBasicTest4(bool printAllTests);
+bool  vBasicTest5(bool printAllTests);
+bool  vBasicTest6(bool printAllTests);
+bool  vBasicTest7(bool printAllTests);
+bool  vBasicTest8(bool printAllTests);
+bool  vBasicTest9(bool printAllTests);
+bool  vBasicTest10(bool printAllTests);
+bool  vBasicTest11(bool printAllTests);
+bool  vBasicTest12(bool printAllTests);
+bool  vBasicTest13(bool printAllTests);
+bool  vBasicTest14(bool printAllTests);
+bool  vBasicTest15(bool printAllTests);
+bool  vBasicTest16(bool printAllTests);
+bool  vBasicTest17(bool printAllTests);
+bool  vectorBasic(bool printAllTests);
 
 bool  vectorIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
@@ -159,16 +189,18 @@ bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & 
 bool  vectorConstReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorConstReverseIterators(bool printAllTests);
 
-bool  vBasicTest1(bool printAllTests);
-bool  vBasicTest2(bool printAllTests);
-bool  vBasicTest3(bool printAllTests);
-bool  vBasicTest4(bool printAllTests);
-bool  vBasicTest5(bool printAllTests);
-bool  vBasicTest6(bool printAllTests);
-bool  vBasicTest7(bool printAllTests);
-bool  vBasicTest8(bool printAllTests);
-bool  vBasicTest9(bool printAllTests);
-bool  vBasicTest10(bool printAllTests);
-bool  vectorBasic(bool printAllTests);
+bool  vectorElementAccessTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest2(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest4(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest6(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest8(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest10(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccess(bool printAllTests);
+
+
 
 #endif
