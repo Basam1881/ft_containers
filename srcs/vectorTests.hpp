@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 14:39:38 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 15:01:12 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 #include <sys/time.h>
 #include <iomanip>
+#include <limits.h>
 
 
 /* ************************************** Printers ************************************** */
@@ -117,8 +118,6 @@ bool  vBasicTest12(bool printAllTests);
 bool  vBasicTest13(bool printAllTests);
 bool  vBasicTest14(bool printAllTests);
 bool  vBasicTest15(bool printAllTests);
-bool  vBasicTest16(bool printAllTests);
-bool  vBasicTest17(bool printAllTests);
 bool  vectorBasic(bool printAllTests);
 
 bool  vectorIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:05:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 13:11:12 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 15:01:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ std::string vBasictestType(size_t testnum) {
       return ": operator=() {bigger2smaller}                        : ";
     case 15:
       return ": operator=() {smaller2bigger}                        : ";
-    case 16: 
-      return ": Fill Constructor<int> (size_t_Max + 1, int)         : ";
-    case 17:
-      return ": Fill Constructor<int> (size_t_Max + 2, int)         : ";
   }
   return NULL;
 }
@@ -173,16 +169,4 @@ bool  vBasicTest15(bool printAllTests) {
   v = v1;
   ft_v = ft_v1;
   return vBasictest<std::string>(v, ft_v, printAllTests, 15, "Bnaji");
-}
-
-bool  vBasicTest16(bool printAllTests) {
-  std::vector<int> v(SIZE_T_MAX + 1, 100);
-  ft::vector<int> ft_v(SIZE_T_MAX + 1, 100);
-  return vBasictest<int>(v, ft_v, printAllTests, 16, 100);
-}
-
-bool  vBasicTest17(bool printAllTests) {
-  std::vector<int> v(SIZE_T_MAX + 2, 100);
-  ft::vector<int> ft_v(SIZE_T_MAX + 2, 100);
-  return vBasictest<int>(v, ft_v, printAllTests, 17, 100);
 }

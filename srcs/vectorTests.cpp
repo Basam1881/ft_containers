@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 14:39:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 15:01:20 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ bool  vectorBasic(bool printAllTests) {
     && vBasicTest13(printAllTests)
     && vBasicTest14(printAllTests)
     && vBasicTest15(printAllTests)
-    && vBasicTest16(printAllTests)
-    && vBasicTest17(printAllTests)
   );
 }
 
