@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/21 19:35:31 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 02:23:13 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,31 @@ bool  vectorReverseIterators(bool printAllTests) {
     && vectorReverseIteratorsTest13(v, ft_v, printAllTests, 13)
     && vectorReverseIteratorsTest14(v, ft_v, printAllTests, 14)
     && vectorReverseIteratorsTest15(v, ft_v, printAllTests, 15)
+    );
+}
+
+bool  vectorConstReverseIterators(bool printAllTests) {
+  std::cout << PURPLE << "-------------------- vector Reverse Iterators Test --------------------" << RESET << std::endl;
+  size_t n = 20;
+  std::vector<int> v(n); ft::vector<int> ft_v(n);
+  for (size_t i = 0; i < n; i++) {
+    v[i] = i; ft_v[i] = i;
+  }
+  return (
+    vectorConstReverseIteratorsTest1(v, ft_v, printAllTests, 1)
+    && vectorConstReverseIteratorsTest2(v, ft_v, printAllTests, 2)
+    && vectorConstReverseIteratorsTest3(v, ft_v, printAllTests, 3)
+    && vectorConstReverseIteratorsTest4(v, ft_v, printAllTests, 4)
+    && vectorConstReverseIteratorsTest5(v, ft_v, printAllTests, 5)
+    && vectorConstReverseIteratorsTest6(v, ft_v, printAllTests, 6)
+    && vectorConstReverseIteratorsTest7(v, ft_v, printAllTests, 7)
+    && vectorConstReverseIteratorsTest8(v, ft_v, printAllTests, 8)
+    && vectorConstReverseIteratorsTest9(v, ft_v, printAllTests, 9)
+    && vectorConstReverseIteratorsTest10(v, ft_v, printAllTests, 10)
+    && vectorConstReverseIteratorsTest11(v, ft_v, printAllTests, 11)
+    && vectorConstReverseIteratorsTest12(v, ft_v, printAllTests, 12)
+    && vectorConstReverseIteratorsTest13(v, ft_v, printAllTests, 13)
+    && vectorConstReverseIteratorsTest14(v, ft_v, printAllTests, 14)
+    && vectorConstReverseIteratorsTest15(v, ft_v, printAllTests, 15)
     );
 }

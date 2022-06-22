@@ -24,7 +24,7 @@ PROJECT_NAME = ft_containers
 # Starting Date of the project
 DATE = 27 - 05 - 2022
 
-CPP_FILES = main.cpp vectorTests.cpp vTBasic.cpp vTIterators.cpp vTRIterators.cpp vTCIterators.cpp
+CPP_FILES = main.cpp vectorTests.cpp vTBasic.cpp vTIterators.cpp vTRIterators.cpp vTCIterators.cpp vTCRIterators.cpp
 
 SRC_NAME = $(addprefix $(OBJ_DIR), ${CPP_FILES})
 

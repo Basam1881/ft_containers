@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/21 19:02:21 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 02:07:42 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string>
 # include <memory>
 # include <cstddef>
+# include <cstdlib>
 
 namespace ft
 {
@@ -72,7 +73,7 @@ namespace ft
 
       pointer                   base() const { return this->_p; }
 
-      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { /* if (this != &rhs) */ this->_p  = rhs.base(); return *this; }
+      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { if (this != &rhs) this->_p  = rhs.base(); return *this; }
       iterator  		            operator + ( difference_type n ) const { return (this->_p + n); }
       iterator  		            operator - ( difference_type n ) const { return (this->_p - n); }
 

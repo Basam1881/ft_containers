@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/21 19:20:03 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 02:24:29 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,23 @@ bool  vectorReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v,
 bool  vectorReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorReverseIterators(bool printAllTests);
+
+bool  vectorConstReverseIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIterators(bool printAllTests);
 
 bool  vBasicTest1(bool printAllTests);
 bool  vBasicTest2(bool printAllTests);

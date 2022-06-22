@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/21 19:22:51 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/22 02:24:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int main() {
   vectorConstIterators(true);
   std::cout << std::endl << std::endl;
   vectorReverseIterators(true);
+  std::cout << std::endl << std::endl;
+  vectorConstReverseIterators(true);
 
   // ft::vector<int> v(5, 100);
   // ft::vector<int>::reverse_iterator it = v.rbegin();
