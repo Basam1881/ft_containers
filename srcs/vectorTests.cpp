@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 09:51:19 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 18:44:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,9 @@ bool  vectorModifiers(bool printAllTests) {
   return (
     vectorModifiersTest1(printAllTests, 1)
     && vectorModifiersTest2(printAllTests, 2)
-    // && vectorModifiersTest3(printAllTests, 3)
-    // && vectorModifiersTest4(printAllTests, 4)
-    // && vectorModifiersTest5(printAllTests, 5)
+    && vectorModifiersTest3(printAllTests, 3)
+    && vectorModifiersTest4(printAllTests, 4)
+    && vectorModifiersTest5(printAllTests, 5)
     // && vectorModifiersTest6(printAllTests, 6)
     );
 }

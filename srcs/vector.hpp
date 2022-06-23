@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 11:08:58 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 18:54:35 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,25 +131,8 @@ namespace ft
 
       void push_back (const value_type& val)
       {
-        if (_size == _capacity) {
-          T * tmp = _alloc.allocate(_capacity);
-          size_type i = 0;
-          for ( ; i != _capacity ; i++) {
-            tmp[i] = _arr[i];
-            _alloc.destroy(_arr + i);
-          }
-          _alloc.deallocate(_arr, _capacity);
-          _capacity = _size * 2;
-          _size += 1;
-          _arr = _alloc.allocate(_capacity);
-          size_type j = 0;
-          for ( ; j != i; j++) {
-            _arr[j] = tmp[j];
-            _alloc.destroy(tmp + j);
-          }
-          _alloc.deallocate(tmp, _size);
-          _arr[j] = val;
-        }
+        checkAndReserve(*this);
+        _alloc.construct(_arr + _size++, val);
       }
       
       void pop_back()
@@ -160,16 +143,15 @@ namespace ft
       iterator insert (iterator position, const value_type& val)
       {
         if (_size == _capacity) {
-          iterator itmp = begin();
-          // size_type tmp = ft::distance(itmp, position);
-          size_type i = 0;
-          for( ; itmp != position; itmp++, i++);
-          reserve(_size * 2);
+          size_type i = ft::distance(begin(), position);
+          if (!_capacity)
+            reserve(1);
+          else
+            reserve(_capacity * 2);
           position = begin() + i;
         }
         ++_size;
         ft::copy_backward(position , end() - 1, end() );
-        // printArr();
         *position = val;
         return begin();
       }
@@ -282,6 +264,13 @@ namespace ft
             if (i < n)
               v._alloc.construct(v._arr + i, val);
         }
+      }
+
+      void  checkAndReserve(vector & v) {
+        if (!v._capacity)
+          v.reserve(1);
+        else if (v._size == v._capacity)
+          v.reserve(v._capacity * 2);
       }
       
 
