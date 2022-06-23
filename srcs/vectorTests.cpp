@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 01:56:49 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 09:51:19 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,17 @@ bool  vectorCapacity(bool printAllTests) {
     && vectorCapacityTest4(printAllTests, 4)
     && vectorCapacityTest5(printAllTests, 5)
     && vectorCapacityTest6(printAllTests, 6)
-    // && vectorCapacityTest7(printAllTests, 7)
-    // && vectorCapacityTest8(printAllTests, 8)
-    // && vectorCapacityTest9(printAllTests, 9)
-    // && vectorCapacityTest10(printAllTests, 10)
+    );
+}
+
+bool  vectorModifiers(bool printAllTests) {
+  std::cout << PURPLE << "<====================" << WHITE << " vector Modifier Test " << PURPLE << "====================>" << RESET << std::endl;
+  return (
+    vectorModifiersTest1(printAllTests, 1)
+    && vectorModifiersTest2(printAllTests, 2)
+    // && vectorModifiersTest3(printAllTests, 3)
+    // && vectorModifiersTest4(printAllTests, 4)
+    // && vectorModifiersTest5(printAllTests, 5)
+    // && vectorModifiersTest6(printAllTests, 6)
     );
 }

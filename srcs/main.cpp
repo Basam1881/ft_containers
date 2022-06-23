@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 19:03:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 08:24:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int main() {
   vectorElementAccess(true);
   std::cout << std::endl << std::endl;
   vectorCapacity(true);
+  std::cout << std::endl << std::endl;
+  vectorModifiers(true);
   
   // std::vector<std::string> v1;
   // std::vector<std::string> v(5, "100");

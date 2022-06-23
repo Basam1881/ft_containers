@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 02:21:47 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 11:08:58 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,26 @@ namespace ft
 		public:
     
       /* ************************************** Types ************************************** */
-			typedef T																																				          	value_type;
-			typedef Alloc																																		          	allocator_type;
-			typedef typename allocator_type::reference																			          	reference;
-			typedef typename allocator_type::const_reference																          	const_reference;
-			typedef typename allocator_type::pointer																				          	pointer;
-			typedef typename allocator_type::const_pointer																	          	const_pointer;
-			typedef typename ft::iterator<ft::random_access_iterator_tag, value_type>			              iterator;
-			typedef typename ft::iterator<ft::random_access_iterator_tag, const value_type>             const_iterator;
-			typedef typename ft::reverse_iterator<iterator>           reverse_iterator;
-			typedef typename ft::reverse_iterator<const_iterator>     const_reverse_iterator;
-			typedef ptrdiff_t																																           	difference_type;
-			typedef size_t																																	           	size_type;
+			typedef T																																				  value_type;
+			typedef Alloc																																		  allocator_type;
+			typedef typename allocator_type::reference																			  reference;
+			typedef typename allocator_type::const_reference																  const_reference;
+			typedef typename allocator_type::pointer																				  pointer;
+			typedef typename allocator_type::const_pointer																	  const_pointer;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, value_type>			    iterator;
+			typedef typename ft::iterator<ft::random_access_iterator_tag, const value_type>   const_iterator;
+			typedef typename ft::reverse_iterator<iterator>                                   reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>                             const_reverse_iterator;
+			typedef ptrdiff_t																																  difference_type;
+			typedef size_t																																	  size_type;
 			
       /* ************************************** Constructors ************************************** */
 			explicit vector (const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
       
-			explicit vector (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type())
+			explicit vector (size_type n, const value_type & val = value_type()
+        , const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
       { allocMe(*this, n, val); }
 
@@ -108,44 +109,24 @@ namespace ft
       {
         size_type n = ft::distance(first, last);
         if (n > _capacity) {
-          for (size_type i = 0; i < _capacity ; i++)
-            _alloc.destroy(_arr + i);
-          _alloc.deallocate(_arr, _capacity);
+          clearMe(*this);
+          allocMe(*this, n, first, last);
           _capacity = n;
-          _size = n;
-          _arr = _alloc.allocate(_capacity);
-          for (size_type i = 0; i < _capacity ; i++, first++)
-            _alloc.construct(_arr + i, *first);
         }
-        else {
-          _size = n;
-          for (size_type i = 0; i < _size; i++) {
-            _alloc.destroy(_arr + i);
-            if (i < n)
-              _arr[i] = *first;
-          }
-        }
+        else
+          replace(*this, n, first);
+        _size = n;
       }
       void assign (size_type n, const value_type& val) 
       {
         if (n > _capacity) {
-          for (size_type i = 0; i < _capacity ; i++)
-            _alloc.destroy(_arr + i);
-          _alloc.deallocate(_arr, _capacity);
+          clearMe(*this);
+          allocMe(*this, n, val);
           _capacity = n;
-          _size = n;
-          _arr = _alloc.allocate(_capacity);
-          for (size_type i = 0; i < _capacity ; i++)
-            _arr[i] = val;
         }
-        else {
-          for (size_type i = 0; i < _capacity; i++) {
-            _alloc.destroy(_arr + i);
-            if (i < n)
-              _arr[i] = val;
-          }
-          _size = n;
-        }
+        else
+          replace(*this, n, val);
+        _size = n;
       }
 
       void push_back (const value_type& val)
@@ -283,6 +264,24 @@ namespace ft
         for (iterator it = v.begin(); it != v.end(); it++)
           v._alloc.destroy(it.base());
         v._alloc.deallocate(v.begin().base(), v.capacity());
+      }
+      
+      void  replace(vector & v, size_type & n, iterator & first) {
+        for (size_type i = 0; i < v._capacity; i++) {
+            v._alloc.destroy(v._arr + i);
+            if (i < n) {
+              v._alloc.construct(v._arr + i, *first);
+              first++;              
+            }
+        }
+      }
+      
+      void  replace(vector & v, size_type n, const value_type& val) {
+        for (size_type i = 0; i < v._capacity; i++) {
+            v._alloc.destroy(v._arr + i);
+            if (i < n)
+              v._alloc.construct(v._arr + i, val);
+        }
       }
       
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 01:57:09 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 08:16:01 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,11 +206,15 @@ bool  vectorCapacityTest3(bool printAllTests, size_t testnum);
 bool  vectorCapacityTest4(bool printAllTests, size_t testnum);
 bool  vectorCapacityTest5(bool printAllTests, size_t testnum);
 bool  vectorCapacityTest6(bool printAllTests, size_t testnum);
-// bool  vectorCapacityTest7(bool printAllTests, size_t testnum);
-// bool  vectorCapacityTest8(bool printAllTests, size_t testnum);
-// bool  vectorCapacityTest9(bool printAllTests, size_t testnum);
-// bool  vectorCapacityTest10(bool printAllTests, size_t testnum);
 bool  vectorCapacity(bool printAllTests);
+
+bool  vectorModifiersTest1(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest2(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest3(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest4(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest5(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest6(bool printAllTests, size_t testnum);
+bool  vectorModifiers(bool printAllTests);
 
 
 
