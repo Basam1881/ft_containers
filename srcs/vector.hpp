@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 01:49:07 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 02:21:47 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ namespace ft
 			typedef size_t																																	           	size_type;
 			
       /* ************************************** Constructors ************************************** */
-
 			explicit vector (const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
@@ -84,48 +83,24 @@ namespace ft
 			const_reverse_iterator 			rend() const;
 
       /* ************************************** Capacity ************************************** */
-      size_type size() const { return _size; }
-      size_type max_size() const { return (size_t)(-1) / (sizeof(T) * 2);/* (sizeof(void *) * 8); */ }
-      size_type capacity() const { return _capacity; }
-      bool      empty() const { return (_size == 0); }
-      void      resize(size_type n, value_type val = value_type())
-      {
-        size_type i = _size;
-        if (n <= _size) {
-          i--;
-          for ( ; i > n; i--)
-            _alloc.construct(_arr + i, val);
-        }
-        else {
-          if (n > _capacity)
-            reserve(n);
-          for ( ; i < n; i++)
-            _alloc.construct(_arr + i, val);
-        }
-        _size = n;
-      }
-
-      void reserve (size_type n)
-      {
-        if (n > _capacity) {
-          vector tmp(*this);
-          clearMe(*this);
-          allocMe(*this, n, tmp.begin(), tmp.end());
-          _capacity = n;
-        }
-      }
+      size_type                   size() const;
+      size_type                   max_size() const;
+      size_type                   capacity() const;
+      bool                        empty() const;
+      void                        resize(size_type n, value_type val = value_type());
+      void                        reserve (size_type n);
 
       /* ************************************** Element Access ************************************** */
-      reference operator[] (size_type n);
-      const_reference operator[] (size_type n) const;
-      reference at (size_type n);
-      const_reference at (size_type n) const;
-      reference front();
-      const_reference front() const;
-      reference back();
-      const_reference back() const;
-      pointer data();
-      const_pointer data() const;
+      reference                   operator[] (size_type n);
+      const_reference             operator[] (size_type n) const;
+      reference                   at (size_type n);
+      const_reference             at (size_type n) const;
+      reference                   front();
+      const_reference             front() const;
+      reference                   back();
+      const_reference             back() const;
+      pointer                     data();
+      const_pointer               data() const;
 
       /* ************************************** Modifiers ************************************** */
       template <class InputIterator>

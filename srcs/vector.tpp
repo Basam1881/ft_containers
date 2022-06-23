@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.tpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 14:54:11 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 02:19:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,43 @@ namespace ft {
   typename vector<T, Alloc>::pointer vector<T, Alloc>::data() { return _arr; }
   template < class T, class Alloc>
   typename vector<T, Alloc>::const_pointer vector<T, Alloc>::data() const { return _arr; }
+
+
+  /* ************************************** Capacity ************************************** */
+  template < class T, class Alloc>
+  typename vector<T, Alloc>::size_type vector<T, Alloc>::size() const { return _size; }
+  template < class T, class Alloc>
+  typename vector<T, Alloc>::size_type vector<T, Alloc>::max_size() const { return (size_t)(-1) / (sizeof(T) * 2); }
+  template < class T, class Alloc>
+  typename vector<T, Alloc>::size_type vector<T, Alloc>::capacity() const { return _capacity; }
+  template < class T, class Alloc>
+  bool      vector<T, Alloc>::empty() const { return (_size == 0); }
+  template < class T, class Alloc>
+  void      vector<T, Alloc>::resize(size_type n, value_type val)
+  {
+    size_type i = _size;
+    if (n <= _size) {
+      i--;
+      for ( ; i > n; i--)
+        _alloc.construct(_arr + i, val);
+    }
+    else {
+      if (n > _capacity)
+        reserve(n);
+      for ( ; i < n; i++)
+        _alloc.construct(_arr + i, val);
+    }
+    _size = n;
+  }
+  template < class T, class Alloc>
+  void vector<T, Alloc>::reserve (size_type n)
+  {
+    if (n > _capacity) {
+      vector tmp(*this);
+      clearMe(*this);
+      allocMe(*this, n, tmp.begin(), tmp.end());
+      _capacity = n;
+    }
+  }
   
 }
