@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTCapacity.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:23:25 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 18:34:38 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 02:00:14 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,22 +138,61 @@ bool  vectorCapacityTest5(bool printAllTests, size_t testnum) {
   
   std::vector<int> v;
   ft::vector<int> ft_v;
-  std::vector<int> v1(15);
-  ft::vector<int> ft_v1(15);
-  std::vector<int> v2(5);
-  ft::vector<int> ft_v2(5);
+  std::vector<int> v1(5);
+  ft::vector<int> ft_v1(5);
+  std::vector<int> v2(15, 1);
+  ft::vector<int> ft_v2(15, 1);
   std::vector<int> v3(5);
   ft::vector<int> ft_v3(5);
   v.resize(10, 10);
   ft_v.resize(10, 10);
-  v1.resize(10, 20);
-  ft_v1.resize(10, 20);
-  v2.resize(15, 30);
-  ft_v2.resize(15, 30);
-  v3.resize(0, 40);
-  ft_v3.resize(0, 40);
+  v1.resize(0, 20);
+  ft_v1.resize(0, 20);
+  v2.resize(5, 10);
+  ft_v2.resize(5, 10);
+  v2.resize(10, 20);
+  ft_v2.resize(10, 20);
+  v3.resize(10, 40);
+  ft_v3.resize(10, 40);
+  v3.resize(7, 40);
+  ft_v3.resize(7, 40);
   
   if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  else std::cout << RED << "KO" << RESET << std::endl;
+  
+  if (!test || printAllTests) printAll<int>(v, ft_v);
+  std::cout << std::endl;
+  if (!test || printAllTests) printAll<int>(v1, ft_v1);
+  std::cout << std::endl;
+  if (!test || printAllTests) printAll<int>(v2, ft_v2);
+  std::cout << std::endl;
+  if (!test || printAllTests) printAll<int>(v3, ft_v3);
+  
+  return test;
+}
+
+bool  vectorCapacityTest6(bool printAllTests, size_t testnum) {
+  bool test = false;
+  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.reserve()                       : " << RESET;
+  
+  std::vector<int> v;
+  ft::vector<int> ft_v;
+  std::vector<int> v1(5);
+  ft::vector<int> ft_v1(5);
+  std::vector<int> v2(15, 1);
+  ft::vector<int> ft_v2(15, 1);
+  std::vector<int> v3(5);
+  ft::vector<int> ft_v3(5);
+  v.reserve(10);
+  ft_v.reserve(10);
+  v1.reserve(10);
+  ft_v1.reserve(10);
+  v2.reserve(5);
+  ft_v2.reserve(5);
+  v3.reserve(0);
+  ft_v3.reserve(0);
+  
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
   else std::cout << RED << "KO" << RESET << std::endl;
   
   if (!test || printAllTests) printAll<int>(v, ft_v);

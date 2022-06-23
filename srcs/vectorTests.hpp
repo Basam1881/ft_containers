@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 16:59:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/23 01:57:09 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ bool  vectorCapacityTest2(bool printAllTests, size_t testnum);
 bool  vectorCapacityTest3(bool printAllTests, size_t testnum);
 bool  vectorCapacityTest4(bool printAllTests, size_t testnum);
 bool  vectorCapacityTest5(bool printAllTests, size_t testnum);
-// bool  vectorCapacityTest6(bool printAllTests, size_t testnum);
+bool  vectorCapacityTest6(bool printAllTests, size_t testnum);
 // bool  vectorCapacityTest7(bool printAllTests, size_t testnum);
 // bool  vectorCapacityTest8(bool printAllTests, size_t testnum);
 // bool  vectorCapacityTest9(bool printAllTests, size_t testnum);
