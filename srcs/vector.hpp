@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 18:54:35 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/24 07:59:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,63 +49,63 @@ namespace ft
 			typedef size_t																																	  size_type;
 			
       /* ************************************** Constructors ************************************** */
-			explicit vector (const allocator_type & alloc = allocator_type())
+			inline explicit vector (const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
       
-			explicit vector (size_type n, const value_type & val = value_type()
+			inline explicit vector (size_type n, const value_type & val = value_type()
         , const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
       { allocMe(*this, n, val); }
 
 			template <class InputIterator>
-			vector (InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last,
+			inline vector (InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last,
         const allocator_type& alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(ft::distance(first, last)), _capacity(_size)
       { allocMe(*this, _capacity, first, last); }
 
-			vector (const vector & x)
+			inline vector (const vector & x)
           : _alloc(x.get_allocator()), _arr(NULL), _size(0), _capacity(0)
       { *this = x; }
 
-			~vector()
+			inline ~vector()
       { clearMe(*this); }
 
-			vector &		operator=( vector const & rhs );
+			inline vector &		operator=( vector const & rhs );
 
       /* ************************************** Iterators ************************************** */
-			iterator					        	begin();
-			const_iterator 		        	begin() const;
-			iterator					        	end();
-			const_iterator 		        	end() const;
-			reverse_iterator						rbegin();
-			const_reverse_iterator 			rbegin() const;
-			reverse_iterator						rend();
-			const_reverse_iterator 			rend() const;
+			inline iterator					        	begin();
+			inline const_iterator 		        	begin() const;
+			inline iterator					        	end();
+			inline const_iterator 		        	end() const;
+			inline reverse_iterator						rbegin();
+			inline const_reverse_iterator 			rbegin() const;
+			inline reverse_iterator						rend();
+			inline const_reverse_iterator 			rend() const;
 
       /* ************************************** Capacity ************************************** */
-      size_type                   size() const;
-      size_type                   max_size() const;
-      size_type                   capacity() const;
-      bool                        empty() const;
-      void                        resize(size_type n, value_type val = value_type());
-      void                        reserve (size_type n);
+      inline size_type                   size() const;
+      inline size_type                   max_size() const;
+      inline size_type                   capacity() const;
+      inline bool                        empty() const;
+      inline void                        resize(size_type n, value_type val = value_type());
+      inline void                        reserve (size_type n);
 
       /* ************************************** Element Access ************************************** */
-      reference                   operator[] (size_type n);
-      const_reference             operator[] (size_type n) const;
-      reference                   at (size_type n);
-      const_reference             at (size_type n) const;
-      reference                   front();
-      const_reference             front() const;
-      reference                   back();
-      const_reference             back() const;
-      pointer                     data();
-      const_pointer               data() const;
+      inline reference                   operator[] (size_type n);
+      inline const_reference             operator[] (size_type n) const;
+      inline reference                   at (size_type n);
+      inline const_reference             at (size_type n) const;
+      inline reference                   front();
+      inline const_reference             front() const;
+      inline reference                   back();
+      inline const_reference             back() const;
+      inline pointer                     data();
+      inline const_pointer               data() const;
 
       /* ************************************** Modifiers ************************************** */
       template <class InputIterator>
-      void assign (InputIterator first, InputIterator last)
+      inline void assign (InputIterator first, InputIterator last)
       {
         size_type n = ft::distance(first, last);
         if (n > _capacity) {
@@ -117,7 +117,7 @@ namespace ft
           replace(*this, n, first);
         _size = n;
       }
-      void assign (size_type n, const value_type& val) 
+      inline void assign (size_type n, const value_type& val) 
       {
         if (n > _capacity) {
           clearMe(*this);
@@ -129,49 +129,46 @@ namespace ft
         _size = n;
       }
 
-      void push_back (const value_type& val)
+      inline void push_back (const value_type& val)
       {
-        checkAndReserve(*this);
+        checkAndReserve(*this, 1, _capacity * 2);
         _alloc.construct(_arr + _size++, val);
       }
-      
-      void pop_back()
+
+      inline void pop_back()
       {
         _alloc.destroy(_arr + _size-- - 1);
       }
 
-      iterator insert (iterator position, const value_type& val)
+      inline iterator insert (iterator position, const value_type& val)
       {
-        if (_size == _capacity) {
-          size_type i = ft::distance(begin(), position);
-          if (!_capacity)
-            reserve(1);
-          else
-            reserve(_capacity * 2);
-          position = begin() + i;
-        }
+        if (_size == _capacity)
+          position = storePositionAndReserve(*this, position, 1, _capacity * 2);
         ++_size;
         ft::copy_backward(position , end() - 1, end() );
         *position = val;
-        return begin();
+        return position;
       }
 
-      void insert (iterator position, size_type n, const value_type& val)
+      inline void insert (iterator position, size_type n, const value_type& val)
       {
-        iterator itmp = begin();
-        size_type i = 0;
-        for( ; itmp != position; itmp++, i++);
-        for ( size_type j = 0; j < n; j++)
-          insert(begin() + i + j, val);
+        isValidInsert(_size + n);
+        size_type oldEnd = _size;
+        if (_size + n > _capacity)
+          position = storePositionAndReserve(*this, position, _size + n, _size + n);
+        _size += n;
+        ft::copy_backward(position, begin() + oldEnd, end());
+        for (size_type i = 0; i < n; i++)
+          *position++ = val;
       }
 
       template <class InputIterator>
-      void insert (iterator position, InputIterator first, InputIterator last)
+      inline void insert (iterator position, InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last)
       {
         size_type i = 0;
         bool exist = false;
         for(iterator itmp = begin(); itmp != position; itmp++, i++);
-        for (iterator it = position; it != end(); it++)
+        for (iterator it = begin(); it != end(); it++)
           if (it == first)
             exist = true;
         for ( size_type j = 0; first != last  ; first++, j++) {
@@ -181,16 +178,11 @@ namespace ft
             for(iterator itmp = begin(); itmp != first; itmp++, f++);
             for(iterator itmp = first; itmp != last; itmp++, n++);
           }
-          T tmp = *first;
-          insert(begin() + i + j, tmp);
+          insert(begin() + i + j, *first);
           if (exist) {
             first = begin() + f;
             last = first + n;
           }
-          // std::cout << "HERE\n";
-          // insert(begin() + i + j, first);
-          // std::cout << "HERE\n";
-          // break;
         }
       }
 
@@ -207,7 +199,7 @@ namespace ft
       // }
       
       /* ************************************** Allocator ************************************** */
-      allocator_type get_allocator() const { return _alloc; }
+      inline allocator_type get_allocator() const { return _alloc; }
       
 		private:
 			allocator_type	_alloc;
@@ -215,64 +207,80 @@ namespace ft
 			size_type				_size;
 			size_type				_capacity;
       
-      void printArr() {
+      inline void printArr() {
         size_type i = 0;
         for (; i != size(); i++)
           std::cout << _arr[i] << ' ';
         std::cout << std::endl;
       }
       
-      size_type store(iterator it) {
+      inline size_type store(iterator it) {
         iterator tmp = begin();
         size_type i = 0;
         for( ; tmp != it && tmp != end(); tmp++, i++);
         return i;
       }
 
-      void  allocMe(vector & v, size_t & n, const value_type & val) {
+      inline void  allocMe(vector & v, size_t & n, const value_type & val) {
         if (n)
           _arr = _alloc.allocate(n);
         for (size_t i = 0; i < n; i++)
           v.get_allocator().construct(v.begin().base() + i, val);
       }
 
-      void  allocMe(vector & v, size_t & n, iterator first, iterator last) {
-        if (n)
+      inline void  allocMe(vector & v, size_t & n, iterator first, iterator last) {
+        if (n) 
           v._arr = v.get_allocator().allocate(n);
         ft::copy(first, last, v.begin(), v.get_allocator());
       }
 
-      void clearMe(vector & v) {
+      inline void clearMe(vector & v) {
         for (iterator it = v.begin(); it != v.end(); it++)
           v._alloc.destroy(it.base());
         v._alloc.deallocate(v.begin().base(), v.capacity());
       }
       
-      void  replace(vector & v, size_type & n, iterator & first) {
+      inline void  replace(vector & v, size_type & n, iterator & first) {
         for (size_type i = 0; i < v._capacity; i++) {
-            v._alloc.destroy(v._arr + i);
-            if (i < n) {
-              v._alloc.construct(v._arr + i, *first);
-              first++;              
-            }
+          v._alloc.destroy(v._arr + i);
+          if (i < n) {
+            v._alloc.construct(v._arr + i, *first);
+            first++;              
+          }
         }
       }
       
-      void  replace(vector & v, size_type n, const value_type& val) {
+      inline void  replace(vector & v, size_type n, const value_type& val) {
         for (size_type i = 0; i < v._capacity; i++) {
-            v._alloc.destroy(v._arr + i);
-            if (i < n)
-              v._alloc.construct(v._arr + i, val);
+          v._alloc.destroy(v._arr + i);
+          if (i < n)
+            v._alloc.construct(v._arr + i, val);
         }
       }
 
-      void  checkAndReserve(vector & v) {
+      inline void  checkAndReserve(vector & v, size_type m, size_type n) {
         if (!v._capacity)
-          v.reserve(1);
+          v.reserve(m);
         else if (v._size == v._capacity)
-          v.reserve(v._capacity * 2);
+          v.reserve(n);
       }
       
+      inline void isValidInsert(size_type n) {
+        if (n > max_size())
+          throw std::length_error("vector::_M_fill_insert");
+        pointer tmp = _alloc.allocate(_size + n);
+        _alloc.deallocate(tmp, _size + n);
+      }
+
+      inline iterator  storePositionAndReserve(vector & v, iterator & position, size_type reserveSize1, size_type reserveSize2) {
+        size_type i = ft::distance(v.begin(), position);
+        checkAndReserve(v, reserveSize1, reserveSize2);
+        return (begin() + i);
+      }
+
+      // inline bool isIteratorInVector(vector & v, iterator it) {
+        
+      // }
 
 
 	};

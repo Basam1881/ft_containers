@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 08:16:01 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/24 02:39:36 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,10 @@ bool  vectorModifiersTest3(bool printAllTests, size_t testnum);
 bool  vectorModifiersTest4(bool printAllTests, size_t testnum);
 bool  vectorModifiersTest5(bool printAllTests, size_t testnum);
 bool  vectorModifiersTest6(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest7(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest8(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest9(bool printAllTests, size_t testnum);
+bool  vectorModifiersTest10(bool printAllTests, size_t testnum);
 bool  vectorModifiers(bool printAllTests);
 
 

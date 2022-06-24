@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.tpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/23 09:56:01 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/24 07:37:50 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ namespace ft {
   
   /* ************************************** Constructors ************************************** */
   template < class T, class Alloc>
-  vector<T, Alloc> &		vector<T, Alloc>::operator=( vector<T, Alloc> const & rhs )
+  inline vector<T, Alloc> &		vector<T, Alloc>::operator=( vector<T, Alloc> const & rhs )
   {
     if (this != &rhs)
     {
@@ -49,81 +49,81 @@ namespace ft {
   
   /* ************************************** Iterators ************************************** */
   template < class T, class Alloc>
-  typename vector<T, Alloc>::iterator					        	vector<T, Alloc>::begin() { 
+  inline typename vector<T, Alloc>::iterator					        	vector<T, Alloc>::begin() { 
     return iterator(_arr);
   }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_iterator 		        	vector<T, Alloc>::begin() const { return const_iterator(_arr); }
+  inline typename vector<T, Alloc>::const_iterator 		        	vector<T, Alloc>::begin() const { return const_iterator(_arr); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::iterator					        	vector<T, Alloc>::end() { return iterator(_arr + _size); }
+  inline typename vector<T, Alloc>::iterator					        	vector<T, Alloc>::end() { return iterator(_arr + _size); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_iterator 		        	vector<T, Alloc>::end() const { return const_iterator(_arr + _size); }
+  inline typename vector<T, Alloc>::const_iterator 		        	vector<T, Alloc>::end() const { return const_iterator(_arr + _size); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::reverse_iterator						vector<T, Alloc>::rbegin() { return reverse_iterator(_arr + _size - 1); }
+  inline typename vector<T, Alloc>::reverse_iterator						vector<T, Alloc>::rbegin() { return reverse_iterator(_arr + _size - 1); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_reverse_iterator 			vector<T, Alloc>::rbegin() const { return const_reverse_iterator(_arr + _size - 1); }
+  inline typename vector<T, Alloc>::const_reverse_iterator 			vector<T, Alloc>::rbegin() const { return const_reverse_iterator(_arr + _size - 1); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::reverse_iterator						vector<T, Alloc>::rend() { return reverse_iterator(_arr - 1); }
+  inline typename vector<T, Alloc>::reverse_iterator						vector<T, Alloc>::rend() { return reverse_iterator(_arr - 1); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_reverse_iterator 			vector<T, Alloc>::rend() const { return const_reverse_iterator(_arr - 1); }
+  inline typename vector<T, Alloc>::const_reverse_iterator 			vector<T, Alloc>::rend() const { return const_reverse_iterator(_arr - 1); }
   
   
 
   /* ************************************** Element Access ************************************** */
   template < class T, class Alloc>
-  typename vector<T, Alloc>::reference vector<T, Alloc>::operator[] (size_type n) { return _arr[n]; }
+  inline typename vector<T, Alloc>::reference vector<T, Alloc>::operator[] (size_type n) { return _arr[n]; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_reference vector<T, Alloc>::operator[] (size_type n) const { return _arr[n]; }
+  inline typename vector<T, Alloc>::const_reference vector<T, Alloc>::operator[] (size_type n) const { return _arr[n]; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::reference vector<T, Alloc>::at (size_type n) { if (n >= _size) throw std::out_of_range("ft_vector\n"); return _arr[n]; }
+  inline typename vector<T, Alloc>::reference vector<T, Alloc>::at (size_type n) { if (n >= _size) throw std::out_of_range("vector\n"); return _arr[n]; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_reference vector<T, Alloc>::at (size_type n) const { if (n >= _size) throw std::out_of_range("ft_vector\n"); return _arr[n]; }
+  inline typename vector<T, Alloc>::const_reference vector<T, Alloc>::at (size_type n) const { if (n >= _size) throw std::out_of_range("vector\n"); return _arr[n]; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::reference vector<T, Alloc>::front() { return *_arr; }
+  inline typename vector<T, Alloc>::reference vector<T, Alloc>::front() { return *_arr; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_reference vector<T, Alloc>::front() const { return *_arr; }
+  inline typename vector<T, Alloc>::const_reference vector<T, Alloc>::front() const { return *_arr; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::reference vector<T, Alloc>::back() { return *(_arr + size() - 1); }
+  inline typename vector<T, Alloc>::reference vector<T, Alloc>::back() { return *(_arr + size() - 1); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_reference vector<T, Alloc>::back() const { return *(_arr + size() - 1); }
+  inline typename vector<T, Alloc>::const_reference vector<T, Alloc>::back() const { return *(_arr + size() - 1); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::pointer vector<T, Alloc>::data() { return _arr; }
+  inline typename vector<T, Alloc>::pointer vector<T, Alloc>::data() { return _arr; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::const_pointer vector<T, Alloc>::data() const { return _arr; }
+  inline typename vector<T, Alloc>::const_pointer vector<T, Alloc>::data() const { return _arr; }
   
 
 
   /* ************************************** Capacity ************************************** */
   template < class T, class Alloc>
-  typename vector<T, Alloc>::size_type vector<T, Alloc>::size() const { return _size; }
+  inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::size() const { return _size; }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::size_type vector<T, Alloc>::max_size() const { return (size_t)(-1) / (sizeof(T)/*  * 2 */); }
+  inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::max_size() const { return (size_t)(-1) / (sizeof(T) * 2); }
   
   template < class T, class Alloc>
-  typename vector<T, Alloc>::size_type vector<T, Alloc>::capacity() const { return _capacity; }
+  inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::capacity() const { return _capacity; }
   
   template < class T, class Alloc>
-  bool      vector<T, Alloc>::empty() const { return (_size == 0); }
+  inline bool                                    vector<T, Alloc>::empty() const { return (_size == 0); }
   
   template < class T, class Alloc>
-  void      vector<T, Alloc>::resize(size_type n, value_type val)
+  inline void                                    vector<T, Alloc>::resize(size_type n, value_type val)
   {
     size_type i = _size;
     if (n <= _size) {
@@ -141,7 +141,7 @@ namespace ft {
   }
   
   template < class T, class Alloc>
-  void vector<T, Alloc>::reserve (size_type n)
+  inline void vector<T, Alloc>::reserve (size_type n)
   {
     if (n > _capacity) {
       vector tmp(*this);
