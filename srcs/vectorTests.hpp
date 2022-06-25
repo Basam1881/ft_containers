@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 06:45:09 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/25 09:29:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,19 @@ bool  vectorModifiersTest9(bool printAllTests, size_t testnum);
 bool  vectorModifiersTest10(bool printAllTests, size_t testnum);
 bool  vectorModifiersTest11(bool printAllTests, size_t testnum);
 bool  vectorModifiers(bool printAllTests);
+
+bool  vectorNonMemberFunctionsTest1(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest2(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest3(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest4(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest5(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest6(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest7(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest8(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest9(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest10(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctionsTest11(bool printAllTests, size_t testnum);
+bool  vectorNonMemberFunctions(bool printAllTests);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 07:23:22 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/25 09:52:26 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int main() {
   vectorCapacity(false);
   std::cout << std::endl << std::endl;
   vectorModifiers(false);
+  std::cout << std::endl << std::endl;
+  vectorNonMemberFunctions(false);
 
 
 /* 

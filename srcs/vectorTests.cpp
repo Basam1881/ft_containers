@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 07:03:18 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/25 10:03:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,22 @@ bool  vectorModifiers(bool printAllTests) {
     && vectorModifiersTest9(printAllTests, 9)
     && vectorModifiersTest10(printAllTests, 10)
     && vectorModifiersTest11(printAllTests, 11)
+    );
+}
+
+bool  vectorNonMemberFunctions(bool printAllTests) {
+  std::cout << PURPLE << "<====================" << WHITE << " vector Non-Member Functions Test " << PURPLE << "====================>" << RESET << std::endl;
+  return (
+    vectorNonMemberFunctionsTest1(printAllTests, 1)
+    && vectorNonMemberFunctionsTest2(printAllTests, 2)
+    && vectorNonMemberFunctionsTest3(printAllTests, 3)
+    && vectorNonMemberFunctionsTest4(printAllTests, 4)
+    && vectorNonMemberFunctionsTest5(printAllTests, 5)
+    && vectorNonMemberFunctionsTest6(printAllTests, 6)
+    && vectorNonMemberFunctionsTest7(printAllTests, 7)
+    // && vectorNonMemberFunctionsTest8(printAllTests, 8)
+    // && vectorNonMemberFunctionsTest9(printAllTests, 9)
+    // && vectorNonMemberFunctionsTest10(printAllTests, 10)
+    // && vectorNonMemberFunctionsTest11(printAllTests, 11)
     );
 }
