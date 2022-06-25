@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTElementAccess.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 07:54:36 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 14:38:05 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/25 07:10:07 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ bool vectorElementAccessTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool
 
 bool vectorElementAccessTest10(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_data()                           : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_data()                          : " << RESET;
   
   size_t i = 0;
   for  ( ; ft_v.at(i) == v.at(i) && i < v.size() - 1; i++);

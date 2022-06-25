@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/24 07:59:48 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/25 07:08:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,38 +165,52 @@ namespace ft
       template <class InputIterator>
       inline void insert (iterator position, InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last)
       {
-        size_type i = 0;
-        bool exist = false;
-        for(iterator itmp = begin(); itmp != position; itmp++, i++);
-        for (iterator it = begin(); it != end(); it++)
-          if (it == first)
-            exist = true;
-        for ( size_type j = 0; first != last  ; first++, j++) {
-          size_type f = 0;
-          size_type n = 0;
-          if (exist) {
-            for(iterator itmp = begin(); itmp != first; itmp++, f++);
-            for(iterator itmp = first; itmp != last; itmp++, n++);
-          }
-          insert(begin() + i + j, *first);
-          if (exist) {
-            first = begin() + f;
-            last = first + n;
-          }
-        }
+        size_type toPos = ft::distance(begin(), position);
+        bool exist = isIteratorInVector(*this, first);
+        size_type size = ft::distance(first, last);
+        size_type toFirst;
+        if (exist)
+          toFirst = ft::distance(begin(), first);
+        insert(position, size, *first);
+        if (exist)
+          ft::copy(begin() + toFirst, begin() + toFirst + size, begin() + toPos);
+        else
+          ft::copy(first, last, begin() + toPos);
       }
 
-      // iterator erase (iterator position)
-      // {
-      //   size_type i = store(position);
-      //   reserve(_capacity);
-      //   i = 
-        
-      // }
-      // iterator erase (iterator first, iterator last)
-      // {
-        
-      // }
+      iterator erase (iterator position)
+      {
+        return erase(position, position + 1);
+      }
+      iterator erase (iterator first, iterator last)
+      {
+        size_type size = ft::distance(first, last);
+        ft::copy(last, end(), first);
+        for (size_type i = 0; i < size; i++)
+        _alloc.destroy(_arr + _size - i);
+        _size -= size;
+        return last;
+      }
+
+      void  swap(vector & x) {
+        allocator_type  tmpAlloc = x._alloc;
+        pointer					tmpArr = x._arr;
+        size_type				tmpSize = x._size;
+        size_type				tmpCapacity = x._capacity;
+        x._alloc = _alloc;
+        x._arr = _arr;
+        x._size = _size;
+        x._capacity = _capacity;
+        _alloc = tmpAlloc;
+        _arr = tmpArr;
+        _size = tmpSize;
+        _capacity = tmpCapacity;
+      }
+      
+      void  clear() {
+        for (size_type i = _size; i > 0; i--, _size--)
+          _alloc.destroy(_arr + i);
+      }
       
       /* ************************************** Allocator ************************************** */
       inline allocator_type get_allocator() const { return _alloc; }
@@ -278,9 +292,12 @@ namespace ft
         return (begin() + i);
       }
 
-      // inline bool isIteratorInVector(vector & v, iterator it) {
-        
-      // }
+      inline bool isIteratorInVector(vector & v, iterator & iter) {
+        for (iterator it = v.begin(); it != v.end(); it++)
+          if (it == iter)
+            return true;
+        return false;
+      }
 
 
 	};

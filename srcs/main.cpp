@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/24 07:09:54 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/25 07:23:22 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <sys/time.h>
 
 int main() {
-  vectorBasic(true);
+  vectorBasic(false);
   std::cout << std::endl << std::endl;
   vectorIterators(false);
   std::cout << std::endl << std::endl;
@@ -33,9 +33,9 @@ int main() {
   std::cout << std::endl << std::endl;
   vectorCapacity(false);
   std::cout << std::endl << std::endl;
-  vectorModifiers(true);
+  vectorModifiers(false);
 
-  
+
 /* 
   try { v1.insert(v1.begin() + v1.size(), v1.max_size() + 1, 5); }
   catch (const std::length_error& le) {}
