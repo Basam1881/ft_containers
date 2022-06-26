@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTBasic.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:05:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 15:01:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/26 13:39:16 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ bool  vBasicTest2(bool printAllTests) {
 }
 
 bool  vBasicTest3(bool printAllTests) {
-  std::vector<int> v(3);
-  ft::vector<int> ft_v(3);
+  std::vector<int> v(0);
+  ft::vector<int> ft_v(0);
   return vBasictest<int>(v, ft_v, printAllTests, 3, 1000);
 }
 

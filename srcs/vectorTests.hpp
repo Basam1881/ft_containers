@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 09:29:48 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/26 16:01:41 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,12 +228,18 @@ bool  vectorNonMemberFunctionsTest4(bool printAllTests, size_t testnum);
 bool  vectorNonMemberFunctionsTest5(bool printAllTests, size_t testnum);
 bool  vectorNonMemberFunctionsTest6(bool printAllTests, size_t testnum);
 bool  vectorNonMemberFunctionsTest7(bool printAllTests, size_t testnum);
-bool  vectorNonMemberFunctionsTest8(bool printAllTests, size_t testnum);
-bool  vectorNonMemberFunctionsTest9(bool printAllTests, size_t testnum);
-bool  vectorNonMemberFunctionsTest10(bool printAllTests, size_t testnum);
-bool  vectorNonMemberFunctionsTest11(bool printAllTests, size_t testnum);
 bool  vectorNonMemberFunctions(bool printAllTests);
 
+bool  vectorExceptionTest1(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest2(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest3(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest4(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest5(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest6(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest7(bool printAllTests, size_t testnum);
+bool  vectorExceptionTest8(bool printAllTests, size_t testnum);
+bool  vectorException(bool printAllTests);
 
+bool  vectorAll(bool printAllTests, bool valgrind);
 
 #endif

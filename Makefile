@@ -28,7 +28,8 @@ CPP_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
 						vTIterators.cpp vTRIterators.cpp\
 						vTCIterators.cpp vTCRIterators.cpp\
 						vTElementAccess.cpp vTCapacity.cpp\
-						vTModifiers.cpp vTNonMemberFuncs.cpp
+						vTModifiers.cpp vTNonMemberFuncs.cpp\
+						vTException.cpp
 
 SRC_NAME = $(addprefix $(OBJ_DIR), ${CPP_FILES})
 

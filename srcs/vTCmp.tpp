@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTCmp.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:39:23 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 16:58:41 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/06/26 15:26:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,20 @@ void  cmpPerformanceHelper(size_t testnum, T value) {
 template<typename T>
 bool  cmpBasicPerformance(size_t testnum, bool printAllTests, T value) {
   struct timeval begin, end;
+  static double elapsed, elapsed1;
+  if (printAllTests) {
+    std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed * 1e+6 << WHITE << " Ms" << RESET << std::endl;
+    std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 * 1e+6 << WHITE << " Ms" << RESET << std::endl;
+    std::cout << PURPLE << "Faster by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed / elapsed1 << WHITE << " (ft_v/v)" << RESET<< std::endl;
+    std::cout << PURPLE << "Slower by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 / elapsed << WHITE << " (v/ft_v)" << RESET<< std::endl;
+    return true;
+  }
   gettimeofday(&begin, 0);
   cmpPerformanceHelper<T, std::vector<T> >(testnum, value);
   gettimeofday(&end, 0);
   long seconds = end.tv_sec - begin.tv_sec;
   long microseconds = end.tv_usec - begin.tv_usec;
-  double elapsed = seconds + microseconds*1e-6;
+  elapsed = seconds + microseconds*1e-6;
   
   struct timeval begin1, end1;
   gettimeofday(&begin1, 0);
@@ -92,13 +100,7 @@ bool  cmpBasicPerformance(size_t testnum, bool printAllTests, T value) {
   gettimeofday(&end1, 0);
   long seconds1 = end1.tv_sec - begin1.tv_sec;
   long microseconds1 = end1.tv_usec - begin1.tv_usec;
-  double elapsed1 = seconds1 + microseconds1*1e-6;
-  if (printAllTests) {
-    std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed * 1e+6 << WHITE << " Ms" << RESET << std::endl;
-    std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 * 1e+6 << WHITE << " Ms" << RESET << std::endl;
-    std::cout << PURPLE << "Faster by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed / elapsed1 << WHITE << " (ft_v/v)" << RESET<< std::endl;
-    std::cout << PURPLE << "Slower by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 / elapsed << WHITE << " (v/ft_v)" << RESET<< std::endl;
-  }
+  elapsed1 = seconds1 + microseconds1*1e-6;
   return (elapsed1 / elapsed < 20);
 }
 
