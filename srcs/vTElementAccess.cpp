@@ -6,14 +6,12 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 07:54:36 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 07:10:07 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:36:04 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 bool vectorElementAccessTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {

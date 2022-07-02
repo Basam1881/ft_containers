@@ -6,14 +6,12 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:51:19 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 13:49:06 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:35:39 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 void printVecInsertPosition(int pos, int ft_pos) {

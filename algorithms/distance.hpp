@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   distance.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:02:46 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/20 17:36:49 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:45:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <string>
 # include <memory>
 # include <cstddef>
-# include "iterator.hpp"
 
 namespace ft
 {

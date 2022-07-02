@@ -6,14 +6,12 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:05:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/26 13:39:16 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:36:53 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 std::string vBasictestType(size_t testnum) {

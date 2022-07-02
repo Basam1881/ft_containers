@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vTPrinter.tpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:10 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 15:51:46 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:35:30 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 template<typename T>

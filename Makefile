@@ -31,7 +31,7 @@ CPP_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
 						vTModifiers.cpp vTNonMemberFuncs.cpp\
 						vTException.cpp
 
-SRC_NAME = $(addprefix $(OBJ_DIR), ${CPP_FILES})
+SRC_NAME = $(addprefix $(SRC_DIR), ${CPP_FILES})
 
 SRC_DIR = srcs/
 

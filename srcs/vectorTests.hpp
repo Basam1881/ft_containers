@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/26 16:01:41 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:37:08 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include <sys/time.h>
 #include <iomanip>
 #include <limits.h>
+#include <vector>
+#include "../vector/vector.hpp"
 
 
 /* ************************************** Printers ************************************** */

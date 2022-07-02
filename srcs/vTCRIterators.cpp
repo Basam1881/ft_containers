@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vTCRIterators.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 19:03:30 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/22 09:56:29 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:36:23 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 bool  vectorConstReverseIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {

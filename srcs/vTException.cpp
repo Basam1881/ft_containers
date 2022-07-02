@@ -6,14 +6,12 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:26 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/26 15:13:05 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:35:55 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 

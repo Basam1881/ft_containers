@@ -6,14 +6,12 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:26:27 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 10:10:05 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 07:35:35 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include "vector.hpp"
 #include "vectorTests.hpp"
 
 bool  vectorNonMemberFunctionsTest1(bool printAllTests, size_t testnum) {

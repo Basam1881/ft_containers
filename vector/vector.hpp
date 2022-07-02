@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/26 15:29:26 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/02 09:43:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <memory>
 # include <cstddef>
 # include <stdexcept>
-# include "iterator.hpp"
-# include "distance.hpp"
-# include "copy.hpp"
-# include "copy_backward.hpp"
-# include "enable_if.hpp"
-# include "is_integral.hpp"
-# include "equal.hpp"
-# include "lexicographical_compare.hpp"
+# include "../iterators/iterator.hpp"
+# include "../algorithms/distance.hpp"
+# include "../algorithms/copy.hpp"
+# include "../algorithms/copy_backward.hpp"
+# include "../algorithms/enable_if.hpp"
+# include "../algorithms/is_integral.hpp"
+# include "../algorithms/equal.hpp"
+# include "../algorithms/lexicographical_compare.hpp"
 
 namespace ft
 {
