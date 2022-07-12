@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTBasic.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 10:05:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:36:53 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/12 13:05:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ std::string vBasictestType(size_t testnum) {
     case 9:
       return " : Copy Constructor<int>                              : ";
     case 10:
-      return ": Copy Constructor<std::string>                       : ";
+      return ": Copy Constructor<std::string>                      : ";
     case 11:
-      return ": operator=() {empty2empty}                           : ";
+      return ": operator=() {empty2empty}                          : ";
     case 12:
-      return ": operator=() {empty2filled}                          : ";
+      return ": operator=() {empty2filled}                         : ";
     case 13:
-      return ": operator=() {filled2empty}                          : ";
+      return ": operator=() {filled2empty}                         : ";
     case 14: 
-      return ": operator=() {bigger2smaller}                        : ";
+      return ": operator=() {bigger2smaller}                       : ";
     case 15:
-      return ": operator=() {smaller2bigger}                        : ";
+      return ": operator=() {smaller2bigger}                       : ";
   }
   return NULL;
 }

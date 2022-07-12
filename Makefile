@@ -24,19 +24,30 @@ PROJECT_NAME = ft_containers
 # Starting Date of the project
 DATE = 27 - 05 - 2022
 
-CPP_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
+VEC_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
 						vTIterators.cpp vTRIterators.cpp\
 						vTCIterators.cpp vTCRIterators.cpp\
 						vTElementAccess.cpp vTCapacity.cpp\
 						vTModifiers.cpp vTNonMemberFuncs.cpp\
 						vTException.cpp
 
-SRC_NAME = $(addprefix $(SRC_DIR), ${CPP_FILES})
+MAP_FILES = main.cpp
+
+VEC_NAME = $(addprefix $(VEC_DIR), ${VEC_FILES})
+
+MAP_NAME = $(addprefix $(MAP_DIR), ${MAP_FILES})
 
 SRC_DIR = srcs/
 
+VEC_DIR = vectorTester/
+
+MAP_DIR = mapTester/
+
+# Vector Object Files
+VEC_OBJ_NAME = $(addprefix $(OBJ_DIR), ${VEC_NAME:%.cpp=%.o})
+
 # Object Files
-OBJ_NAME = $(addprefix $(OBJ_DIR), ${CPP_FILES:%.cpp=%.o})
+MAP_OBJ_NAME = $(addprefix $(OBJ_DIR), ${MAP_NAME:%.cpp=%.o})
 
 OBJ_DIR = objs/
 
@@ -47,21 +58,36 @@ CXX = c++ -g
 CXX_FLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Executable file's name
-NAME = container
+VNAME = ftvector
+
+# Executable file's name
+MNAME = ftmap
+
+NAME = ft
 
 all: header $(NAME) footer
 
-$(NAME): nothing $(OBJ_DIR) $(OBJ_NAME)
-	@$(CXX) ${CXX_FLAGS} $(OBJ_NAME) -o $(NAME)
+$(NAME) : $(MNAME)
+
+$(VNAME): nothing $(OBJ_DIR) $(VEC_OBJ_NAME)
+	@$(CXX) ${CXX_FLAGS} $(VEC_OBJ_NAME) -o $(VNAME)
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
+
+$(MNAME): nothing $(OBJ_DIR) $(MAP_OBJ_NAME)
+	@$(CXX) ${CXX_FLAGS} $(MAP_OBJ_NAME) -o $(MNAME)
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
 
 nothing:
 	@echo "\n\n"
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR) && mkdir -p $(OBJ_DIR)$(VEC_DIR) && mkdir -p $(OBJ_DIR)$(MAP_DIR)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.cpp
+$(OBJ_DIR)$(VEC_DIR)%.o : $(SRC_DIR)$(VEC_DIR)%.cpp
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)generating $@\n$(NO_COLOR)"
+	@$(CXX) ${CXX_FLAGS} -c $< -o $@
+
+$(OBJ_DIR)$(MAP_DIR)%.o : $(SRC_DIR)$(MAP_DIR)%.cpp
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)generating $@\n$(NO_COLOR)"
 	@$(CXX) ${CXX_FLAGS} -c $< -o $@
 
@@ -117,7 +143,8 @@ clean_o_files:
 	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
 
 clean_exec_file:
-	@rm -rf $(NAME)
+	@rm -rf $(VNAME)
+	@rm -rf $(MNAME)
 	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable file is Deleted\n$(NO_COLOR)"
 
 

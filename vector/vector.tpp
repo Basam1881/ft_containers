@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.tpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/05 10:32:25 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/12 14:18:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ namespace ft {
   
   template < class T, class Alloc>
   inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::max_size() const {
-    return (size_t)(-1) / (sizeof(T) * 2);
+    return (size_t)(-1) / sizeof(T);
   }
   
   template < class T, class Alloc>

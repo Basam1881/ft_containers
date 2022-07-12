@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/07 05:17:44 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/12 11:53:01 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ namespace ft {
 
     /* ************************************** Constructors ************************************** */
     inline explicit map (const key_compare& comp = key_compare(),
-              const allocator_type& alloc = allocator_type()) {}
+              const allocator_type& alloc = allocator_type()) : _comp(comp), _alloc(alloc) {}
 
     template <class InputIterator>
     inline map (InputIterator first, InputIterator last,
         const key_compare& comp = key_compare(),
-        const allocator_type& alloc = allocator_type()) {}
+        const allocator_type& alloc = allocator_type()) : _comp(comp), _alloc(alloc) { (void)first;(void)last; }
 
-    inline map (const map& x) {}
+    inline map (const map& x) { *this = x; }
     
     inline ~map() {}
 
@@ -165,6 +165,7 @@ namespace ft {
         avl_type *            _root;
         size_type             _size;
         allocator_type        _alloc;
+        key_compare           _comp;
 
   };
 }

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:37:08 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/12 12:39:06 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORTESTS_CPP
-# define VECTORTESTS_CPP
+#ifndef VECTORTESTS_HPP
+# define VECTORTESTS_HPP
 
 # define GREEN "\033[38;5;46m"
 # define WHITE "\033[1;37m"
@@ -25,7 +25,7 @@
 #include <iomanip>
 #include <limits.h>
 #include <vector>
-#include "../vector/vector.hpp"
+#include "../../vector/vector.hpp"
 
 
 /* ************************************** Printers ************************************** */

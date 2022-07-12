@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexicographical_compare.hpp                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 08:14:05 by bnaji             #+#    #+#             */
-/*   Updated: 2022/06/25 08:51:10 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/12 11:38:46 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
     while (first1!=last1)
     {
       if (first2==last2 || *first2<*first1) return false;
-      else if (cmp(*first1, *first2)) return true;
+      else if (comp(*first1, *first2)) return true;
       ++first1; ++first2;
     }
     return (first2!=last2);
