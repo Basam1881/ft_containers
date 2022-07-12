@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/12 14:31:35 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/12 20:00:47 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,19 @@ int main() {
   std::map<std::string, std::string> mmap;
   // std::vector<std::string>::iterator v;
   
-  // ft::pair<int, int> p;
+  // ft::pair<std::string, std::string> p = ft::make_pair<std::string, std::string>("hello", "world");
   // p.first = 2;
   // p.second = 20;
-  ft::AVL<int, int> * root = NULL;
-  ft::AVL<int, int> myavl;
-  root = myavl.Insert(root, ft::make_pair(1, 10));
-  myavl.Insert(root, ft::make_pair(4, 40));
-  myavl.Insert(root, ft::make_pair(2, 20));
-  myavl.Insert(root, ft::make_pair(3, 30));
-  root->Inorder(root);
+  ft::AVL<std::string, std::string> myavl, * root = NULL;
+  // std::cout << "Hello World!" << std::endl;
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi5", "five"));
+  myavl.insert(root, ft::make_pair<std::string, std::string>("hi3", "three"));
+  myavl.insert(root, ft::make_pair<std::string, std::string>("hi7", "seven"));
+  myavl.insert(root, ft::make_pair<std::string, std::string>("hi4", "four"));
+  myavl.erase(root, "hi4");
+  myavl.erase(root, "hi3");
+  root->inorder(root);
+  // std::cout << myavl.search(root, "hi7")->getpair().second << std::endl;
   ft::pair<int, int> p1(ft::make_pair(4, 40));
   std:: cout << p1.first << " " << p1.second << std::endl;
   mmap["hi7"] = "seven";
