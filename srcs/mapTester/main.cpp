@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/13 11:21:42 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/13 11:49:18 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main() {
   root = myavl.erase(root, "hi5");
   root = myavl.erase(root, "hi7");
   root = myavl.erase(root, "hi");
-  root->inorder(root);
+  root->printAll(root);
   // std::cout << myavl.search(root, "hi7")->getpair().second << std::endl;
   ft::pair<int, int> p1(ft::make_pair(4, 40));
   std:: cout << p1.first << " " << p1.second << std::endl;

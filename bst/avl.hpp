@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/13 11:21:28 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/13 12:07:43 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,16 @@ namespace ft {
     allocator_type       _alloc;
     avl_allocator        _avlAlloc;
     value_type           _p;
-    AVL                  *_parent;
     AVL                  *_left;
     AVL                  *_right;
 
   public:
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(value_type()), _parent(NULL), _left(NULL), _right(NULL)
+        _avlAlloc(avl_allocator()), _p(value_type()), _left(NULL), _right(NULL)
     {}
-    
 
     AVL(value_type p) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(p), _parent(NULL), _left(NULL), _right(NULL)
+        _avlAlloc(avl_allocator()), _p(p), _left(NULL), _right(NULL)
     {}
 
     AVL &		operator=( AVL const & rhs ) {
@@ -56,7 +54,6 @@ namespace ft {
         _alloc = rhs._alloc;
         _avlAlloc = rhs._avlAlloc;
         _p = rhs._p;
-        _parent = rhs._parent;
         _left = rhs._left;
         _right = rhs._right;
       }
@@ -72,6 +69,18 @@ namespace ft {
       while (tmp && tmp->_left) {
         tmp = tmp->_left;
       }
+      return tmp;
+    }
+    
+    AVL * freeMe(AVL * root) {
+      _avlAlloc.deallocate(root, 1);
+      return NULL;
+    }
+
+    AVL * replace(AVL * dst, AVL * src) {
+      AVL * tmp = _avlAlloc.allocate(1);
+      *tmp = *src;
+      dst = freeMe(dst);
       return tmp;
     }
 
@@ -98,6 +107,21 @@ namespace ft {
       return search(root->_right, key);
     }
 
+    AVL * checkChildrenAndErase(AVL *root) {
+      if (!root->_left && !root->_right)
+        root = freeMe(root);
+      else if (!root->_left)
+        root = replace(root, root->_right);
+      else if (!root->_right)
+        root = replace(root, root->_left);
+      else {
+        AVL * tmp = getLowestKey(root->_right);
+        root->_p = tmp->_p;
+        root->_right = erase(root->_right, root->_p.first);
+      }
+      return root;
+    }
+
     AVL * erase(AVL * root, Key key) {
       if (!root)
         return root;
@@ -105,39 +129,18 @@ namespace ft {
         root->_left = erase(root->_left, key);
       else if (_isGreater(key, root->_p.first))
         root->_right  = erase(root->_right, key);
-      else {
-        if (!root->_left && !root->_right) {
-          _avlAlloc.deallocate(root, 1);
-          root = NULL;
-        }
-        else if (!root->_left) {
-          AVL * tmp = _avlAlloc.allocate(1);
-          *tmp = *root->_right;
-          _avlAlloc.deallocate(root, 1);
-          root = tmp;
-        }
-        else if (!root->_right) {
-          AVL * tmp = _avlAlloc.allocate(1);
-          *tmp = *root->_left;
-          _avlAlloc.deallocate(root, 1);
-          root = tmp;
-        }
-        else {
-          AVL * tmp = getLowestKey(root->_right);
-          root->_p = tmp->_p;
-          root->_right = erase(root->_right, root->_p.first);
-        }
-      }
+      else
+        root = checkChildrenAndErase(root);
       return root;
     }
 
-    void inorder(AVL * root)
+    void printAll(AVL * root)
     {
       if (!root)
           return;
-      inorder(root->_left);
+      printAll(root->_left);
       std::cout << root->_p.second << std::endl;
-      inorder(root->_right);
+      printAll(root->_right);
     }
   };
 }
