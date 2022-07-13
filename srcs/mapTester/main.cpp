@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/13 11:49:18 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/13 19:22:19 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,24 @@ int main() {
   // p.first = 2;
   // p.second = 20;
   ft::AVL<std::string, std::string> myavl, * root = NULL;
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi3", "three"));
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi4", "four"));
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi5", "five"));
-  myavl.insert(root, ft::make_pair<std::string, std::string>("hi3", "three"));
-  myavl.insert(root, ft::make_pair<std::string, std::string>("hi7", "seven"));
-  myavl.insert(root, ft::make_pair<std::string, std::string>("hi2", "two"));
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi6", "six"));
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi7", "seven"));
+  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi8", "eight"));
+  std::cout << "HELLO world" << std::endl;
+  // root = myavl.erase(root, "hi3");
+  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi9", "nine"));
+  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hia", "ten"));
   // myavl.erase(root, "hi5");
-  // std::cout << "Hello World!" << std::endl;
   // myavl.erase(root, "hi7");
   // myavl.erase(root, "hi4");
-  root = myavl.erase(root, "hi5");
-  root = myavl.erase(root, "hi7");
-  root = myavl.erase(root, "hi");
+  // root = myavl.erase(root, "hi7");
+  // root = myavl.erase(root, "hi");
   root->printAll(root);
-  // std::cout << myavl.search(root, "hi7")->getpair().second << std::endl;
+  
+  // std::cout << root->getpair().second << std::endl;
   ft::pair<int, int> p1(ft::make_pair(4, 40));
   std:: cout << p1.first << " " << p1.second << std::endl;
   mmap["hi7"] = "seven";
