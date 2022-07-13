@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/12 19:59:53 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/13 11:21:28 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ namespace ft {
 
     AVL * getLowestKey(AVL * root) {
       AVL * tmp = root;
-      while (tmp) {
+      while (tmp && tmp->_left) {
         tmp = tmp->_left;
       }
       return tmp;
@@ -108,24 +108,25 @@ namespace ft {
       else {
         if (!root->_left && !root->_right) {
           _avlAlloc.deallocate(root, 1);
-          return NULL;
+          root = NULL;
         }
         else if (!root->_left) {
           AVL * tmp = _avlAlloc.allocate(1);
-          tmp = root->_right;
+          *tmp = *root->_right;
           _avlAlloc.deallocate(root, 1);
-          return tmp;
+          root = tmp;
         }
         else if (!root->_right) {
           AVL * tmp = _avlAlloc.allocate(1);
-          tmp = root->_left;
+          *tmp = *root->_left;
           _avlAlloc.deallocate(root, 1);
-          return tmp;
+          root = tmp;
         }
-        AVL * tmp = getLowestKey(root->_right);
-        root->_p.first = tmp->_p.first;
-        root->_right = erase(root->_right, tmp->_p.first);
-        
+        else {
+          AVL * tmp = getLowestKey(root->_right);
+          root->_p = tmp->_p;
+          root->_right = erase(root->_right, root->_p.first);
+        }
       }
       return root;
     }
