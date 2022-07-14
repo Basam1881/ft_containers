@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/13 19:22:19 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/14 11:28:21 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int main() {
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi5", "five"));
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi6", "six"));
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi7", "seven"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi8", "eight"));
-  std::cout << "HELLO world" << std::endl;
-  // root = myavl.erase(root, "hi3");
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi8", "eight"));
+  root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi2", "two"));
+  // std::cout << "HELLO world ------ ";
+  root = myavl.erase(root, "hi8");
   // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi9", "nine"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hia", "ten"));
-  // myavl.erase(root, "hi5");
+  // root = myavl.erase(root, "hi3");
   // myavl.erase(root, "hi7");
   // myavl.erase(root, "hi4");
   // root = myavl.erase(root, "hi7");

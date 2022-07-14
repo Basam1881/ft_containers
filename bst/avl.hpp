@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/13 19:36:48 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/14 11:54:41 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ namespace ft {
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
         _avlAlloc(avl_allocator()), _p(value_type()), _left(NULL),
-        _right(NULL), _height(1)
+        _right(NULL), _height(0)
     {}
 
     AVL(value_type p) : _alloc(allocator_type()),
         _avlAlloc(avl_allocator()), _p(p), _left(NULL), _right(NULL),
-        _height(1)
+        _height(0)
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
         _avlAlloc(avl_allocator()), _p(value_type()), _left(NULL), _right(NULL),
-        _height(1)
+        _height(0)
     { *this = src; }
 
     AVL &		operator=( AVL const & rhs ) {
@@ -78,7 +78,7 @@ namespace ft {
     int getHeight(AVL * root) {
       if (root)
         return root->_height;
-      return 0;
+      return -1;
     }
 
     int getBalanceFactor(AVL * root) {
@@ -93,6 +93,36 @@ namespace ft {
         tmp = tmp->_left;
       }
       return tmp;
+    }
+
+    key_type getLeftKey(AVL * root, key_type key) {
+      key_type leftKey;
+      if (root->_left)
+        leftKey = root->_left->_p.first;
+      else
+        leftKey = key;
+      return leftKey;
+    }
+
+    key_type getRightKey(AVL * root, key_type key) {
+      key_type rightKey;
+      if (root->_right)
+        rightKey = root->_right->_p.first;
+      else
+        rightKey = key;
+      return rightKey;
+    }
+
+    AVL * getLeft(AVL * root) {
+      if (root)
+        return root->_left;
+      return root;
+    }
+
+    AVL * getRight(AVL * root) {
+      if (root)
+        return root->_right;
+      return root;
     }
 
   /* ************************************** Utils ************************************** */
@@ -141,6 +171,7 @@ namespace ft {
     AVL * rotateRight(AVL * root) {
       AVL * left = root->_left;
       AVL * leftRight = root->_left->_right;
+      std::cout << "Hello World!" << std::endl;
       root->_left->_right = root;
       root->_left = leftRight;
       updateHeight(root);
@@ -158,6 +189,24 @@ namespace ft {
       return right;
     }
 
+    AVL * balance(AVL * root, bool isLeftRight, bool isRightLeft) {
+      if (!root)
+        return root;
+      updateHeight(root);
+      int balanceFactor = getBalanceFactor(root);    
+      if (balanceFactor > 1) {
+        if (isLeftRight)
+          root->_left = rotateLeft(root->_left);
+        root = rotateRight(root);
+      }
+      else if (balanceFactor < -1) {
+        if (isRightLeft)
+          root->_right = rotateRight(root->_right);
+        root = rotateLeft (root);
+      }
+      return root;
+    }
+
   /* ************************************** Modifiers ************************************** */
     AVL * insert(AVL * root, value_type p)
     {
@@ -169,34 +218,9 @@ namespace ft {
       }
       if (_isLess(p.first, root->_p.first))
         root->_left = insert(root->_left, p);
-      else {
+      else
         root->_right = insert(root->_right, p);
-        std::cout << root->_right->_p.first << " : " << root->_right->_height << std::endl;
-      }
-
-      updateHeight(root);
-
-      int balanceFactor = getBalanceFactor(root);
-
-      if (root->_p.first == "hi4") {
-        std::cout << "hmmm : " << std::max(getHeight(root->_left->_left), getHeight(root->_left->_right)) + 1 << std::endl;
-        std::cout << getHeight(root->_left) << std::endl;
-        std::cout << getHeight(root->_right) << std::endl;
-        
-      }
-      
-      if (balanceFactor > 1) {
-        if (p.first > root->_left->_p.first)
-          root->_left = rotateLeft(root->_left);
-        root = rotateRight(root);
-      }
-      else if (balanceFactor < -1) {
-        if (p.first < root->_right->_p.first)
-          root->_right = rotateRight(root->_right);
-        root = rotateLeft (root);
-        std::cout << "left" << std::endl;
-      }
-      std::cout << "HELLO - " <<  root->_p.first << std::endl;
+      root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
       return root;
     }
 
@@ -217,25 +241,7 @@ namespace ft {
         root->_right  = erase(root->_right, key);
       else
         root = checkChildrenAndErase(root);
-
-      // if (!root)
-      //   return root;
-      
-      // updateHeight(root);
-
-      // int balanceFactor = getBalanceFactor(root);
-
-      // if (balanceFactor > 1) {
-      //   if (getBalanceFactor(root->_left) < 0)
-      //     root->_left = rotateLeft(root->_left);
-      //   root = rotateRight(root);
-      // }
-      // else if (balanceFactor < -1) {
-      //   if (getBalanceFactor(root->_right) < 0)
-      //     root->_right = rotateRight(root->_right);
-      //   root = rotateLeft (root);
-      // }
-      
+      root = balance(root, getBalanceFactor(getLeft(root)) < 0, getBalanceFactor(getRight(root)) > 0);
       return root;
     }
   };
