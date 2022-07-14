@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/14 11:28:21 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/14 18:46:43 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main() {
   // std::vector<std::string>::iterator v;
   
   // ft::pair<std::string, std::string> p = ft::make_pair<std::string, std::string>("hello", "world");
+  // std::pair<std::string, std::string> p;
   // p.first = 2;
   // p.second = 20;
   ft::AVL<std::string, std::string> myavl, * root = NULL;
@@ -39,6 +40,11 @@ int main() {
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi7", "seven"));
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi8", "eight"));
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi2", "two"));
+  // typedef ft::iterator<ft::bidirectional_iterator_tag, ft::pair<std::string, std::string>	> iterator;
+  // iterator myit;
+  // myit = iterator(root);
+  
+  // std::cout << myit << std::endl;
   // std::cout << "HELLO world ------ ";
   root = myavl.erase(root, "hi8");
   // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi9", "nine"));
@@ -60,7 +66,7 @@ int main() {
   // mmap.erase("hi4");
   // mmap.erase("hi4");
   for (std::map<std::string, std::string>::iterator it = mmap.begin(); it != mmap.end(); it++ ) {
-    std::cout << "|" << it->first << " " << it->second << "| ";
+    std::cout << "|" << it->first << " " << it->second << "| " << (*it).first;
   }
   std::cout << std::endl;
 }

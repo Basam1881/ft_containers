@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/12 11:53:01 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/14 17:41:45 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <memory>
 # include "../bst/avl.hpp"
 # include "../algorithms/pair.hpp"
-# include "../iterators/iterator.hpp"
+# include "../iterators/mapIterator.hpp"
 
 namespace ft {
   template < class Key, class T, class Compare = std::less<Key>,
