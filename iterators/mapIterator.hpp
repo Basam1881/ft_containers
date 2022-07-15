@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/14 18:48:02 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/15 19:31:25 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ namespace ft
   };
 
   template <class Category, class T, class Distance = std::ptrdiff_t,
-	  	class Pointer = T*, class Reference = T&>
+	  	class Pointer = typename T::pointer, class Reference = typename T::reference>
 	class iterator
 	{
     public:
@@ -69,12 +69,12 @@ namespace ft
       typedef Reference                        reference;
       typedef Category                         iterator_category;
 
-      iterator() : _node(NULL) { /* Ç>getPair() = NULL; */ }
-      iterator(pointer node) : _node(node) { /* _node->getPair() = NULL; */ }
-      iterator (iterator const & src) : _node(NULL) { /* _node->getPair() = NULL; */ *this = src; }
+      iterator() : _node(NULL) {  }
+      iterator(T * node) : _node(node) { _lowest = _node->getLowestKey(_node->getMasterRoot()); _heighest = _node->getHeighestKey(_node->getMasterRoot()); T dumb; _end = &dumb; }
+      iterator (iterator const & src) : _node(NULL) { *this = src; }
       ~iterator() {}
 
-      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { if (this != &rhs) this->_node  = rhs._node; return *this; }
+      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { if (this != &rhs) this->_node  = rhs._node; _lowest = rhs._lowest; _heighest = rhs._heighest; return *this; }
 
       iterator &                operator ++ () { _increment(); return *this; }
       iterator                  operator ++ (int) { iterator tmp(*this); _increment(); return (tmp); }
@@ -85,44 +85,57 @@ namespace ft
       operator                  iterator<Category, const value_type>() { return iterator<Category, const value_type>(_node); }
 
       reference                 operator * () const { return this->_node->getPair(); }
-      pointer                   operator -> () const { return &this->_node->getPair(); }
+      pointer                   operator -> () const { return this->_node->getPairPointer(); }
 
-      protected:
-        pointer     _node;
+      template <class Iterator1, class Iterator2>
+      friend bool operator== ( const Iterator1 & lhs,
+                        const Iterator2 & rhs) { return lhs._node == rhs._node; }
+      template <class Iterator1, class Iterator2>
+      friend bool operator!= ( const Iterator1 & lhs,
+                        const Iterator2 & rhs) { return lhs._node != rhs._node; }
 
-        void        _increment() {
-          if (_node->getRight()) {
-            _node = _node->getRight();
-            while (_node->getLeft())
-              _node = _node->getLeft();
-          }
-          else if (_node->getParent()) {
-            while (_node->getLess()(_node->getParent(), _node))
-              _node = _node->getParent();
-            _node = _node->getParent();
-          }
-        }
+    protected:
+      T *                             _node;
+      T *                             _heighest;
+      T *                             _lowest;
+      T *                             _end;
 
-        void        _decrement() {
-          if (_node->getLeft()) {
+      void        _increment() {
+        if (_node == _heighest)
+          _node = _end;
+        else if (_node == _end)
+          _node = NULL;
+        else if (_node->getRight()) {
+          _node = _node->getRight();
+          while (_node->getLeft())
             _node = _node->getLeft();
-            while (_node->getRight())
-              _node = _node->getRight();
-          }
-          else if (_node->getParent()) {
-            while (_node->getGreater()(_node->getParent(), _node))
-              _node = _node->getParent();
+        }
+        else if (_node->getParent()) {
+          while (_node->getLess()(_node->getParent()->getPair().first, _node->getPair().first))
+            _node = _node->getParent();
+          _node = _node->getParent();
+        }
+      }
+
+      void        _decrement() {
+        if (_node == _lowest) {
+          _node = NULL;
+        }
+        else if (_node->getLeft()) {
+          _node = _node->getLeft();
+          while (_node->getRight())
+            _node = _node->getRight();
+        }
+        else if (_node->getParent()) {
+          while (_node->getParent() && _node->getGreater()(_node->getParent()->getPair().first, _node->getPair().first)) {
             _node = _node->getParent();
           }
+          if (_node->getParent())
+            _node = _node->getParent();
         }
+      }
 	};
 
-  // template <class Iterator1, class Iterator2>
-  // bool operator== ( const Iterator1 & lhs,
-  //                   const Iterator2 & rhs) { return lhs.base() == rhs.base(); }
-  // template <class Iterator1, class Iterator2>
-  // bool operator!= ( const Iterator1 & lhs,
-  //                   const Iterator2 & rhs) { return lhs.base() != rhs.base(); }
 
 
  template <class Iterator>

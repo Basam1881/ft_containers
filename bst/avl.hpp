@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/14 18:45:04 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/15 18:57:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 
 namespace ft {
   template < class Key, class T, class Compare = std::less<Key>,
-    class Alloc = std::allocator<ft::pair<const Key,T> > >
+    class Alloc = std::allocator<ft::pair<Key,T> > >
   class AVL {
-
+  public:
     typedef Key														          key_type;
     typedef T															          mapped_type;
-    typedef ft::pair<key_type,mapped_type>		      value_type; 
+    typedef ft::pair<key_type,mapped_type>		      value_type;
+    typedef value_type *		                        pointer;
+    typedef value_type &		                        reference;
     typedef Compare																	key_compare_less;
     typedef std::greater<Key>                       key_compare_greater;
     typedef std::equal_to<Key>                      key_compare_equal;
@@ -39,6 +41,7 @@ namespace ft {
     allocator_type       _alloc;
     avl_allocator        _avlAlloc;
     value_type           _p;
+    AVL                  *_masterRoot;
     AVL                  *_parent;
     AVL                  *_left;
     AVL                  *_right;
@@ -48,17 +51,17 @@ namespace ft {
 
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(value_type()), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(value_type()), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     {}
 
     AVL(value_type p) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(p), _parent(NULL), _left(NULL),
+        _avlAlloc(avl_allocator()), _p(p), _masterRoot(this), _parent(NULL), _left(NULL),
         _right(NULL), _height(0)
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(value_type()), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(value_type()), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     { *this = src; }
 
@@ -75,20 +78,31 @@ namespace ft {
     }
 
   /* ************************************** Getters ************************************** */
-    key_compare_less const & getLess() {
+    key_compare_less getLess() {
       return _isLess;
     }
 
-    key_compare_greater const & getGreater() {
+    key_compare_greater getGreater() {
       return _isGreater;
     }
 
-    key_compare_equal const & getEqual() {
+    key_compare_equal getEqual() {
       return _isEqual;
     }
 
-    value_type const & getPair() {
+    value_type & getPair() {
       return _p;
+    }
+
+
+    pointer getPairPointer() {
+      pointer p = _alloc.allocate(1);
+      *p = _p;
+      return p;
+    }
+
+    AVL * getMasterRoot() {
+      return _masterRoot;
     }
 
     AVL * getParent() {
@@ -123,6 +137,14 @@ namespace ft {
       AVL * tmp = root;
       while (tmp && tmp->_left) {
         tmp = tmp->_left;
+      }
+      return tmp;
+    }
+
+    AVL * getHeighestKey(AVL * root) {
+      AVL * tmp = root;
+      while (tmp && tmp->_right) {
+        tmp = tmp->_right;
       }
       return tmp;
     }
@@ -174,6 +196,15 @@ namespace ft {
       root->_height = std::max(getAVLHeight(root->_left), getAVLHeight(root->_right)) + 1;
     }
 
+    void  updateMasterRoot(AVL * root) {
+      if (!root)
+        return ;
+      if (root->_parent)
+        root->_masterRoot = root->_parent->_masterRoot;
+      updateMasterRoot(root->_left);
+      updateMasterRoot(root->_right);
+    }
+
     AVL * checkChildrenAndErase(AVL *root) {
       if (!root->_left && !root->_right)
         root = freeMe(root);
@@ -193,7 +224,6 @@ namespace ft {
     {
       if (!root)
           return;
-      std::cout << root->_p.first << std::endl;
       printAll(root->_left);
       std::cout << root->_p.second << std::endl;
       printAll(root->_right);
@@ -204,12 +234,18 @@ namespace ft {
       AVL * left = root->_left;
       AVL * leftRight = root->_left->_right;
 
-      root->_left->_right = root;
-      root->_left->_right->_parent = root;
-      
       root->_left->_parent = root->_parent;
+      root->_left->_right = root;
       root->_parent = root->_left;
+
+      if(leftRight)
+        leftRight->_parent = root;
       root->_left = leftRight;
+      
+      if (root->_masterRoot == root) {
+        left->_masterRoot = left;
+        updateMasterRoot(left);
+      }
 
       updateHeight(root);
       updateHeight(left);
@@ -221,13 +257,18 @@ namespace ft {
       AVL * right = root->_right;
       AVL * rightLeft = right->_left;
 
-      root->_right->_left = root;
-      root->_right->_left->_parent = root;
-
       root->_right->_parent = root->_parent;
+      root->_right->_left = root;
       root->_parent = root->_right;
+
+      if (rightLeft)
+        rightLeft->_parent = root;
       root->_right = rightLeft;
 
+      if (root->_masterRoot == root) {
+        right->_masterRoot = right;
+        updateMasterRoot(right);
+      }
       updateHeight(root);
       updateHeight(right);
 
@@ -259,16 +300,20 @@ namespace ft {
         AVL * element = _avlAlloc.allocate(1);
         element->_p.first = p.first;
         element->_p.second = p.second;
+        element->_masterRoot = element;
         return element;
       }
       if (_isLess(p.first, root->_p.first)) {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
+        root->_left->_masterRoot = root->_masterRoot;
       }
       else {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root; 
+        root->_right->_masterRoot = root->_masterRoot;
       }
+      
       root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
       return root;
     }
