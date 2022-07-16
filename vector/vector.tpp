@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/12 14:18:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 13:17:45 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ namespace ft {
     return *this;
   }
 
-  
+
   /* ************************************** Iterators ************************************** */
   template < class T, class Alloc>
   inline typename vector<T, Alloc>::iterator                  vector<T, Alloc>::begin() { 

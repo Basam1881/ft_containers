@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/16 11:56:16 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 18:30:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@
 
 namespace ft
 {
-  template <class T, T v>
-  struct bidirectional_constant {
-    static const T value = v;
-    typedef T value_type;
-    typedef bidirectional_constant<T,v> type;
-  };
-
-  typedef bidirectional_constant<bool,false> false_type;
-  typedef bidirectional_constant<bool,true> true_type;
-
-  template <class _Tp> struct is_bidirectional                                      : public false_type {};
-  template <>          struct is_bidirectional<bidirectional_iterator_tag>          : public true_type {};
-
   template <class Category, class T, class Distance = std::ptrdiff_t,
 	  	class Pointer = typename T::pointer, class Reference = typename T::reference>
 	class iterator
@@ -58,6 +45,8 @@ namespace ft
       ~iterator() {}
 
       value_type *              getNode () const { return _node; }
+      
+      value_type *              getEnd () const { return _node; }
 
       iterator &		            operator = ( iterator<Category, const T> const & rhs ) { if (this != &rhs) { this->_node  = rhs._node; _lowest = rhs._lowest; _heighest = rhs._heighest; } return *this; }
 
@@ -74,10 +63,10 @@ namespace ft
 
       template <class Iterator1, class Iterator2>
       friend bool operator== ( const Iterator1 & lhs,
-                        const Iterator2 & rhs) { return lhs.getNode() == rhs.base().getNode(); }
+                        const Iterator2 & rhs) { return lhs.getNode() == rhs.getNode(); }
       template <class Iterator1, class Iterator2>
       friend bool operator!= ( const Iterator1 & lhs,
-                        const Iterator2 & rhs) { return lhs.getNode() != rhs.base().getNode(); }
+                        const Iterator2 & rhs) { return lhs.getNode() != rhs.getNode(); }
 
     protected:
       value_type *                             _node;

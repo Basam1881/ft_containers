@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pair.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 05:09:43 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/11 17:58:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 16:04:29 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ namespace ft {
     pair( const T1& x, const T2& y ) : first(x), second(y) {}
 
     template< class U1, class U2 >
-    pair( const pair<U1, U2>& p ) : first(first_type()), second(second_type()) { *this = p; }
+    pair( const pair<U1, U2>& p ) : first(p.first), second(p.second) { }
 
     ~pair() {}
 

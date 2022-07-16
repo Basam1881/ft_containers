@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.tpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 09:56:16 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 18:03:25 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@ namespace ft {
 
 
   /* ************************************** Iterators ************************************** */
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline typename map<Key, T, Compare, Alloc>::iterator					        	  map<Key, T, Compare, Alloc>::begin() {
-  //   return iterator();
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline typename map<Key, T, Compare, Alloc>::iterator					        	  map<Key, T, Compare, Alloc>::begin() {
+    return iterator(_root->getLowestKey(_root));
+  }
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::begin() const {
-    
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::begin() const {
+    return iterator(_root->getLowestKey(_root));
+  }
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline typename map<Key, T, Compare, Alloc>::iterator					        	  map<Key, T, Compare, Alloc>::end() {
-    
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline typename map<Key, T, Compare, Alloc>::iterator					        	  map<Key, T, Compare, Alloc>::end() {
+    return iterator(_root->getHeighestKey(_root));
+  }
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::end() const {
-    
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::end() const {
+    return iterator(_root->getHeighestKey(_root));
+  }
 
   // template<class Key, class T, class Compare, class Alloc>
   // inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rbegin() {
@@ -63,7 +63,7 @@ namespace ft {
 
   /* ************************************** Capacity ************************************** */
   template<class Key, class T, class Compare, class Alloc>
-  inline bool                        map<Key, T, Compare, Alloc>::empty() const {
+  inline bool                                                             map<Key, T, Compare, Alloc>::empty() const {
     return (_size == 0);
   }
 
@@ -74,7 +74,7 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::size_type                   map<Key, T, Compare, Alloc>::max_size() const {
-    return (size_t)(-1) / (sizeof(T) * 2);
+    return (size_t)(-1) / sizeof(T);
   }
 
 
@@ -97,7 +97,7 @@ namespace ft {
 
   /* ************************************** Modifiers ************************************** */
   // template<class Key, class T, class Compare, class Alloc>
-  // inline std::pair<typename map<Key, T, Compare, Alloc>::iterator,bool> map<Key, T, Compare, Alloc>::insert (const typename map<Key, T, Compare, Alloc>::value_type& val) {
+  // inline std::pair<typename map<Key, T, Compare, Alloc>::iterator, bool>   map<Key, T, Compare, Alloc>::insert (const typename map<Key, T, Compare, Alloc>::value_type& val) {
     
   // }
 
