@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/16 08:20:37 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 11:29:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ int main() {
 
   typedef ft::iterator<ft::bidirectional_iterator_tag, ft::AVL<std::string, std::string>	> iterator;
   typedef ft::reverse_iterator<iterator> reverse_iterator;
-  reverse_iterator myit;
+  reverse_iterator myit(root->getHeighestKey(root));
 
-  myit = reverse_iterator(root->getHeighestKey(root));
+  // myit = reverse_iterator(root->getHeighestKey(root));
   for ( ; iterator(root->getLowestKey(root)) != myit; myit++)
     std::cout << "<--- " << (*myit).first << " --->" << std::endl;
   std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
+  // myit += 1;
   // for ( myit = iterator(root->getHeighestKey(root)); myit != iterator(root->getLowestKey(root)); myit--)
   //   std::cout << "<--- " << (*myit).first << " --->" << std::endl;
   // std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
@@ -72,9 +73,9 @@ int main() {
   mmap.insert(std::pair<std::string, std::string>("hi8", "eight"));
   // mmap.erase("hi4");
   // mmap.erase("hi4");
-  std::map<std::string, std::string>::iterator it = mmap.begin();
+  std::map<std::string, std::string>::reverse_iterator it = mmap.rbegin();
   std::cout << "|" << it->first << " " << it->second << "| " << std::endl;
-  for (it = mmap.begin(); it != mmap.end(); it++ ) {
+  for (it = mmap.rbegin(); it != mmap.rend(); it++ ) {
     std::cout << "|" << it->first << " " << it->second << "| ";
   }
   // it--;

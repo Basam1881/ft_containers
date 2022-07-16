@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 09:43:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 11:58:16 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <memory>
 # include <cstddef>
 # include <stdexcept>
-# include "../iterators/iterator.hpp"
+# include "../iterators/vectorIterator.hpp"
 # include "../algorithms/distance.hpp"
 # include "../algorithms/copy.hpp"
 # include "../algorithms/copy_backward.hpp"
