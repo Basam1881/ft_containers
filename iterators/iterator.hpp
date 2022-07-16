@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/14 16:37:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 08:23:11 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ namespace ft
       typedef typename iterator_traits<Iterator>::pointer               pointer;
       typedef typename iterator_traits<Iterator>::reference             reference;
       typedef typename iterator_traits<Iterator>::iterator_category     iterator_category;
-        
+
       reverse_iterator() : iterator<iterator_category, value_type>(NULL) {}
       reverse_iterator(pointer p) : iterator<iterator_category, value_type>(p) {}
       reverse_iterator(reverse_iterator const & src) : iterator<iterator_category, value_type>(src) { *this = src; }

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/15 19:27:49 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 08:20:37 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ int main() {
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi2", "two"));
 
   typedef ft::iterator<ft::bidirectional_iterator_tag, ft::AVL<std::string, std::string>	> iterator;
-  iterator myit;
+  typedef ft::reverse_iterator<iterator> reverse_iterator;
+  reverse_iterator myit;
 
-  myit = iterator(root->getLowestKey(root));
-  for ( ; iterator(root->getHeighestKey(root)) != myit; myit++)
+  myit = reverse_iterator(root->getHeighestKey(root));
+  for ( ; iterator(root->getLowestKey(root)) != myit; myit++)
     std::cout << "<--- " << (*myit).first << " --->" << std::endl;
   std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
-  for ( myit = iterator(root->getHeighestKey(root)); myit != iterator(root->getLowestKey(root)); myit--)
-    std::cout << "<--- " << (*myit).first << " --->" << std::endl;
-  std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
+  // for ( myit = iterator(root->getHeighestKey(root)); myit != iterator(root->getLowestKey(root)); myit--)
+  //   std::cout << "<--- " << (*myit).first << " --->" << std::endl;
+  // std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
 
   // myit++;
   // root = myavl.erase(root, "hi8");

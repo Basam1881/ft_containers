@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/15 19:31:25 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/16 08:20:19 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ namespace ft
       typedef Reference                        reference;
       typedef Category                         iterator_category;
 
-      iterator() : _node(NULL) {  }
-      iterator(T * node) : _node(node) { _lowest = _node->getLowestKey(_node->getMasterRoot()); _heighest = _node->getHeighestKey(_node->getMasterRoot()); T dumb; _end = &dumb; }
-      iterator (iterator const & src) : _node(NULL) { *this = src; }
+      iterator() : _node(NULL), _heighest(NULL), _lowest(NULL) { T dumb; _end = &dumb; }
+      iterator(value_type * node) : _node(node) { _lowest = _node->getLowestKey(_node->getMasterRoot()); _heighest = _node->getHeighestKey(_node->getMasterRoot()); T dumb; _end = &dumb; }
+      iterator (iterator const & src) : _node(NULL), _heighest(NULL), _lowest(NULL) { *this = src; T dumb; _end = &dumb; }
       ~iterator() {}
 
-      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { if (this != &rhs) this->_node  = rhs._node; _lowest = rhs._lowest; _heighest = rhs._heighest; return *this; }
+      iterator &		            operator = ( iterator<Category, const T> const & rhs ) { if (this != &rhs) { this->_node  = rhs._node; _lowest = rhs._lowest; _heighest = rhs._heighest; } return *this; }
 
       iterator &                operator ++ () { _increment(); return *this; }
       iterator                  operator ++ (int) { iterator tmp(*this); _increment(); return (tmp); }
@@ -95,10 +95,10 @@ namespace ft
                         const Iterator2 & rhs) { return lhs._node != rhs._node; }
 
     protected:
-      T *                             _node;
-      T *                             _heighest;
-      T *                             _lowest;
-      T *                             _end;
+      value_type *                             _node;
+      value_type *                             _heighest;
+      value_type *                             _lowest;
+      value_type *                             _end;
 
       void        _increment() {
         if (_node == _heighest)
@@ -138,30 +138,33 @@ namespace ft
 
 
 
- template <class Iterator>
+  template <class Iterator>
 	class reverse_iterator : public iterator<typename Iterator::iterator_category, typename Iterator::value_type>
 	{
     public:
-//       typedef typename iterator_traits<Iterator>::value_type            value_type;
-//       typedef typename iterator_traits<Iterator>::difference_type       difference_type;
-//       typedef typename iterator_traits<Iterator>::pointer               pointer;
-//       typedef typename iterator_traits<Iterator>::reference             reference;
-//       typedef typename iterator_traits<Iterator>::iterator_category     iterator_category;
-        
-//       reverse_iterator() : iterator<iterator_category, value_type>(NULL) {}
-//       reverse_iterator(pointer p) : iterator<iterator_category, value_type>(p) {}
-//       reverse_iterator(reverse_iterator const & src) : iterator<iterator_category, value_type>(src) { *this = src; }
-//       ~reverse_iterator() {}
+      typedef typename iterator_traits<Iterator>::value_type            value_type;
+      typedef typename iterator_traits<Iterator>::difference_type       difference_type;
+      typedef typename iterator_traits<Iterator>::pointer               pointer;
+      typedef typename iterator_traits<Iterator>::reference             reference;
+      typedef typename iterator_traits<Iterator>::iterator_category     iterator_category;
 
-//       reverse_iterator &	      operator = ( reverse_iterator const & rhs ) { if (this != &rhs) { this->_p  = rhs._p; } return *this; }
+      reverse_iterator() : iterator<iterator_category, value_type>(), _it(iterator<iterator_category, value_type>()) {}
+      reverse_iterator(value_type * val) : iterator<iterator_category, value_type>(val) { _it = iterator<iterator_category, value_type>(val); }
+      reverse_iterator(reverse_iterator const & src) : iterator<iterator_category, value_type>(src) { *this = src; }
+      ~reverse_iterator() {}
 
-//       reverse_iterator &        operator ++ () { --this->_p; return *this; }
-//       reverse_iterator          operator ++ (int) { reverse_iterator tmp(*this); this->_p--; return (tmp); }
+      reverse_iterator &		            operator = ( reverse_iterator<Iterator> const & rhs ) { if (this != &rhs) { this->_node  = rhs._node; this->_lowest = rhs._lowest; this->_heighest = rhs._heighest; _it = rhs._it; } return *this; }
 
-//       reverse_iterator &        operator -- () { ++this->_p; return *this; }
-//       reverse_iterator          operator -- (int) { reverse_iterator tmp(*this); this->_p++; return (tmp); }
+      reverse_iterator &                operator ++ () { --_it; return *this;}
+      reverse_iterator                  operator ++ (int) { reverse_iterator tmp(*this); this->_decrement(); return (tmp); }
 
-//       operator reverse_iterator<iterator<iterator_category, const value_type> >() { return reverse_iterator<iterator<iterator_category, const value_type> >(this->_p); }
+      reverse_iterator &                operator -- () { ++_it; return *this;}
+      reverse_iterator                  operator -- (int) { reverse_iterator tmp(*this); this->_increment(); _it++; return (tmp); }
+
+      operator reverse_iterator<iterator<iterator_category, const value_type> >() { return reverse_iterator<iterator<iterator_category, const value_type> >(this->_p); }
+
+    private:
+      Iterator _it;
 
 	};
 }
