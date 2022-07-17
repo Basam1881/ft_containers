@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/16 16:16:36 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/17 19:18:19 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MAP_HPP
 
 # include <iostream>
+# include <sstream>
 # include <string>
 # include <memory>
 # include "../bst/avl.hpp"
@@ -73,7 +74,7 @@ namespace ft {
         const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc) {
      for ( ; first != last; first++) {
       _root = _root->insert(_root, *first);
-      std::cout << "hello\n";
+      _root->setEnd(first.getEnd());
      }
     }
 
@@ -119,15 +120,12 @@ namespace ft {
 
 
       /* ************************************** Modifiers ************************************** */
-      ft::pair<iterator,bool> insert (const value_type& val) {
-        _root = _root->insert(_root, val);
-        return ft::pair<iterator,bool>();
-      }
+      ft::pair<iterator,bool> insert (const value_type& val);
 
       iterator insert (iterator position, const value_type& val);
 
       template <class InputIterator>
-        void insert (InputIterator first, InputIterator last);
+      void insert (InputIterator first, InputIterator last);
       
       void erase (iterator position);
 

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 05:09:43 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/16 16:04:29 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/17 17:49:40 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft {
         second = pr.second;
       }
       return *this;
-    }
+  }
   };
 
   // Non-Member Functions
