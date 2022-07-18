@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/17 19:18:19 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/18 10:05:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ namespace ft {
         const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc) {
      for ( ; first != last; first++) {
       _root = _root->insert(_root, *first);
-      _root->setEnd(first.getEnd());
+      _root->setHighEnd(first.getHighEnd());
+      _root->setLowEnd(first.getLowEnd());
      }
     }
 

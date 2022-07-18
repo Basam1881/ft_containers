@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/17 18:48:24 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:42:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,44 @@ namespace ft
       typedef Reference                        reference;
       typedef Category                         iterator_category;
 
-      iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _end(NULL) {}
-      iterator(value_type * node) : _node(node) { _lowest = _node->getLowestKey(_node->getMasterRoot()); _Highest = _node->getHighestKey(_node->getMasterRoot()); _end = _node->getEnd(); }
-    iterator (iterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; _end = _node->getEnd(); }
+      iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _highEnd(NULL), _lowEnd(NULL) {}
+      iterator(value_type * node) : _node(node) { _lowest = node->getLowestKey(node->getMasterRoot()); _Highest = node->getHighestKey(node->getMasterRoot()); _highEnd = node->getHighEnd(); _lowEnd = node->getLowEnd();
+      // std::cout << _node->getPair().first << " != " << node->getMasterRoot()->getPair().first << " != " << node->getLowestKey(node->getMasterRoot())->getPair().first << std::endl;
+      }
+      iterator (iterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; }
       ~iterator() {}
 
       value_type *              getNode () const { return _node; }
-      
-      value_type *              getEnd () const { return _end; }
 
-      iterator &		            operator = ( iterator<Category, const T> const & rhs ) {  this->_node  = rhs._node; _lowest = rhs._lowest; _Highest = rhs._Highest; _end = rhs.getEnd(); return *this; }
+      value_type *              getHighEnd () const { return _highEnd; }
 
-      iterator &                operator ++ () { _increment(); return *this; }
-      iterator                  operator ++ (int) { iterator tmp(*this); _increment(); return (tmp); }
+      value_type *              getLowEnd () const { return _lowEnd; }
 
-      iterator &                operator -- () { _decrement(); return *this; }
-      iterator                  operator -- (int) { iterator tmp(*this); _decrement(); return (tmp); }
+      iterator &		            operator = ( iterator<Category, const T> const & rhs ) {  _node  = rhs._node; _lowest = rhs._lowest; _Highest = rhs._Highest; _highEnd = rhs._node->getHighEnd(); _lowEnd = rhs._node->getLowEnd(); return *this; }
+
+      iterator &                operator ++ () {
+        if (this->_node == _lowEnd)
+          _node = _lowest;
+        _increment();
+        return *this;
+      }
+      iterator                  operator ++ (int) { 
+        if (this->_node == _lowEnd)
+          _node = _lowest;
+        iterator tmp(*this); _increment(); return (tmp);
+      }
+
+      iterator &                operator -- () {
+        if (this->_node == _highEnd)
+          _node = _Highest;
+        _decrement();
+        return *this;
+      }
+      iterator                  operator -- (int) {
+        if (this->_node == _highEnd)
+          _node = _Highest;
+        iterator tmp(*this); _decrement(); return (tmp);
+      }
 
       operator                  iterator<Category, const value_type>() { return iterator<Category, const value_type>(_node); }
 
@@ -70,14 +92,15 @@ namespace ft
       value_type *                             _node;
       value_type *                             _Highest;
       value_type *                             _lowest;
-      value_type *                             _end;
+      value_type *                             _highEnd;
+      value_type *                             _lowEnd;
 
       void        _increment() {
         if (_node == _Highest)
-          _node = _end;
-        else if (_node == _end) {
+          _node = _highEnd;
+        else if (_node == _highEnd) {
           _node = NULL;
-          _node->getEnd();
+          _node->getHighEnd();
         }
         else if (_node->getRight()) {
           _node = _node->getRight();
@@ -93,10 +116,10 @@ namespace ft
 
       void        _decrement() {
         if (_node == _lowest)
-          _node = _end;
-        else if (_node == _end) {
+          _node = _lowEnd;
+        else if (_node == _lowEnd) {
           _node = NULL;
-          _node->getEnd();
+          _node->getLowEnd();
         }
         else if (_node->getLeft()) {
           _node = _node->getLeft();
@@ -104,7 +127,7 @@ namespace ft
             _node = _node->getRight();
         }
         else if (_node->getParent()) {
-          while (_node->getParent() && _node->getGreater()(_node->getParent()->getPair().first, _node->getPair().first)) {
+          while (/* _node->getParent() && */ _node->getGreater()(_node->getParent()->getPair().first, _node->getPair().first)) {
             _node = _node->getParent();
           }
           if (_node->getParent())

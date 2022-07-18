@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/17 19:19:42 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/18 12:59:39 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 #include "../../algorithms/make_pair.hpp"
 #include "../../bst/avl.hpp"
 
-
+/**   
+ * !Fix the error from avl erase when reading getLowestKey and setting iterator to start from lowest as well
+*/
 int main() {
-  std::map<std::string, std::string> mmap;
 
   // ft::pair<std::string, std::string> p = ft::make_pair<std::string, std::string>("hello", "world");
   ft::AVL<std::string, std::string> myavl, * root = NULL;
@@ -38,19 +39,26 @@ int main() {
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi8", "eight"));
   root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi2", "two"));
 
-  // root = myavl.erase(root, "hi7");
-  // root = myavl.erase(root, "hi3");
+  root = myavl.erase(root, "hi7");
+  root = myavl.erase(root, "hi3");
   // std::cout << "Hello\n";
   typedef ft::iterator<ft::bidirectional_iterator_tag, ft::AVL<std::string, std::string>	> iterator;
+  // iterator myit(root->getLowestKey(root));
+  iterator myit(root->getHighestKey(root));
   // typedef ft::reverse_iterator<iterator> reverse_iterator;
-  iterator myit(root->getLowestKey(root));
-  // myit;
-  // myit = reverse_iterator(root->getHighestKey(root));
-  // if (root->getEnd() && root->getEnd() == root->getHighestKey(root)->getEnd())
-  //   std::cout << "fuck yeah\n";
-  for ( ; iterator(root->getEnd()) != myit; myit++)
-    std::cout << "<--- " << myit->first << " --->" << std::endl;
-  std::cout << "<--- " << myit->first << "-" << myit->second << " --->" << std::endl;
+  // reverse_iterator myit(root->getHighestKey(root));
+  // for ( ; myit != reverse_iterator(root->getHighEnd()); myit--) {
+      std::cout << "decrement1" << std::endl;
+  for ( ; myit != iterator(root->getLowEnd()); myit--) {
+    // if (myit != iterator(root->getEnd()))
+      std::cout << "<--- " << myit->first << " - " << myit->second << " --->" << std::endl;
+      std::cout << "<--- " << myit.getLowEnd() << " - " << root->getLowestKey(root->getMasterRoot()) << " --->" << std::endl;
+
+    // myit++;  
+    // myit--;
+    // std::cout << "decrement2" << std::endl;
+  }
+  // std::cout << "<--- " << myit->first << "-" << myit->second << " --->" << std::endl;
   // myit++;
   // myit++;
   // std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
@@ -61,7 +69,7 @@ int main() {
   //   std::cout << "<--- " << (*myit).first << " --->" << std::endl;
   // std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
 
-  // myit++;
+  // myit++;            
   // root = myavl.erase(root, "hi8");
   // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi9", "nine"));
   // myavl.erase(root, "hi4");
@@ -72,7 +80,8 @@ int main() {
   ft::map<int, int> ftmap;
   // ft::pair<int, int> p = ft::make_pair<int, int>(1, 10);
   ftmap.insert(ft::make_pair<int, int>(1, 10));
-  ftmap.insert(ft::make_pair<int, int>(1, 20));
+  ftmap.insert(ft::make_pair<int, int>(2, 20));
+  ftmap[0];
   
   // ftmap.insert(ft::make_pair<int, int>(3, 30));
   // ftmap.insert(ft::make_pair<int, int>(4, 40));
@@ -82,7 +91,7 @@ int main() {
   for ( ; tt != ftmap1.end(); tt++) {
     std:: cout << tt->first << " " << tt->second << std::endl;
   }
-  std::cout << ftmap1.at(1) << std::endl;
+  std::cout << ftmap1.at(2) << std::endl;
   // if (tt != ftmap.end())
   // if (tt != ftmap.end())
   //   tt++;
@@ -93,6 +102,7 @@ int main() {
   // std:: cout << tt->first << " " << tt->second << std::endl;
 
   // std::cout << root->getpair().second << std::endl;
+  std::map<std::string, std::string> mmap;
   ft::pair<int, int> p1(ft::make_pair(4, 40));
   // std:: cout << p1.first << " " << p1.second << std::endl;
   mmap["hi7"] = "seven";
@@ -101,6 +111,8 @@ int main() {
   mmap.insert(std::pair<std::string, std::string>("hi4", "four"));
   mmap.insert(std::pair<std::string, std::string>("hi3", "three"));
   mmap.insert(std::pair<std::string, std::string>("hi8", "eight"));
+  // std::cout << mmap.at("hi4") << std::endl;
+  
   // mmap.erase("hi4");
   // mmap.erase("hi4");
   // it--;
@@ -118,6 +130,7 @@ int main() {
   // it--;
   // std::cout << "|" << it->first << " " << it->second << "| ";
   std::map<std::string, std::string> mmap1(mmap.begin(), mmap.end());
+  // std::map<std::string, std::string>::reverse_iterator it2 = mmap1.rbegin();
   std::map<std::string, std::string>::iterator it = mmap1.begin();
   std::cout << "|" << it->first << " " << it->second << "| " << std::endl;
   for (it = mmap1.begin(); it != mmap1.end(); it++ ) {

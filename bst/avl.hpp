@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/17 19:33:30 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:43:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ namespace ft {
     allocator_type       _alloc;
     avl_allocator        _avlAlloc;
     value_type           _p;
-    AVL                  *_end;
+    AVL                  *_highEnd;
+    AVL                  *_lowEnd;
     AVL                  *_masterRoot;
     AVL                  *_parent;
     AVL                  *_left;
@@ -52,17 +53,17 @@ namespace ft {
 
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(), _end(NULL), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     {}
 
     AVL(value_type p) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(p), _end(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
+        _avlAlloc(avl_allocator()), _p(p), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
         _right(NULL), _height(0)
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(), _end(NULL), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     { *this = src; }
 
@@ -71,6 +72,8 @@ namespace ft {
         _alloc = rhs._alloc;
         _avlAlloc = rhs._avlAlloc;
         _p = rhs._p;
+        _highEnd = rhs._highEnd;
+        _lowEnd = rhs._lowEnd;
         _parent = rhs._parent;
         _left = rhs._left;
         _right = rhs._right;
@@ -99,12 +102,20 @@ namespace ft {
       return &_p;
     }
 
-    AVL * getEnd() {
-      return _end;
+    AVL * getHighEnd() {
+      return _highEnd;
     }
 
-    void setEnd(AVL * end) {
-      _end = end;
+    void setHighEnd(AVL * highEnd) {
+      _highEnd = highEnd;
+    }
+    
+    AVL * getLowEnd() {
+      return _lowEnd;
+    }
+
+    void setLowEnd(AVL * lowEnd) {
+      _lowEnd = lowEnd;
     }
 
     AVL * getMasterRoot() {
@@ -192,7 +203,9 @@ namespace ft {
     }
 
     AVL * replace(AVL * dst, AVL * src) {
+      std::cout << "Replace" << std::endl;
       AVL * tmp = _avlAlloc.allocate(1);
+      src->_parent = dst->_parent;
       *tmp = *src;
       dst = freeMe(dst);
       return tmp;
@@ -220,7 +233,7 @@ namespace ft {
         root = replace(root, root->_left);
       else {
         AVL * tmp = getLowestKey(root->_right);
-        root->_p = tmp->_p;
+        root = tmp;
         root->_right = erase(root->_right, root->_p.first);
       }
       return root;
@@ -230,8 +243,9 @@ namespace ft {
     {
       if (!root)
           return;
-      printAll(root->_left);
       std::cout << root->_p.second << std::endl;
+      printAll(root->_left);
+      std::cout << "<--- " << root->_p.second << " - " << root->getLowEnd() << " --->" << std::endl;
       printAll(root->_right);
     }
 
@@ -304,7 +318,8 @@ namespace ft {
     {
       if (!root) {
         AVL * element = _avlAlloc.allocate(1);
-        element->_end = _avlAlloc.allocate(1);
+        element->_highEnd = _avlAlloc.allocate(1);
+        element->_lowEnd = _avlAlloc.allocate(1);
         element->_p.first = p.first;
         element->_p.second = p.second;
         element->_masterRoot = element;
@@ -314,13 +329,15 @@ namespace ft {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
-        root->_left->_end = root->_end;
+        root->_left->_highEnd = root->_highEnd;
+        root->_left->_lowEnd = root->_lowEnd;
       }
       else {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root;
         root->_right->_masterRoot = root->_masterRoot;
-        root->_right->_end = root->_end;
+        root->_right->_highEnd = root->_highEnd;
+        root->_right->_lowEnd = root->_lowEnd;
       }
       
       root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
@@ -330,8 +347,8 @@ namespace ft {
     AVL * search(AVL * root, Key key) {
       if (!root || _isEqual(key, root->_p.first))
         return root;
-      else if (root == root->getHighestKey(getMasterRoot()))
-        return NULL;
+      else if (root == root->getHighestKey(_masterRoot))
+        return nullptr;
       if (_isLess(key, root->_p.first))
         return search(root->_left, key);
       return search(root->_right, key);
