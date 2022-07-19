@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/18 10:06:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/19 19:57:52 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::size_type                   map<Key, T, Compare, Alloc>::max_size() const {
-    return (size_t)(-1) / sizeof(T);
+    return (size_t)(-1) / (sizeof(T) * 10);
   }
 
 
@@ -112,6 +112,7 @@ namespace ft {
   template<class Key, class T, class Compare, class Alloc>
   inline ft::pair<typename map<Key, T, Compare, Alloc>::iterator, bool>   map<Key, T, Compare, Alloc>::insert (const typename map<Key, T, Compare, Alloc>::value_type& val) {
     _root = _root->insert(_root, val);
+    _size++;
     return ft::pair<iterator,bool>(iterator(_root->search(_root, val.first)), true);
   }
 

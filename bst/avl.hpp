@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/18 11:43:27 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/19 19:40:19 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,11 @@ namespace ft {
     AVL * getLowestKey(AVL * root) {
       AVL * tmp = root;
       while (tmp && tmp->_left) {
+        // std::cout << tmp->_p.first << " | " << std::endl;
         tmp = tmp->_left;
+        // std::cout << tmp->_p.first << " > " << std::endl;
       }
+        // std::cout << tmp->_p.first << " >>> " << std::endl;
       return tmp;
     }
 
@@ -203,10 +206,8 @@ namespace ft {
     }
 
     AVL * replace(AVL * dst, AVL * src) {
-      std::cout << "Replace" << std::endl;
       AVL * tmp = _avlAlloc.allocate(1);
-      src->_parent = dst->_parent;
-      *tmp = *src;
+      tmp = src;
       dst = freeMe(dst);
       return tmp;
     }
@@ -243,9 +244,21 @@ namespace ft {
     {
       if (!root)
           return;
-      std::cout << root->_p.second << std::endl;
       printAll(root->_left);
-      std::cout << "<--- " << root->_p.second << " - " << root->getLowEnd() << " --->" << std::endl;
+      // std::cout << "<--- " << root->_p.second << " : ( left - ";
+      // if (root->_left)
+      //   std::cout << root->_left->_p.second << " ) - ( right - ";
+      // else
+      //   std::cout << "NULL" << " ) - ( right - ";
+      // if (root->_right)
+      //   std::cout << root->_right->_p.second << " ) - ( parent - ";
+      // else
+      //   std::cout << "NULL" << " ) - ( parent - ";
+      // if (root->_parent)
+      //   std::cout << root->_parent->_p.second << " ) - ( masterRoot - ";
+      // else
+      //   std::cout << "NULL" << " ) - ( masterRoot - ";
+      std::cout << "<--- " << root->_p.second << root->_masterRoot->_p.second << " --->" << std::endl;
       printAll(root->_right);
     }
 
@@ -266,6 +279,8 @@ namespace ft {
         left->_masterRoot = left;
         updateMasterRoot(left);
       }
+      // std::cout << root->_p.second <<" master is " << root->_masterRoot->_p.second << std::endl;
+      // std::cout << std::endl;
 
       updateHeight(root);
       updateHeight(left);
@@ -289,6 +304,8 @@ namespace ft {
         right->_masterRoot = right;
         updateMasterRoot(right);
       }
+      // std::cout << root->_p.second <<" master is " << root->_masterRoot->_p.second << std::endl;
+      // std::cout << std::endl;
       updateHeight(root);
       updateHeight(right);
 
@@ -299,6 +316,7 @@ namespace ft {
       if (!root)
         return root;
       updateHeight(root);
+      // updateMasterRoot(root);
       int balanceFactor = getBalanceFactor(root);    
       if (balanceFactor > 1) {
         if (isLeftRight)
@@ -310,6 +328,11 @@ namespace ft {
           root->_right = rotateRight(root->_right);
         root = rotateLeft (root);
       }
+      // else
+      //   std::cout << "No balance\n";
+      // std::cout << root->_p.second << std::endl;
+      // if (root->_masterRoot)
+      // std::cout << root->_p.second <<" master is " << root->_masterRoot->_p.second << std::endl;
       return root;
     }
 
@@ -339,7 +362,7 @@ namespace ft {
         root->_right->_highEnd = root->_highEnd;
         root->_right->_lowEnd = root->_lowEnd;
       }
-      
+
       root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
       return root;
     }
@@ -357,12 +380,17 @@ namespace ft {
     AVL * erase(AVL * root, Key key) {
       if (!root)
         return root;
+      // std::cout << "Erase Balance\n";
+      // if (root->_p.second == "three")
+      //   std::cout << root->_left->_p.second << " - " << root->_masterRoot->_p.second << std::endl;
       if (_isLess(key, root->_p.first))
         root->_left = erase(root->_left, key);
       else if (_isGreater(key, root->_p.first))
         root->_right  = erase(root->_right, key);
       else
         root = checkChildrenAndErase(root);
+      // if (root->_p.second == "two")
+      //   std::cout << root->_p.second << " - " << root->_masterRoot->_p.second << std::endl;
       root = balance(root, getBalanceFactor(getLeft(root)) < 0, getBalanceFactor(getRight(root)) > 0);
       return root;
     }
