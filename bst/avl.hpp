@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/19 19:40:19 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/20 11:00:22 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,7 +371,7 @@ namespace ft {
       if (!root || _isEqual(key, root->_p.first))
         return root;
       else if (root == root->getHighestKey(_masterRoot))
-        return nullptr;
+        return NULL;
       if (_isLess(key, root->_p.first))
         return search(root->_left, key);
       return search(root->_right, key);

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/18 10:05:51 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/20 18:20:36 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ namespace ft {
       friend class map;
     protected:
       Compare comp;
+      value_compare () {}
       value_compare (Compare c) : comp(c) {}
     public:
       typedef bool result_type;

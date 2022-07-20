@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/19 19:57:28 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:35:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,26 @@ int main() {
   ft::pair<int, int> p = ft::make_pair<int, int>(1, 10);
   ftmap.insert(ft::make_pair<int, int>(1, 10));
   ftmap.insert(ft::make_pair<int, int>(2, 20));
+  ftmap.insert(ft::make_pair<int, int>(3, 30));
+  ftmap.insert(ft::make_pair<int, int>(4, 40));
+  ft::map<int, int>::iterator ftit = ftmap.begin();
+  // ftit++;
+  ft::map<int, int>::iterator ftit1 = ftmap.begin();
+  // ftit1++;
   // ftmap[0];
   
-  // ftmap.insert(ft::make_pair<int, int>(3, 30));
-  // ftmap.insert(ft::make_pair<int, int>(4, 40));
   // ft::map<int, int> ftmap1(ftmap);
   // ft::map<int, int>::iterator tt;
   // tt = ftmap1.begin();
-  ft::map<int, int> ftmap1;
-  std::cout << ftmap1.max_size() << std::endl;
+  // ft::map<int, int> ftmap1;
+  // ft::map<int, int>::iterator t1 = ftmap.find(1);
+  std::cout << ftit->first << " < " << ftit1->first << std::endl;
+  // ft::map<int, int>::key_compare com = ftmap.key_comp();
+  std::cout << ftmap.upper_bound(0)->second << std::endl;
   // for ( ; tt != ftmap1.end(); tt++) {
   //   std:: cout << tt->first << " " << tt->second << std::endl;
   // }
-  // std::cout << ftmap1.at(2) << std::endl;
-  // if (tt != ftmap.end())
-  // if (tt != ftmap.end())
-  //   tt++;
-  // std:: cout << tt->first << " " << tt->second << std::endl;
-  // if (tt != ftmap.end())
-  //   tt++;
-  // if (tt != ftmap.end())
-  // std:: cout << tt->first << " " << tt->second << std::endl;
 
-  // std::cout << root->getpair().second << std::endl;
   std::map<int, int> mmap2;
   std::cout << mmap2.max_size() << std::endl;
   std::map<std::string, std::string> mmap;
@@ -113,51 +110,18 @@ int main() {
   // std:: cout << p1.first << " " << p1.second << std::endl;
   mmap["hi7"] = "seven";
   // std::cout << mmap.max_size() << std::endl;
-  mmap.insert(std::pair<std::string, std::string>("hi5", "five"));
-  mmap.insert(std::pair<std::string, std::string>("hi6", "two")); 
+  // mmap.insert(std::pair<std::string, std::string>("hi5", "five"));
+  mmap.insert(std::pair<std::string, std::string>("hi6", "six")); 
   mmap.insert(std::pair<std::string, std::string>("hi4", "four"));
   mmap.insert(std::pair<std::string, std::string>("hi3", "three"));
-  mmap.insert(std::pair<std::string, std::string>("hi8", "eight"));
-  // std::cout << mmap.at("hi4") << std::endl;
-  
-  // mmap.erase("hi4");
-  // mmap.erase("hi4");
-  // it--;
-  // it--;
-  // it--;
-  // it--;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // it--;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // it--;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // it--;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // it--;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
+  // mmap.insert(std::pair<std::string, std::string>("hi8", "eight"));
   std::map<std::string, std::string> mmap1(mmap.begin(), mmap.end());
-  // std::map<std::string, std::string>::reverse_iterator it2 = mmap1.rbegin();
   std::map<std::string, std::string>::iterator it = mmap1.begin();
+  // std::cout << mmap.equal_range("hi").second << std::endl;
   std::cout << "|" << it->first << " " << it->second << "| " << std::endl;
   for (it = mmap1.begin(); it != mmap1.end(); it++ ) {
     std::cout << "|" << it->first << " " << it->second << "| ";
   }
   std::cout << std::endl;
-  std::cout << "|" << it->first << " " << it->second << "| " << std::endl;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // it++;
-  // it++;
-  // it++;
-  // it++;
-  // it++;
-  // it--;
-  // it++;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // it++;
-  // std::cout << "|" << it->first << " " << it->second << "| ";
-  // std::cout << std::endl;
-  // *it;
-    // it++;
-    // std::cout << "|" << it->first << " " << it->second << "| ";
+
 }

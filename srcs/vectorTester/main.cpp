@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/12 14:39:20 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/20 16:35:23 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,10 @@ int main() {
     std::cout << PURPLE << "Enter test name: " << RESET;
   }
   std::cout << std::endl << std::endl;
+  
+  ft::vector<int> v(1, 10);
+  ft::vector<int>::iterator it1 = v.begin();
+  ft::vector<int>::const_iterator it2 = v.begin();
+  if (it1 == it2)
+    std::cout << *it1 << std::endl;
 }
