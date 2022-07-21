@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/20 19:35:56 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/21 19:04:59 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ int main() {
   ft::map<int, int> ftmap;
   ft::pair<int, int> p = ft::make_pair<int, int>(1, 10);
   ftmap.insert(ft::make_pair<int, int>(1, 10));
+  ftmap.insert(ft::make_pair<int, int>(1, 10));
   ftmap.insert(ft::make_pair<int, int>(2, 20));
-  ftmap.insert(ft::make_pair<int, int>(3, 30));
+  // ftmap.insert(ft::make_pair<int, int>(3, 30));
   ftmap.insert(ft::make_pair<int, int>(4, 40));
   ft::map<int, int>::iterator ftit = ftmap.begin();
   // ftit++;
@@ -91,16 +92,18 @@ int main() {
   // ftmap[0];
   
   // ft::map<int, int> ftmap1(ftmap);
-  // ft::map<int, int>::iterator tt;
+  ft::map<int, int>::iterator tt = ftmap.begin();
   // tt = ftmap1.begin();
   // ft::map<int, int> ftmap1;
   // ft::map<int, int>::iterator t1 = ftmap.find(1);
   std::cout << ftit->first << " < " << ftit1->first << std::endl;
   // ft::map<int, int>::key_compare com = ftmap.key_comp();
-  std::cout << ftmap.upper_bound(0)->second << std::endl;
-  // for ( ; tt != ftmap1.end(); tt++) {
-  //   std:: cout << tt->first << " " << tt->second << std::endl;
-  // }
+  ft::pair<ft::map<int, int>::iterator, ft::map<int, int>::iterator> ppp = ftmap.equal_range(0);
+  std::cout << ppp.first->second << " - " << ppp.second->second << std::endl;
+  std::cout << ftmap.upper_bound(2)->second << std::endl;
+  for ( ; tt != ftmap.end(); tt++) {
+    std:: cout << tt->first << " " << tt->second << std::endl;
+  }
 
   std::map<int, int> mmap2;
   std::cout << mmap2.max_size() << std::endl;
@@ -117,7 +120,7 @@ int main() {
   // mmap.insert(std::pair<std::string, std::string>("hi8", "eight"));
   std::map<std::string, std::string> mmap1(mmap.begin(), mmap.end());
   std::map<std::string, std::string>::iterator it = mmap1.begin();
-  // std::cout << mmap.equal_range("hi").second << std::endl;
+  std::cout << mmap.lower_bound("hi4")->second << std::endl;
   std::cout << "|" << it->first << " " << it->second << "| " << std::endl;
   for (it = mmap1.begin(); it != mmap1.end(); it++ ) {
     std::cout << "|" << it->first << " " << it->second << "| ";
