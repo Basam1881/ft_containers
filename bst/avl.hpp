@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   avl.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/20 11:00:22 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/24 08:17:27 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ namespace ft {
       if ( this != &rhs ) {
         _alloc = rhs._alloc;
         _avlAlloc = rhs._avlAlloc;
-        _p = rhs._p;
         _highEnd = rhs._highEnd;
         _lowEnd = rhs._lowEnd;
+        _masterRoot = rhs._masterRoot;
         _parent = rhs._parent;
         _left = rhs._left;
         _right = rhs._right;
+        _height = rhs._height;
+        _p = rhs._p;
       }
       return *this;
     }
@@ -206,10 +208,13 @@ namespace ft {
     }
 
     AVL * replace(AVL * dst, AVL * src) {
-      AVL * tmp = _avlAlloc.allocate(1);
-      tmp = src;
-      dst = freeMe(dst);
-      return tmp;
+      AVL * tmpParent = dst->_parent;
+      AVL * tmpMasterRoot = dst->_masterRoot;
+      *dst = *src;
+      dst->_parent = tmpParent;
+      dst->_masterRoot = tmpMasterRoot;
+      src = freeMe(src);
+      return dst;
     }
 
     void updateHeight(AVL * root) {
@@ -234,8 +239,8 @@ namespace ft {
         root = replace(root, root->_left);
       else {
         AVL * tmp = getLowestKey(root->_right);
-        root = tmp;
-        root->_right = erase(root->_right, root->_p.first);
+        root->_p = tmp->_p;
+        root->_right = erase(root->_right, tmp->_p.first);
       }
       return root;
     }
@@ -244,21 +249,21 @@ namespace ft {
     {
       if (!root)
           return;
+      std::cout << "<--- " << root->_p.second << " : ( left - ";
+      if (root->_left)
+        std::cout << root->_left->_p.second << " ) - ( right - ";
+      else
+        std::cout << "NULL" << " ) - ( right - ";
+      if (root->_right)
+        std::cout << root->_right->_p.second << " ) - ( parent - ";
+      else
+        std::cout << "NULL" << " ) - ( parent - ";
+      if (root->_parent)
+        std::cout << root->_parent->_p.second << " ) - ( masterRoot - ";
+      else
+        std::cout << "NULL" << " ) - ( masterRoot - ";
+      std::cout << root->_masterRoot->_p.second << " )" << std::endl;
       printAll(root->_left);
-      // std::cout << "<--- " << root->_p.second << " : ( left - ";
-      // if (root->_left)
-      //   std::cout << root->_left->_p.second << " ) - ( right - ";
-      // else
-      //   std::cout << "NULL" << " ) - ( right - ";
-      // if (root->_right)
-      //   std::cout << root->_right->_p.second << " ) - ( parent - ";
-      // else
-      //   std::cout << "NULL" << " ) - ( parent - ";
-      // if (root->_parent)
-      //   std::cout << root->_parent->_p.second << " ) - ( masterRoot - ";
-      // else
-      //   std::cout << "NULL" << " ) - ( masterRoot - ";
-      std::cout << "<--- " << root->_p.second << root->_masterRoot->_p.second << " --->" << std::endl;
       printAll(root->_right);
     }
 
@@ -370,10 +375,10 @@ namespace ft {
     AVL * search(AVL * root, Key key) {
       if (!root || _isEqual(key, root->_p.first))
         return root;
-      else if (root == root->getHighestKey(_masterRoot))
-        return NULL;
       if (_isLess(key, root->_p.first))
         return search(root->_left, key);
+      else if (root == root->getHighestKey(_masterRoot))
+        return NULL;
       return search(root->_right, key);
     }
 

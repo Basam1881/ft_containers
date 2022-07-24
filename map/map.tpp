@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.tpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/21 19:31:11 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/24 09:07:15 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,50 +123,70 @@ namespace ft {
     return ft::pair<iterator, bool>(iterator(tmp), false);
   }
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline typename map<Key, T, Compare, Alloc>::iterator    map<Key, T, Compare, Alloc>::insert (iterator position, const value_type& val) {
-    // if (_root->search(position.getNode(), val.first)) {
-      // avl_type * tmp = _root->search(_root, val.first);
-      // if (!tmp) {
-      //   _root = _root->insert(_root, val);
-      //   _size++;
-      //   return iterator(_root->search(_root, val.first));
-      // }
-    // }
-    // return iterator(tmp);
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline typename map<Key, T, Compare, Alloc>::iterator    map<Key, T, Compare, Alloc>::insert (iterator position, const value_type& val) {
+    (void)position;
+    return insert(val).first;
+  }
 
-  // template <class InputIterator>
-  // template<class Key, class T, class Compare, class Alloc>
-  // void    map<Key, T, Compare, Alloc>::insert (InputIterator first, InputIterator last) {
-    // for ( ; first != last; first++)
-    //   _root = insert(first.getNode()->getPair());
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  template <class InputIterator>
+  inline void    map<Key, T, Compare, Alloc>::insert (InputIterator first, InputIterator last) {
+    for ( ; first != last; first++)
+      insert(*first);
+  }
   
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline void map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator position) {
-    
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline void   map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator position) {
+    erase(position.getNode()->getPair().first);
+  }
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline typename map<Key, T, Compare, Alloc>::size_type map<Key, T, Compare, Alloc>::erase (const typename map<Key, T, Compare, Alloc>::key_type& k) {
-    
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline typename map<Key, T, Compare, Alloc>::size_type    map<Key, T, Compare, Alloc>::erase (const typename map<Key, T, Compare, Alloc>::key_type& k) {
+    if (_root->search(_root, k))
+      _size--;
+    _root = _root->erase(_root, k);
+    return 1;
+  }
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline void map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator first, map<Key, T, Compare, Alloc>::iterator last) {
-    
-  // }
+  template<class Key, class T, class Compare, class Alloc>
+  inline void map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator first, map<Key, T, Compare, Alloc>::iterator last) {
+    iterator f;
+    size_type count;
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline void map<Key, T, Compare, Alloc>::swap (map& x) {
+    for ( count = 0, f = first; f != last; f++, count++);
+    key_type * keys = new key_type[count];
     
-  // }
+    for ( count = 0, f = first; f != last; f++, count++)
+      keys[count] = f.getNode()->getPair().first;
 
-  // template<class Key, class T, class Compare, class Alloc>
-  // inline void map<Key, T, Compare, Alloc>::clear() {
+    for (size_type cnt = 0; cnt < count; cnt++)
+      erase(keys[cnt]);
+    delete[] keys;
+  }
+
+  template<class Key, class T, class Compare, class Alloc>
+  inline void map<Key, T, Compare, Alloc>::swap (map& x) {
+    avl_type *            tmpRoot = _root;
+    size_type             tmpSize = _size;
+    key_compare           tmpComp = _comp;
+    allocator_type        tmpAlloc = _alloc;
     
-  // }
+    _root = x._root;
+    _size = x._size;
+    _comp = x._comp;
+    _alloc = x._alloc;
+    
+    x._root = tmpRoot;
+    x._size = tmpSize;
+    x._comp = tmpComp;
+    x._alloc = tmpAlloc;
+  }
+
+  template<class Key, class T, class Compare, class Alloc>
+  inline void map<Key, T, Compare, Alloc>::clear() {
+    erase(begin(), end());
+  }
 
 
   /* ************************************** Observers ************************************** */
