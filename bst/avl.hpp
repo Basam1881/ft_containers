@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   avl.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/24 08:17:27 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 11:13:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ namespace ft {
     typedef std::greater<Key>                       key_compare_greater;
     typedef std::equal_to<Key>                      key_compare_equal;
     typedef Alloc																		allocator_type;
-    typedef std::allocator<AVL>					            avl_allocator;
+    // typedef std::allocator<AVL>					            avl_allocator;
 
   private:
     key_compare_less     _isLess;
     key_compare_greater  _isGreater;
     key_compare_equal    _isEqual;
     allocator_type       _alloc;
-    avl_allocator        _avlAlloc;
+    // avl_allocator        _avlAlloc;
     value_type           _p;
     AVL                  *_highEnd;
     AVL                  *_lowEnd;
@@ -53,24 +53,24 @@ namespace ft {
 
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
+        /* _avlAlloc(avl_allocator()), */ _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     {}
 
     AVL(value_type p) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(p), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
+        /* _avlAlloc(avl_allocator()), */ _p(p), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
         _right(NULL), _height(0)
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
+        /* _avlAlloc(avl_allocator()), */ _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     { *this = src; }
 
     AVL &		operator=( AVL const & rhs ) {
       if ( this != &rhs ) {
         _alloc = rhs._alloc;
-        _avlAlloc = rhs._avlAlloc;
+        // _avlAlloc = rhs._avlAlloc;
         _highEnd = rhs._highEnd;
         _lowEnd = rhs._lowEnd;
         _masterRoot = rhs._masterRoot;
@@ -172,21 +172,15 @@ namespace ft {
     }
 
     key_type getLeftKey(AVL * root, key_type key) {
-      key_type leftKey;
       if (root->_left)
-        leftKey = root->_left->_p.first;
-      else
-        leftKey = key;
-      return leftKey;
+        return root->_left->_p.first;
+      return key;
     }
 
     key_type getRightKey(AVL * root, key_type key) {
-      key_type rightKey;
       if (root->_right)
-        rightKey = root->_right->_p.first;
-      else
-        rightKey = key;
-      return rightKey;
+        return root->_right->_p.first;
+      return key;
     }
 
     AVL * getLeft(AVL * root) {
@@ -203,7 +197,8 @@ namespace ft {
 
   /* ************************************** Utils ************************************** */
     AVL * freeMe(AVL * root) {
-      _avlAlloc.deallocate(root, 1);
+      // _avlAlloc.deallocate(root, 1);
+      delete root;
       return NULL;
     }
 
@@ -262,7 +257,10 @@ namespace ft {
         std::cout << root->_parent->_p.second << " ) - ( masterRoot - ";
       else
         std::cout << "NULL" << " ) - ( masterRoot - ";
-      std::cout << root->_masterRoot->_p.second << " )" << std::endl;
+      if (root->_masterRoot)
+        std::cout << root->_masterRoot->_p.second << " )" << std::endl;
+      else  
+        std::cout << "NULL )" << std::endl;
       printAll(root->_left);
       printAll(root->_right);
     }
@@ -345,11 +343,11 @@ namespace ft {
     AVL * insert(AVL * root, value_type p)
     {
       if (!root) {
-        AVL * element = _avlAlloc.allocate(1);
-        element->_highEnd = _avlAlloc.allocate(1);
-        element->_lowEnd = _avlAlloc.allocate(1);
-        element->_p.first = p.first;
-        element->_p.second = p.second;
+        AVL * element = new AVL(p);
+        element->_highEnd = new AVL;
+        element->_lowEnd = new AVL;
+        // element->_p.first = p.first;
+        // element->_p.second = p.second;
         element->_masterRoot = element;
         return element;
       }

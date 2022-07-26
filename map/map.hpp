@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/21 17:22:46 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 11:25:36 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ namespace ft {
     typedef Key																													key_type;
     typedef T																														mapped_type;
     typedef ft::pair<const key_type,mapped_type>												value_type;
-    typedef ft::AVL<key_type, T, Compare, Alloc>												avl_type;
+    typedef ft::AVL<const key_type, mapped_type>									                avl_type;
     typedef Compare																											key_compare;
     typedef Alloc																												allocator_type;
     typedef typename allocator_type::reference													reference;
@@ -39,9 +39,9 @@ namespace ft {
     typedef typename allocator_type::pointer														pointer;
     typedef typename allocator_type::const_pointer											const_pointer;
     typedef typename ft::iterator<ft::bidirectional_iterator_tag,
-                                                        avl_type>       iterator;
+                                                        value_type>     iterator;
     typedef typename ft::iterator<ft::bidirectional_iterator_tag,
-                                                  const avl_type>       const_iterator;
+                                                  const value_type>     const_iterator;
     typedef typename ft::reverse_iterator<iterator>                     reverse_iterator;
     typedef typename ft::reverse_iterator<const_iterator>               const_reverse_iterator;
     typedef ptrdiff_t																										difference_type;

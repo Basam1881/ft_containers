@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.tpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/24 09:07:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 11:55:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rbegin() {
-    return iterator(_root->getHighestKey(_root));
+    return reverse_iterator(_root->getHighestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rbegin() const {
-    return iterator(_root->getHighestKey(_root));
+    return reverse_iterator(_root->getHighestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rend() {
-    return iterator(_root->getLowEnd());    
+    return reverse_iterator(_root->getLowEnd());    
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rend() const {
-    return iterator(_root->getLowEnd());
+    return reverse_iterator(_root->getLowEnd());
   }
 
 
@@ -117,6 +117,8 @@ namespace ft {
     avl_type * tmp = _root->search(_root, val.first);
     if (!tmp) {
       _root = _root->insert(_root, val);
+      // _root->printAll(_root);
+      // std::cout << "-----------------" << _size << "---------------" << std::endl;
       _size++;
       return ft::pair<iterator, bool>(iterator(_root->search(_root, val.first)), true);
     }

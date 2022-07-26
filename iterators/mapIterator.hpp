@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/20 12:14:53 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 11:28:31 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@
 namespace ft
 {
   template <class Category, class T, class Distance = std::ptrdiff_t,
-	  	class Pointer = typename T::pointer, class Reference = typename T::reference>
+	  	class Pointer = T*, class Reference = T&>
 	class iterator
 	{
     public:
-      
-      typedef T                                value_type;
-      typedef Distance                         difference_type;
-      typedef Pointer                          pointer;
-      typedef Reference                        reference;
-      typedef Category                         iterator_category;
+      typedef T                                                                           value_type;
+      typedef ft::AVL<typename value_type::first_type, typename value_type::second_type>  avl_type;
+      typedef Distance                                                                    difference_type;
+      typedef Pointer                                                                     pointer;
+      typedef Reference                                                                   reference;
+      typedef Category                                                                    iterator_category;
 
       iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _highEnd(NULL), _lowEnd(NULL) {}
-      iterator(value_type * node) : _node(node) { _lowest = node->getLowestKey(node->getMasterRoot()); _Highest = node->getHighestKey(node->getMasterRoot()); _highEnd = node->getHighEnd(); _lowEnd = node->getLowEnd();
+      iterator(avl_type * node) : _node(node) { _lowest = node->getLowestKey(node->getMasterRoot()); _Highest = node->getHighestKey(node->getMasterRoot()); _highEnd = node->getHighEnd(); _lowEnd = node->getLowEnd();
       // std::cout << _node->getPair().first << " != " << node->getMasterRoot()->getPair().first << " != " << node->getLowestKey(node->getMasterRoot())->getPair().first << std::endl;
       }
       iterator (iterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; }
       ~iterator() {}
 
-      value_type *              getNode () const { return _node; }
+      avl_type *              getNode () const { return _node; }
 
-      value_type *              getHighEnd () const { return _highEnd; }
+      avl_type *              getHighEnd () const { return _highEnd; }
 
-      value_type *              getLowEnd () const { return _lowEnd; }
+      avl_type *              getLowEnd () const { return _lowEnd; }
 
       iterator &		            operator = ( iterator<Category, const T> const & rhs ) {  _node  = rhs._node; _lowest = rhs._lowest; _Highest = rhs._Highest; _highEnd = rhs._node->getHighEnd(); _lowEnd = rhs._node->getLowEnd(); return *this; }
 
@@ -89,11 +89,11 @@ namespace ft
                         const iterator & rhs) { return lhs.getNode() != rhs.getNode(); }
 
     protected:
-      value_type *                             _node;
-      value_type *                             _Highest;
-      value_type *                             _lowest;
-      value_type *                             _highEnd;
-      value_type *                             _lowEnd;
+      avl_type *                             _node;
+      avl_type *                             _Highest;
+      avl_type *                             _lowest;
+      avl_type *                             _highEnd;
+      avl_type *                             _lowEnd;
 
       void        _increment() {
         if (_node == _Highest)
