@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 11:13:48 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 16:19:18 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ namespace ft {
         _left = rhs._left;
         _right = rhs._right;
         _height = rhs._height;
-        _p = rhs._p;
+        // _p = rhs._p;
       }
       return *this;
     }
@@ -234,7 +234,7 @@ namespace ft {
         root = replace(root, root->_left);
       else {
         AVL * tmp = getLowestKey(root->_right);
-        root->_p = tmp->_p;
+        root->_p = tmp->_p; 
         root->_right = erase(root->_right, tmp->_p.first);
       }
       return root;

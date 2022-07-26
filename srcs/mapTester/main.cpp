@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 11:55:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 16:19:28 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,30 @@
 #include "../../algorithms/pair.hpp"
 #include "../../algorithms/make_pair.hpp"
 #include "../../bst/avl.hpp"
+#include "PerformanceChecker.hpp"
 
 
 int main() {
+  PerformanceChecker pcheck;
 
+
+  pcheck.start();
+  ft::map<int, int> ftmapp;
+  for (int i = 0; i < 1000000; i++) {
+    ftmapp.insert(ft::make_pair<int, int>(i, i * 10));
+  }
+  // ftmapp.clear();
+  pcheck.stop();
+  pcheck.start();
+  std::map<int, int> stdmapp;
+  for (int i = 0; i < 1000000; i++) {
+    
+    stdmapp.insert(std::make_pair<int, int>(i, i * 10));
+  }
+  // stdmapp.clear();
+  pcheck.stopStandard();
+  std::cout << pcheck << std::endl;
+  // pcheck.print();
   // ft::pair<std::string, std::string> p = ft::make_pair<std::string, std::string>("hello", "world");
   // ft::AVL<std::string, std::string> myavl, * root = NULL;
   // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi3", "three"));

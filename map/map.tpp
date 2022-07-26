@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 11:55:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/26 16:19:35 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,8 @@ namespace ft {
     avl_type * tmp = _root->search(_root, val.first);
     if (!tmp) {
       _root = _root->insert(_root, val);
-      // _root->printAll(_root);
-      // std::cout << "-----------------" << _size << "---------------" << std::endl;
       _size++;
+      // std::cout << "Here" << std::endl;
       return ft::pair<iterator, bool>(iterator(_root->search(_root, val.first)), true);
     }
     return ft::pair<iterator, bool>(iterator(tmp), false);

@@ -31,7 +31,7 @@ VEC_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
 						vTModifiers.cpp vTNonMemberFuncs.cpp\
 						vTException.cpp
 
-MAP_FILES = main.cpp
+MAP_FILES = main.cpp PerformanceChecker.cpp
 
 VEC_NAME = $(addprefix $(VEC_DIR), ${VEC_FILES})
 
