@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.tpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 16:19:35 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 08:58:44 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ namespace ft {
     if (!tmp) {
       _root = _root->insert(_root, val);
       _size++;
-      // std::cout << "Here" << std::endl;
       return ft::pair<iterator, bool>(iterator(_root->search(_root, val.first)), true);
     }
     return ft::pair<iterator, bool>(iterator(tmp), false);
@@ -147,6 +146,10 @@ namespace ft {
     if (_root->search(_root, k))
       _size--;
     _root = _root->erase(_root, k);
+    // if (!_root->search(_root, k))
+    //   std::cout << "Nice" << std::endl;
+    // else
+    //   std::cout << "WTF : " << k << std::endl;
     return 1;
   }
 
@@ -161,8 +164,10 @@ namespace ft {
     for ( count = 0, f = first; f != last; f++, count++)
       keys[count] = f.getNode()->getPair().first;
 
-    for (size_type cnt = 0; cnt < count; cnt++)
+    for (size_type cnt = 0; cnt < count; cnt++) {
+      // std::cout << "delete: " << cnt << std::endl;
       erase(keys[cnt]);
+    }
     delete[] keys;
   }
 

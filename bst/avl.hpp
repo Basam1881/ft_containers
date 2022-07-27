@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   avl.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 16:19:18 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 08:58:55 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ namespace ft {
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
-        /* _avlAlloc(avl_allocator()), */ _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
+        /* _avlAlloc(avl_allocator()), */ _p(src._p), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     { *this = src; }
 
@@ -198,17 +198,28 @@ namespace ft {
   /* ************************************** Utils ************************************** */
     AVL * freeMe(AVL * root) {
       // _avlAlloc.deallocate(root, 1);
+      
+      // delete root->_highEnd;
+      // delete root->_lowEnd;
+      
       delete root;
       return NULL;
     }
 
     AVL * replace(AVL * dst, AVL * src) {
-      AVL * tmpParent = dst->_parent;
-      AVL * tmpMasterRoot = dst->_masterRoot;
-      *dst = *src;
-      dst->_parent = tmpParent;
-      dst->_masterRoot = tmpMasterRoot;
+      // AVL * tmpParent = dst->_parent;
+      // AVL * tmpMasterRoot = dst->_masterRoot;
+      AVL * tmpDst = new AVL(src->_p);
+      *tmpDst = *src;
+      tmpDst->_parent = dst->_parent;
+      tmpDst->_masterRoot = dst->_masterRoot;
+      dst = freeMe(dst);
       src = freeMe(src);
+      // std::cout << "replace" << std::endl;
+      dst = tmpDst;
+      // *dst = *src;
+      // dst->_parent = tmpParent;
+      // dst->_masterRoot = tmpMasterRoot;
       return dst;
     }
 
@@ -234,7 +245,11 @@ namespace ft {
         root = replace(root, root->_left);
       else {
         AVL * tmp = getLowestKey(root->_right);
-        root->_p = tmp->_p; 
+        AVL * tmpRoot = new AVL(tmp->_p);
+        *tmpRoot = *root;
+        freeMe(root);
+        root = tmpRoot;
+        // root->_p = tmp->_p;
         root->_right = erase(root->_right, tmp->_p.first);
       }
       return root;
@@ -346,6 +361,7 @@ namespace ft {
         AVL * element = new AVL(p);
         element->_highEnd = new AVL;
         element->_lowEnd = new AVL;
+        // std::cout << "Here" << std::endl;
         // element->_p.first = p.first;
         // element->_p.second = p.second;
         element->_masterRoot = element;
@@ -355,6 +371,7 @@ namespace ft {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
+        // delete root->_left->_highEnd;
         root->_left->_highEnd = root->_highEnd;
         root->_left->_lowEnd = root->_lowEnd;
       }
@@ -362,6 +379,7 @@ namespace ft {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root;
         root->_right->_masterRoot = root->_masterRoot;
+        // delete root->_right->_highEnd;
         root->_right->_highEnd = root->_highEnd;
         root->_right->_lowEnd = root->_lowEnd;
       }

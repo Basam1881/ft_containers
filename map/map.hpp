@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 11:25:36 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 08:35:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ namespace ft {
 
     inline map (const map& x) { *this = x; }
     
-    inline ~map() {}
+    inline ~map() { /* delete _root->getHighEnd(); delete _root->getLowEnd(); */ /* clear(); */ }
 
     inline map& operator= (const map& x);
 

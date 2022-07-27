@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterator.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 11:28:31 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 08:50:22 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft
       typedef Category                                                                    iterator_category;
 
       iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _highEnd(NULL), _lowEnd(NULL) {}
-      iterator(avl_type * node) : _node(node) { _lowest = node->getLowestKey(node->getMasterRoot()); _Highest = node->getHighestKey(node->getMasterRoot()); _highEnd = node->getHighEnd(); _lowEnd = node->getLowEnd();
+      iterator(avl_type * node) : _node(node) { if (_node) {_lowest = _node->getLowestKey(_node->getMasterRoot()); _Highest = _node->getHighestKey(_node->getMasterRoot()); _highEnd = _node->getHighEnd(); _lowEnd = _node->getLowEnd(); }
       // std::cout << _node->getPair().first << " != " << node->getMasterRoot()->getPair().first << " != " << node->getLowestKey(node->getMasterRoot())->getPair().first << std::endl;
       }
       iterator (iterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; }
