@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 08:58:44 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 11:54:59 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,57 @@ namespace ft {
   /* ************************************** Iterators ************************************** */
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::iterator					        	  map<Key, T, Compare, Alloc>::begin() {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return iterator(_root->getLowestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::begin() const {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return iterator(_root->getLowestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::iterator					        	  map<Key, T, Compare, Alloc>::end() {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return iterator(_root->getHighEnd());
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::end() const {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return iterator(_root->getHighEnd());
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rbegin() {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return reverse_iterator(_root->getHighestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rbegin() const {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return reverse_iterator(_root->getHighestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rend() {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return reverse_iterator(_root->getLowEnd());    
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rend() const {
+    if (!_size)
+      return iterator(&_uselessEnd);
     return reverse_iterator(_root->getLowEnd());
   }
 
@@ -145,6 +161,9 @@ namespace ft {
   inline typename map<Key, T, Compare, Alloc>::size_type    map<Key, T, Compare, Alloc>::erase (const typename map<Key, T, Compare, Alloc>::key_type& k) {
     if (_root->search(_root, k))
       _size--;
+    if (!_size) {
+      delete _root->getHighEnd(); delete _root->getLowEnd();
+    }
     _root = _root->erase(_root, k);
     // if (!_root->search(_root, k))
     //   std::cout << "Nice" << std::endl;
@@ -157,6 +176,8 @@ namespace ft {
   inline void map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator first, map<Key, T, Compare, Alloc>::iterator last) {
     iterator f;
     size_type count;
+    if (!_size)
+      return ;
 
     for ( count = 0, f = first; f != last; f++, count++);
     key_type * keys = new key_type[count];
@@ -191,7 +212,8 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline void map<Key, T, Compare, Alloc>::clear() {
-    erase(begin(), end());
+    if (_size)  
+      erase(begin(), end());
   }
 
 

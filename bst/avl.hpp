@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 08:58:55 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 11:47:46 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,7 +371,10 @@ namespace ft {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
-        // delete root->_left->_highEnd;
+        if (root->_left->_p == p) {
+          delete root->_left->_highEnd;
+          delete root->_left->_lowEnd;
+        }
         root->_left->_highEnd = root->_highEnd;
         root->_left->_lowEnd = root->_lowEnd;
       }
@@ -379,7 +382,10 @@ namespace ft {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root;
         root->_right->_masterRoot = root->_masterRoot;
-        // delete root->_right->_highEnd;
+        if (root->_right->_p == p) {
+          delete root->_right->_highEnd;
+          delete root->_right->_lowEnd;
+        }
         root->_right->_highEnd = root->_highEnd;
         root->_right->_lowEnd = root->_lowEnd;
       }

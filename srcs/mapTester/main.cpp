@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 08:59:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 11:59:31 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,33 @@
 
 
 int main() {
-  // PerformanceChecker pcheck;
+  PerformanceChecker pcheck;
 
 
-  // pcheck.start();
+  pcheck.start();
   ft::map<int, int> ftmapp;
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 100000; i++) {
     // std::cout << "insert" << i << std::endl;
     ftmapp.insert(ft::make_pair<int, int>(i, i * 10));
     // std::cout << "insertX" << std::endl;
   }
-  
-  for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
-    std:: cout << ftit->first << " " << ftit->second << std::endl;
+  ftmapp.clear();
+  pcheck.stop();
+  pcheck.start();
+  std::map<int, int> stdmapp;
+  for (int i = 0; i < 100000; i++) {
+    
+    stdmapp.insert(std::make_pair<int, int>(i, i * 10));
   }
-    std:: cout << "size: " << ftmapp.size() << std::endl;
+  stdmapp.clear();
+  pcheck.stopStandard();
+  std::cout << pcheck << std::endl;
+  pcheck.print();
+  
+  // for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
+  //   std:: cout << ftit->first << " " << ftit->second << std::endl;
+  // }
+  //   std:: cout << "size: " << ftmapp.size() << std::endl;
   // for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
   //   std:: cout << ftit->first << " " << ftit->second << std::endl;
   // }
@@ -49,22 +61,11 @@ int main() {
   //   ftmapp.erase(i);
   // }
   
-  ftmapp.clear();
+  
   // for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
   //   std:: cout << ftit->first << " " << ftit->second << std::endl;
   // }
-    std:: cout << "size: " << ftmapp.size() << std::endl;
-  // pcheck.stop();
-  // pcheck.start();
-  // std::map<int, int> stdmapp;
-  // for (int i = 0; i < 100; i++) {
-    
-  //   stdmapp.insert(std::make_pair<int, int>(i, i * 10));
-  // }
-  // stdmapp.clear();
-  // pcheck.stopStandard();
-  // std::cout << pcheck << std::endl;
-  // pcheck.print();
+    // std:: cout << "size: " << ftmapp.size() << std::endl;
   // ft::pair<std::string, std::string> p = ft::make_pair<std::string, std::string>("hello", "world");
   // ft::AVL<std::string, std::string> myavl, * root = NULL;
   // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi3", "three"));
@@ -119,6 +120,7 @@ int main() {
   // ft::map<std::string, std::string> ftmap(iterator(root->getLowestKey(root)), iterator(root->getHighestKey(root)));
   // ft::map<int, int> ftmap;
   // ft::pair<int, int> p = ft::make_pair<int, int>(1, 10);
+  
   // ftmap.insert(ft::make_pair<int, int>(1, 10));
   // ftmap.insert(ft::make_pair<int, int>(1, 10));
   // ftmap.insert(ft::make_pair<int, int>(2, 20));
@@ -158,6 +160,9 @@ int main() {
   // std::map<int, int> mmap2;
   // std::cout << mmap2.max_size() << std::endl;
   // std::map<std::string, std::string> mmap;
+  // std::map<std::string, std::string>::iterator itt = mmap.begin();
+  // for ( ; itt != mmap.end(); itt++)
+  //   std::cout << "hello\n";
   // std::cout << mmap.max_size() << std::endl;
   // ft::pair<int, int> p1(ft::make_pair(4, 40));
   // std:: cout << p1.first << " " << p1.second << std::endl;
