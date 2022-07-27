@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 11:54:59 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 16:53:40 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ namespace ft {
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::begin() const {
     if (!_size)
-      return iterator(&_uselessEnd);
-    return iterator(_root->getLowestKey(_root));
+      return const_iterator(&_uselessEnd);
+    return const_iterator(_root->getLowestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
@@ -45,36 +45,36 @@ namespace ft {
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_iterator 		        	map<Key, T, Compare, Alloc>::end() const {
     if (!_size)
-      return iterator(&_uselessEnd);
-    return iterator(_root->getHighEnd());
+      return const_iterator(&_uselessEnd);
+    return const_iterator(_root->getHighEnd());
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rbegin() {
     if (!_size)
-      return iterator(&_uselessEnd);
+      return reverse_iterator(&_uselessEnd);
     return reverse_iterator(_root->getHighestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rbegin() const {
     if (!_size)
-      return iterator(&_uselessEnd);
-    return reverse_iterator(_root->getHighestKey(_root));
+      return const_reverse_iterator(&_uselessEnd);
+    return const_reverse_iterator(_root->getHighestKey(_root));
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rend() {
     if (!_size)
-      return iterator(&_uselessEnd);
+      return reverse_iterator(&_uselessEnd);
     return reverse_iterator(_root->getLowEnd());    
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rend() const {
     if (!_size)
-      return iterator(&_uselessEnd);
-    return reverse_iterator(_root->getLowEnd());
+      return const_reverse_iterator(&_uselessEnd);
+    return const_reverse_iterator(_root->getLowEnd());
   }
 
 
@@ -92,8 +92,8 @@ namespace ft {
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::size_type                   map<Key, T, Compare, Alloc>::max_size() const {
     // return std::numeric_limits<typename ft::map<Key, T>::size_type >::max() / (sizeof(value_type));
-    // return (size_t)(-1) / (sizeof(value_type));
-    return this->_alloc.max_size();
+    return (size_t)(-1) / (sizeof(value_type) * 10);
+    // return this->_alloc.max_size() / ;
   }
 
 
@@ -105,6 +105,7 @@ namespace ft {
       _root = _root->insert(_root, value_type(k, mapped_type()));
       _size++;
     }
+    std::cout << "here\n";
     return tmp->getPair().second;
   }
   

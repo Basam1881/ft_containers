@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_iterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 11:53:52 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/19 17:54:40 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 17:05:36 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ namespace ft {
   template <class Iterator>
   bool operator>= ( const reverse_iterator<Iterator> & lhs,
                     const reverse_iterator<Iterator> & rhs) { return lhs.base() >= rhs.base(); }
-  // template <class Iterator>
-  // Iterator operator+ (typename Iterator::difference_type n,
-  //            const Iterator& it) { return (it + n); }
+  template <class Iterator>
+  Iterator operator+ (typename Iterator::difference_type n,
+             const Iterator& it) { return (it + n); }
 
-  // template <class Iterator>
-  // typename Iterator::difference_type operator- (const Iterator& lhs,
-  //            const Iterator& rhs) { return abs(lhs.base() - rhs.base()); }
+  template <class Iterator>
+  typename Iterator::difference_type operator- (const Iterator& lhs,
+             const Iterator& rhs) { return abs(lhs.base() - rhs.base()); }
 }
 
 #endif

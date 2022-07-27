@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 08:50:22 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/07/27 17:04:30 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,53 +40,72 @@ namespace ft
       typedef Category                                                                    iterator_category;
 
       iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _highEnd(NULL), _lowEnd(NULL) {}
-      iterator(avl_type * node) : _node(node) { if (_node) {_lowest = _node->getLowestKey(_node->getMasterRoot()); _Highest = _node->getHighestKey(_node->getMasterRoot()); _highEnd = _node->getHighEnd(); _lowEnd = _node->getLowEnd(); }
-      // std::cout << _node->getPair().first << " != " << node->getMasterRoot()->getPair().first << " != " << node->getLowestKey(node->getMasterRoot())->getPair().first << std::endl;
+      iterator(avl_type * node) : _node(node) {
+        if (_node) {
+          _lowest = _node->getLowestKey(_node->getMasterRoot());
+          _Highest = _node->getHighestKey(_node->getMasterRoot());
+          _highEnd = _node->getHighEnd();
+          _lowEnd = _node->getLowEnd();
+        }
       }
       iterator (iterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; }
       ~iterator() {}
 
       avl_type *              getNode () const { return _node; }
+      
+      avl_type *              base () const { return _node; }
 
       avl_type *              getHighEnd () const { return _highEnd; }
 
       avl_type *              getLowEnd () const { return _lowEnd; }
 
-      iterator &		            operator = ( iterator<Category, const T> const & rhs ) {  _node  = rhs._node; _lowest = rhs._lowest; _Highest = rhs._Highest; _highEnd = rhs._node->getHighEnd(); _lowEnd = rhs._node->getLowEnd(); return *this; }
+      iterator &		            operator = ( iterator const & rhs ) {
+        if (this != &rhs && _node != rhs._node) {
+          _node  = rhs._node;
+          _lowest = rhs._lowest;
+          _Highest = rhs._Highest;
+          _highEnd = rhs._node->getHighEnd();
+          _lowEnd = rhs._node->getLowEnd();
+        }
+        return *this;
+      }
 
       iterator &                operator ++ () {
         if (this->_node == _lowEnd)
           _node = _lowest;
-        _increment();
+        else
+          _increment();
         return *this;
       }
       iterator                  operator ++ (int) { 
+        iterator tmp(*this);
         if (this->_node == _lowEnd)
           _node = _lowest;
-        iterator tmp(*this); _increment(); return (tmp);
+        else
+          _increment();
+        return (tmp);  
       }
 
       iterator &                operator -- () {
         if (this->_node == _highEnd)
           _node = _Highest;
-        _decrement();
+        else
+          _decrement();
         return *this;
       }
       iterator                  operator -- (int) {
+        iterator tmp(*this);
         if (this->_node == _highEnd)
           _node = _Highest;
-        iterator tmp(*this); _decrement(); return (tmp);
+        else
+          _decrement();
+        return (tmp);
       }
 
       operator                  iterator<Category, const value_type>() { return iterator<Category, const value_type>(_node); }
 
       reference                 operator * () const { return this->_node->getPair(); }
       pointer                   operator -> () const { return this->_node->getPairPointer(); }
-
-      friend bool operator== ( const iterator & lhs,
-                        const iterator & rhs) { return lhs.getNode() == rhs.getNode(); }
-      friend bool operator!= ( const iterator & lhs,
-                        const iterator & rhs) { return lhs.getNode() != rhs.getNode(); }
 
     protected:
       avl_type *                             _node;
@@ -135,6 +154,12 @@ namespace ft
         }
       }
 	};
+  template <class Iterator1, class Iterator2>
+  bool operator== ( const Iterator1 & lhs,
+                    const Iterator2 & rhs) { return lhs.base() == rhs.base(); }
+  template <class Iterator1, class Iterator2>
+  bool operator!= ( const Iterator1 & lhs,
+                    const Iterator2 & rhs) { return lhs.base() != rhs.base(); }
 }
 
 # include "reverse_iterator.hpp"
