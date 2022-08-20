@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 17:12:11 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/20 21:33:05 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@
 #include "../../algorithms/make_pair.hpp"
 #include "../../bst/avl.hpp"
 #include "PerformanceChecker.hpp"
+
+
+template<typename map_type, typename pair_type>
+void  fillMap(map_type & map, size_t size) {
+  for (size_t i = 0; i < size; i++)
+    map.insert(pair_type(i, i * size));
+}
 
 void  checkPerformace() {
   PerformanceChecker pcheck;
@@ -218,180 +225,152 @@ bool  checkMixedIterators() {
   return true;
 }
 
+bool  checkObservers() {
+  ft::map<int, int> ftmap;
+  ft::map<int, int>::key_compare ftcomp = ftmap.key_comp();
+  std::map<int, int> stdmap;
+  std::map<int, int>::key_compare stdcomp = stdmap.key_comp();
+  
+  for (int i = 0; i < 10; i++)
+    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+  for (int i = 0; i < 10; i++)
+    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+  if (ftcomp(ftmap.begin()->first, ftmap.rbegin()->first) != stdcomp(stdmap.begin()->first, stdmap.rbegin()->first)
+    || ftcomp(ftmap.begin()->second, ftmap.rbegin()->second) != stdcomp(stdmap.begin()->second, stdmap.rbegin()->second))
+    return false;
+  return true;
+}
+
+bool  checkElementAccess() {
+  ft::map<int, int> ftmap ;
+  std::map<int, int> stdmap;
+  ft::map<int, int>::iterator ftit;
+  std::map<int, int>::iterator stdit;
+  ft::map<int, int>::const_iterator cftit;
+  std::map<int, int>::const_iterator cstdit;
+  fillMap< ft::map<int, int>, ft::pair<int, int> >(ftmap, 10);
+  fillMap< std::map<int, int>, std::pair<int, int> >(stdmap, 10);
+  ft::map<int, int> const cftmap(ftmap);
+  std::map<int, int> const cstdmap(stdmap);
+
+  if (ftmap.size() != stdmap.size())
+    return false;
+
+  for (ftit = ftmap.begin(), stdit = stdmap.begin(); ftit != ftmap.end(); ftit++, stdit++)
+    if (ftmap[ftit->first] != stdmap[stdit->first])
+      return false;
+  
+  for (ftit = ftmap.begin(), stdit = stdmap.begin(); ftit != ftmap.end(); ftit++, stdit++)
+    if (ftmap.at(ftit->first) != stdmap.at(stdit->first))
+      return false;
+
+  for (cftit = cftmap.begin(), cstdit = cstdmap.begin(); cftit != cftmap.end(); cftit++, cstdit++)
+    if (ftmap.at(0) != stdmap.at(0))
+      return false;
+
+  return true;
+}
+
+bool  checkModifiers() {
+  ft::map<int, int> ftmap1;
+  std::map<int, int> stdmap1;
+  ft::map<int, int> ftmap2;
+  std::map<int, int> stdmap2;
+  ft::map<int, int> ftmap3;
+  std::map<int, int> stdmap3;
+  ft::map<int, int>::iterator ftit;
+  std::map<int, int>::iterator stdit;
+  size_t size = 10;
+
+  for (size_t i = 0; i < size; i++)
+    ftmap1.insert(ft::pair<int, int>(i, i * size));
+  for (size_t i = 0; i < size; i++)
+    stdmap1.insert(std::pair<int, int>(i, i * size));
+  for (size_t i = 0; i < size; i++)
+    ftmap2.insert(ftmap2.begin(), ft::pair<int, int>(i, i * size));
+  for (size_t i = 0; i < size; i++)
+    stdmap2.insert(stdmap2.begin(), std::pair<int, int>(i, i * size));
+  for (size_t i = 0; i < size; i++)
+    ftmap3.insert(ftmap2.begin(), ftmap2.end());
+  for (size_t i = 0; i < size; i++)
+    stdmap3.insert(stdmap2.begin(), stdmap2.end());
+  
+  for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++)
+    if (ftmap1[ftit->first] != stdmap1[stdit->first])
+      return false;
+  for (ftit = ftmap2.begin(), stdit = stdmap2.begin(); ftit != ftmap2.end(); ftit++, stdit++)
+    if (ftmap2[ftit->first] != stdmap2[stdit->first])
+      return false;
+  for (ftit = ftmap3.begin(), stdit = stdmap3.begin(); ftit != ftmap3.end(); ftit++, stdit++)
+    if (ftmap3[ftit->first] != stdmap3[stdit->first])
+      return false;
+
+  ftmap1.erase(ftmap1.begin());
+  ftmap1.erase(ftmap1.begin());
+  stdmap1.erase(stdmap1.begin());
+  stdmap1.erase(stdmap1.begin());
+
+  ftmap2.erase(ftmap2.begin()->first);
+  ftmap2.erase(ftmap2.begin()->first);
+  stdmap2.erase(stdmap2.begin()->first);
+  stdmap2.erase(stdmap2.begin()->first);
+
+  ftit = ftmap3.begin();
+  stdit = stdmap3.begin();
+  ftit++;
+  ftit++;
+  stdit++;
+  stdit++;
+  // ftmap3.erase(ftit, ftmap3.end());
+  // stdmap3.erase(stdit, stdmap3.end());
+  
+  for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++)
+    if (ftmap1[ftit->first] != stdmap1[stdit->first])
+      return false;
+  for (ftit = ftmap2.begin(), stdit = stdmap2.begin(); ftit != ftmap2.end(); ftit++, stdit++)
+    if (ftmap2[ftit->first] != stdmap2[stdit->first])
+      return false;
+  // for (ftit = ftmap3.begin(), stdit = stdmap3.begin(); ftit != ftmap3.end(); ftit++, stdit++)
+  //   if (ftmap3[ftit->first] != stdmap3[stdit->first])
+  //     return false;
+  return true;
+}
+
 int main() {
   checkPerformace();
+
   std::cout << PURPLE << "checkCapacity:" << RESET;
-  if (checkCapcity())
-    std::cout << GREEN <<" OK" << RESET << std::endl;
-  else
-    std::cout << RED <<" KO" << RESET << std::endl;
+  checkCapcity() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
   std::cout << PURPLE << "checkIterators:" << RESET;
-  if (checkIterators())
-    std::cout << GREEN <<" OK" << RESET << std::endl;
-  else
-    std::cout << RED <<" KO" << RESET << std::endl;
+  checkIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
   std::cout << PURPLE << "checkConstIterators:" << RESET;
-  if (checkConstIterators())
-    std::cout << GREEN <<" OK" << RESET << std::endl;
-  else
-    std::cout << RED <<" KO" << RESET << std::endl;
+  checkConstIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
   std::cout << PURPLE << "checkReverseIterators:" << RESET;
-  if (checkReverseIterators())
-    std::cout << GREEN <<" OK" << RESET << std::endl;
-  else
-    std::cout << RED <<" KO" << RESET << std::endl;
+  checkReverseIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
   std::cout << PURPLE << "checkConstReverseIterators:" << RESET;
-  if (checkConstReverseIterators())
-    std::cout << GREEN <<" OK" << RESET << std::endl;
-  else
-    std::cout << RED <<" KO" << RESET << std::endl;
+  checkConstReverseIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
   std::cout << PURPLE << "checkMixedIterators:" << RESET;
-  if (checkConstReverseIterators())
-    std::cout << GREEN <<" OK" << RESET << std::endl;
-  else
-    std::cout << RED <<" KO" << RESET << std::endl;
-  
-  //   ftmap.insert(ft::make_pair<int, int>(i, i * 10));
-  // ftmap.clear();
-  // std::map<int, int> stdmapp;
-  // for (int i = 0; i < 100000; i++) {
-    
-  //   stdmapp.insert(std::make_pair<int, int>(i, i * 10));
-  // }
-  
-  // for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
-  //   std:: cout << ftit->first << " " << ftit->second << std::endl;
-  // }
-  //   std:: cout << "size: " << ftmapp.size() << std::endl;
-  // for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
-  //   std:: cout << ftit->first << " " << ftit->second << std::endl;
-  // }
-  
-  // for (int i = 0; i < 2; i++) {
-  //   ftmapp.erase(i);
-  // }
-  
-  
-  // for (ft::map<int, int>::iterator ftit = ftmapp.begin(); ftit != ftmapp.end(); ftit++) {
-  //   std:: cout << ftit->first << " " << ftit->second << std::endl;
-  // }
-    // std:: cout << "size: " << ftmapp.size() << std::endl;
-  // ft::pair<std::string, std::string> p = ft::make_pair<std::string, std::string>("hello", "world");
-  // ft::AVL<std::string, std::string> myavl, * root = NULL;
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi3", "three"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi4", "four"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi5", "five"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi6", "six"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi7", "seven"));
+  checkConstIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
 
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi8", "eight"));
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi2", "two"));
+  std::cout << PURPLE << "checkObservers:" << RESET;
+  checkObservers() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
 
-  // root = myavl.erase(root, "hi7");
-  // root->printAll(root);
-  // root = myavl.erase(root, "hi3");
-  // root->printAll(root);
-  // std::cout << "Hello\n";
-  // typedef ft::iterator<ft::bidirectional_iterator_tag, ft::AVL<std::string, std::string>	> iterator;
-  // iterator myit(root->getLowestKey(root));
-  // std::cout << "decrement1" << std::endl;
-  // iterator myit(root->getLowestKey(root));
-  // iterator myit(root->getHighestKey(root));
-  // typedef ft::reverse_iterator<iterator> reverse_iterator;
-  // reverse_iterator myit(root->getLowestKey(root));
-  // for ( ; myit != reverse_iterator(root->getLowEnd()); myit++) {
-  // for ( ; myit != iterator(root->getLowEnd()); myit--) {
-    // if (myit != iterator(root->getEnd()))
-    // std::cout << "<--- " << myit->first << " - " << myit->second << " --->" << std::endl;
-      // std::cout << "<--- " << myit.getLowEnd() << " - " << root->getLowestKey(root->getMasterRoot()) << " --->" << std::endl;
+  std::cout << PURPLE << "checkElementAccess:" << RESET;
+  checkElementAccess() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
 
-    // myit++;  
-    // myit--;
-    // std::cout << "decrement2" << std::endl;
-  // }
-  // std::cout << "<--- " << myit->first << "-" << myit->second << " --->" << std::endl;
-  // myit++;
-  // myit++;
-  // std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
-  // root->printAll(root);
-  // root->getEnd() = root->getEnd();
-  // myit += 1;
-  // for ( myit = iterator(root->getHighestKey(root)); myit != iterator(root->getLowestKey(root)); myit--)
-  //   std::cout << "<--- " << (*myit).first << " --->" << std::endl;
-  // std::cout << "<--- " << (*myit).first << " --->" << std::endl << std::endl;
-
-  // myit++;            
-  // root = myavl.erase(root, "hi8");
-  // root = myavl.insert(root, ft::make_pair<std::string, std::string>("hi9", "nine"));
-  // myavl.erase(root, "hi4");
-  // root = myavl.erase(root, "hi7");
-  // root = myavl.erase(root, "hi");
-
-  // ft::map<std::string, std::string> ftmap(iterator(root->getLowestKey(root)), iterator(root->getHighestKey(root)));
-  // ft::map<int, int> ftmap;
-  // ft::pair<int, int> p = ft::make_pair<int, int>(1, 10);
-  
-  // ftmap.insert(ft::make_pair<int, int>(1, 10));
-  // ftmap.insert(ft::make_pair<int, int>(1, 10));
-  // ftmap.insert(ft::make_pair<int, int>(2, 20));
-  // ftmap.insert(ft::make_pair<int, int>(3, 30));
-  // ftmap.insert(ft::make_pair<int, int>(4, 40));
-  // ft::map<int, int>::iterator myfit = ftmap.find(2);
-  // myfit = ftmap.find(4);
-  // ft::map<int, int>::reverse_iterator tt = ftmap.rbegin();
-  // std:: cout << "size: " << ftmap.size() << std::endl;
-  // ft::pair<int, int> ptt = ft::make_pair<int, int>(333, 333);
-  
-  // for (; tt != ftmap.rend(); tt++) {
-  //   std:: cout << tt->first << " " << tt->second << std::endl;
-  // }
-  
-  // ftmap.erase(myfit);
-  // ftmap.erase(ftmap.begin(), ftmap.end());
-  // ftmap.clear();
-  // myfit = ftmap.find(1);
-  // ftmap.erase(4);
-  // ftit++;
-  // ftit1++;
-  // ftmap[0];  
-
-  // ft::map<int, int> ftmap1(ftmap);
-  // tt = ftmap1.begin();
-  // ft::map<int, int> ftmap1;
-  // ftmap1.insert(ft::make_pair<int, int>(5, 50));
-  // ftmap1.insert(ft::make_pair<int, int>(6, 60));
-  // ftmap1.swap(ftmap);
-  // ft::map<int, int>::iterator t1 = ftmap.find(1);
-  // ft::map<int, int>::key_compare com = ftmap.key_comp();
-  // std:: cout << "size: " << ftmap1.size() << std::endl;
-  // for (tt = ftmap1.rbegin(); tt != ftmap1.rend(); tt++) {
-  //   std:: cout << tt->first << " " << tt->second << std::endl;
-  // }
-  // std::map<int, int> mmap2;
-  // std::cout << mmap2.max_size() << std::endl;
-  // std::map<std::string, std::string> mmap;
-  // std::map<std::string, std::string>::iterator itt = mmap.begin();
-  // for ( ; itt != mmap.end(); itt++)
-  //   std::cout << "hello\n";
-  // std::cout << mmap.max_size() << std::endl;
-  // ft::pair<int, int> p1(ft::make_pair(4, 40));
-  // std:: cout << p1.first << " " << p1.second << std::endl;
-  // mmap["hi7"] = "seven";
-  // std::cout << mmap.max_size() << std::endl;
-  // mmap.insert(std::pair<std::string, std::string>("hi5", "five"));
-  // mmap.insert(std::pair<std::string, std::string>("hi6", "six")); 
-  // mmap.insert(std::pair<std::string, std::string>("hi4", "four"));
-  // mmap.insert(std::pair<std::string, std::string>("hi3", "three"));
-  // mmap.insert(std::pair<std::string, std::string>("hi8", "eight"));
-  // std::map<std::string, std::string> mmap1(mmap.begin(), mmap.end());
-  // std::map<std::string, std::string>::iterator it = mmap1.begin();
-  // std::pair< std::string, std::string> pmap = std::make_pair<std::string, std::string>("WHAT", "THE FUCK");
-  // *it = pmap;
-  // std::cout << mmap.lower_bound("hi4")->second << std::endl;
-  // std::cout << "|" << it->first << " " << it->second << "| " << std::endl;
-  // for (it = mmap1.begin(); it != mmap1.end(); it++ ) {
-  //   std::cout << "|" << it->first << " " << it->second << "| ";
-  // }
-  // std::cout << std::endl;
+  std::cout << PURPLE << "checkModifiers:" << RESET;
+  checkModifiers() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+  // std::cout << "deleteeeee: \n";
+  // std::cout << PURPLE << "checkElementAccess:" << RESET;
+  // checkConstIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+  // if (checkElementAccess())
+  //   std::cout << GREEN <<" OK" << RESET << std::endl;
+  // else
+  //   std::cout << RED <<" KO" << RESET << std::endl;
 
 }

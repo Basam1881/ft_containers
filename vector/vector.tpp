@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/16 13:17:45 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/20 15:12:31 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ namespace ft {
       else
         ft::copy(rhs.begin(), rhs.end(), begin(), _alloc);
       _size = rhs._size;
-    }
+    } 
     return *this;
   }
 
