@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/26 10:29:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/26 12:37:28 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -384,8 +384,24 @@ bool  checkOperations() {
     if (ftmap.equal_range(i).first->first != stdmap.equal_range(i).first->first)
       return false;
 
-  
   return true;
+}
+
+bool  checkExceptions() {
+  std::map<int, int> stdmap;
+  ft::map<int, int> ftmap;
+  fillMap< ft::map<int, int>, ft::pair<int, int> >(ftmap, 10);
+  fillMap< std::map<int, int>, std::pair<int, int> >(stdmap, 10);
+  try {
+    stdmap.at(20);
+  } catch (std::out_of_range & e) {
+    try {
+      ftmap.at(20);
+    } catch (std::out_of_range & e) {
+      return true;
+    }
+  }
+  return false;
 }
 
 int main() {
@@ -421,4 +437,7 @@ int main() {
 
   std::cout << PURPLE << "checkOperations:" << RESET;
   checkOperations() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
+  std::cout << PURPLE << "checkExceptions:" << RESET;
+  checkExceptions() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
 }
