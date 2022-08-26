@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:08:46 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/26 15:21:20 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/22 14:36:21 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ class PerformanceChecker
 		PerformanceChecker &		operator=( PerformanceChecker const & rhs );
 
 	private:
-  struct timeval  _begin;
-  struct timeval  _end;
-  size_t          _microseconds1;
-  size_t          _seconds1;
-  double          _elapsed1;
-  size_t          _microseconds2;
-  size_t          _seconds2;
-  double          _elapsed2;
+    struct timeval  _begin;
+    struct timeval  _end;
+    size_t          _microseconds1;
+    size_t          _seconds1;
+    double          _elapsed1;
+    size_t          _microseconds2;
+    size_t          _seconds2;
+    double          _elapsed2;
 
 };
 

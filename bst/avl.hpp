@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/20 20:12:41 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/26 08:40:45 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ namespace ft {
         // _avlAlloc = rhs._avlAlloc;
         _highEnd = rhs._highEnd;
         _lowEnd = rhs._lowEnd;
-        _masterRoot = rhs._masterRoot;
         _parent = rhs._parent;
         _left = rhs._left;
         _right = rhs._right;
         _height = rhs._height;
-        // _p = rhs._p;
+        if (!_parent)
+          _masterRoot = this;
+        else
+          _masterRoot = rhs._masterRoot;
       }
       return *this;
     }
@@ -212,7 +214,10 @@ namespace ft {
       AVL * tmpDst = new AVL(src->_p);
       *tmpDst = *src;
       tmpDst->_parent = dst->_parent;
-      tmpDst->_masterRoot = dst->_masterRoot;
+      if (!tmpDst->_parent)
+        tmpDst->_masterRoot = tmpDst;
+      else
+        tmpDst->_masterRoot = dst->_masterRoot;
       dst = freeMe(dst);
       src = freeMe(src);
       // std::cout << "replace" << std::endl;
@@ -361,7 +366,6 @@ namespace ft {
         AVL * element = new AVL(p);
         element->_highEnd = new AVL;
         element->_lowEnd = new AVL;
-        // std::cout << "Here" << std::endl;
         // element->_p.first = p.first;
         // element->_p.second = p.second;
         element->_masterRoot = element;

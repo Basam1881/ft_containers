@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/20 21:29:12 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/26 08:58:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ namespace ft {
       delete _root->getHighEnd(); delete _root->getLowEnd();
     }
     _root = _root->erase(_root, k);
+    // if (_root)
+    // std::cout << "lowest: " << _root->getLowestKey(_root)->getPair().first << std::endl;
     // if (!_root->search(_root, k))
     //   std::cout << "Nice" << std::endl;
     // else
@@ -185,18 +187,16 @@ namespace ft {
   inline void map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator first, map<Key, T, Compare, Alloc>::iterator last) {
     iterator f;
     size_type count;
+
     if (!_size)
       return ;
-
     for ( count = 0, f = first; f != last; f++, count++);
     key_type * keys = new key_type[count];
-    
+
     for ( count = 0, f = first; f != last; f++, count++)
       keys[count] = f.getNode()->getPair().first;
-
-    for (size_type cnt = 0; cnt < count; cnt++) {
+    for (size_type cnt = 0; cnt < count; cnt++)
       erase(keys[cnt]);
-    }
     delete[] keys;
   }
 
@@ -206,12 +206,12 @@ namespace ft {
     size_type             tmpSize = _size;
     key_compare           tmpComp = _comp;
     allocator_type        tmpAlloc = _alloc;
-    
+
     _root = x._root;
     _size = x._size;
     _comp = x._comp;
     _alloc = x._alloc;
-    
+
     x._root = tmpRoot;
     x._size = tmpSize;
     x._comp = tmpComp;
@@ -220,7 +220,7 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline void map<Key, T, Compare, Alloc>::clear() {
-    if (_size)  
+    if (_size)
       erase(begin(), end());
   }
 
@@ -236,7 +236,7 @@ namespace ft {
     return value_compare();
   }
 
-  
+
   /* ************************************** Operations ************************************** */
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::iterator   map<Key, T, Compare, Alloc>::find (const typename map<Key, T, Compare, Alloc>::key_type& k) {

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/20 21:33:05 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/26 10:29:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void  checkPerformace() {
   pcheck.start();
   ft::map<int, int> ftmap;
   ftmap.clear();
-  for (int i = 0; i < 1000; i++)
-    ftmap.insert(ftmap.begin(), ftmap.end());
+  
+  for (int i = 0; i < 10; i++)
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   ftmap.clear();
   for (int i = 0; i < 1000; i++)
     ftmap.insert(ft::make_pair<int, int>(i, i * 10));
@@ -47,7 +48,7 @@ void  checkPerformace() {
     ftmap.insert(ft::make_pair<int, int>(i, i * 10));
   ftmap.insert(ftmap.begin(), ftmap.end());
   ftmap.clear();
-  
+
   pcheck.stop();
   pcheck.start();
   std::map<int, int> stdmap;
@@ -62,8 +63,7 @@ void  checkPerformace() {
   stdmap.insert(stdmap.begin(), stdmap.end());
   stdmap.clear();
   pcheck.stopStandard();
-  std::cout << pcheck << std::endl;
-  pcheck.print();
+  std::cout << pcheck;
 }
 
 bool  checkCapcity() {
@@ -282,18 +282,12 @@ bool  checkModifiers() {
   std::map<int, int>::iterator stdit;
   size_t size = 10;
 
-  for (size_t i = 0; i < size; i++)
-    ftmap1.insert(ft::pair<int, int>(i, i * size));
-  for (size_t i = 0; i < size; i++)
-    stdmap1.insert(std::pair<int, int>(i, i * size));
-  for (size_t i = 0; i < size; i++)
-    ftmap2.insert(ftmap2.begin(), ft::pair<int, int>(i, i * size));
-  for (size_t i = 0; i < size; i++)
-    stdmap2.insert(stdmap2.begin(), std::pair<int, int>(i, i * size));
-  for (size_t i = 0; i < size; i++)
-    ftmap3.insert(ftmap2.begin(), ftmap2.end());
-  for (size_t i = 0; i < size; i++)
-    stdmap3.insert(stdmap2.begin(), stdmap2.end());
+  fillMap< ft::map<int, int>, ft::pair<int, int> >(ftmap1, size);
+  fillMap< std::map<int, int>, std::pair<int, int> >(stdmap1, size);
+  fillMap< ft::map<int, int>, ft::pair<int, int> >(ftmap2, size);
+  fillMap< std::map<int, int>, std::pair<int, int> >(stdmap2, size);
+  fillMap< ft::map<int, int>, ft::pair<int, int> >(ftmap3, size);
+  fillMap< std::map<int, int>, std::pair<int, int> >(stdmap3, size);
   
   for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++)
     if (ftmap1[ftit->first] != stdmap1[stdit->first])
@@ -321,8 +315,10 @@ bool  checkModifiers() {
   ftit++;
   stdit++;
   stdit++;
-  // ftmap3.erase(ftit, ftmap3.end());
-  // stdmap3.erase(stdit, stdmap3.end());
+  ftmap3.erase(ftit, ftmap3.end());
+  stdmap3.erase(stdit, stdmap3.end());
+  ftmap3.erase(ftmap3.begin(), ftmap3.end());
+  stdmap3.erase(stdmap3.begin(), stdmap3.end());
   
   for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++)
     if (ftmap1[ftit->first] != stdmap1[stdit->first])
@@ -330,13 +326,70 @@ bool  checkModifiers() {
   for (ftit = ftmap2.begin(), stdit = stdmap2.begin(); ftit != ftmap2.end(); ftit++, stdit++)
     if (ftmap2[ftit->first] != stdmap2[stdit->first])
       return false;
-  // for (ftit = ftmap3.begin(), stdit = stdmap3.begin(); ftit != ftmap3.end(); ftit++, stdit++)
-  //   if (ftmap3[ftit->first] != stdmap3[stdit->first])
-  //     return false;
+  for (ftit = ftmap3.begin(), stdit = stdmap3.begin(); ftit != ftmap3.end(); ftit++, stdit++)
+    if (ftmap3[ftit->first] != stdmap3[stdit->first])
+      return false;
+  return true;
+}
+
+bool  checkOperations() {
+  ft::map<int, int> ftmap;
+  std::map<int, int> stdmap;
+  ft::map<int, int> ftmap1;
+  std::map<int, int> stdmap1;
+  size_t size = 20;
+  ft::map<int, int>::iterator ftit;
+  std::map<int, int>::iterator stdit;
+  ft::map<int, int>::const_iterator cftit;
+  std::map<int, int>::const_iterator cstdit;
+
+  for (int i = 0; i < 10; i++)
+    ftmap.insert(ft::make_pair<int, int>(i * size / 10, i * size));
+  for (int i = 0; i < 10; i++)
+    stdmap.insert(std::make_pair<int, int>(i * size / 10, i * size));
+
+  // find()
+  for (ftit = ftmap.begin(), stdit = stdmap.begin(); ftit != ftmap.end(); ftit++, stdit++)
+    if (ftmap.find(ftit->first)->first != stdmap.find(stdit->first)->first)
+      return false;
+  for (cftit = ftmap.begin(), cstdit = stdmap.begin(); cftit != ftmap.end(); cftit++, cstdit++)
+    if (ftmap.find(cftit->first)->first != stdmap.find(cstdit->first)->first)
+      return false;
+  if (ftmap.find(size * 10) != ftmap.end() || ftmap1.find(size * 10) != ftmap1.end())
+    return false;
+  
+  // count()
+  for (ftit = ftmap.begin(), stdit = stdmap.begin(); ftit != ftmap.end(); ftit++, stdit++)
+    if (ftmap.count(ftit->first) != stdmap.count(stdit->first))
+      return false;
+  if (ftmap.count(size * 10) != stdmap.count(size * 10))
+    return false;
+  
+  // lower_bound()
+  for (size_t i = 0; i < 10; i++)
+    if (ftmap.lower_bound(i)->first != stdmap.lower_bound(i)->first)
+      return false;
+  if (ftmap.lower_bound(size * 10) != ftmap.end())
+    return false;
+
+  // upper_bound()
+  for (size_t i = 0; i < 10; i++)
+    if (ftmap.upper_bound(i)->first != stdmap.upper_bound(i)->first)
+      return false;
+  if (ftmap.upper_bound(size * 10) != ftmap.end())
+    return false;
+
+  // equal_range()
+  for (size_t i = 0; i < 10; i++)
+    if (ftmap.equal_range(i).first->first != stdmap.equal_range(i).first->first)
+      return false;
+
+  
   return true;
 }
 
 int main() {
+  std::cout << PURPLE << "checkPerformace:" << RESET << std::endl;
   checkPerformace();
 
   std::cout << PURPLE << "checkCapacity:" << RESET;
@@ -365,12 +418,7 @@ int main() {
 
   std::cout << PURPLE << "checkModifiers:" << RESET;
   checkModifiers() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
-  // std::cout << "deleteeeee: \n";
-  // std::cout << PURPLE << "checkElementAccess:" << RESET;
-  // checkConstIterators() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
-  // if (checkElementAccess())
-  //   std::cout << GREEN <<" OK" << RESET << std::endl;
-  // else
-  //   std::cout << RED <<" KO" << RESET << std::endl;
 
+  std::cout << PURPLE << "checkOperations:" << RESET;
+  checkOperations() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
 }

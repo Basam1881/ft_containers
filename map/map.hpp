@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/20 19:44:51 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/26 08:38:54 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ namespace ft {
 
     inline map (const map& x) : _root(NULL), _size(x._size), _comp(x._comp), _alloc(x._alloc) { *this = x; }
     
-    inline ~map() {  clear(); /* delete _root->getHighEnd(); delete _root->getLowEnd(); */ }
+    inline ~map() { clear(); /* delete _root->getHighEnd(); delete _root->getLowEnd(); */ }
 
     inline map& operator= (const map& x);
 
@@ -174,7 +174,7 @@ namespace ft {
         size_type             _size;
         key_compare           _comp;
         allocator_type        _alloc;
-        avl_type *             _uselessEnd;
+        avl_type *            _uselessEnd;
 
   };
 }
