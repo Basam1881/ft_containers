@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 13:35:02 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/28 15:33:09 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void  checkPerformace() {
 bool  checkCapcity() {
   ft::map<int, int> ftmap;
   std::map<int, int> stdmap;
-  // std::cout << std::endl << ftmap.max_size() << std::endl; 
-  // std::cout << stdmap.max_size() << std::endl;
+
   if (ftmap.size() != stdmap.size() || ftmap.empty() != stdmap.empty() || ftmap.max_size() != stdmap.max_size())
     return false;
 

@@ -31,9 +31,11 @@ VEC_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
 						vTModifiers.cpp vTNonMemberFuncs.cpp\
 						vTException.cpp
 
-MAP_FILES = main.cpp PerformanceChecker.cpp
+MAP_FILES = main.cpp ../$(COMMON_FILES)
 
-STACK_FILES = main.cpp
+STACK_FILES = main.cpp ../$(COMMON_FILES)
+
+COMMON_FILES = PerformanceChecker.cpp
 
 VEC_NAME = $(addprefix $(VEC_DIR), ${VEC_FILES})
 
@@ -79,7 +81,7 @@ NAME = ft
 
 all: header $(NAME) footer
 
-$(NAME) : $(SNAME)
+$(NAME) : $(MNAME)
 
 $(VNAME): nothing $(OBJ_DIR) $(VEC_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(VEC_OBJ_NAME) -o $(VNAME)

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 11:30:42 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 15:02:19 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/28 15:09:42 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void  fillStack(stack_type & stack, size_t size) {
 }
 
 bool checkConstructor() {
-  size_t size = 10;
+size_t size = 10;
   ft::vector<int> ftvec;
   std::deque<int> stdvec;
   for (size_t i = 1; i <= size; i++)
