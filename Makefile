@@ -33,9 +33,13 @@ VEC_FILES = main.cpp vectorTests.cpp vTBasic.cpp\
 
 MAP_FILES = main.cpp PerformanceChecker.cpp
 
+STACK_FILES = main.cpp
+
 VEC_NAME = $(addprefix $(VEC_DIR), ${VEC_FILES})
 
 MAP_NAME = $(addprefix $(MAP_DIR), ${MAP_FILES})
+
+STACK_NAME = $(addprefix $(STACK_DIR), ${STACK_FILES})
 
 SRC_DIR = srcs/
 
@@ -43,11 +47,16 @@ VEC_DIR = vectorTester/
 
 MAP_DIR = mapTester/
 
+STACK_DIR = stackTester/
+
 # Vector Object Files
 VEC_OBJ_NAME = $(addprefix $(OBJ_DIR), ${VEC_NAME:%.cpp=%.o})
 
-# Object Files
+# Map Object Files
 MAP_OBJ_NAME = $(addprefix $(OBJ_DIR), ${MAP_NAME:%.cpp=%.o})
+
+# Stack Object Files
+STACK_OBJ_NAME = $(addprefix $(OBJ_DIR), ${STACK_NAME:%.cpp=%.o})
 
 OBJ_DIR = objs/
 
@@ -57,17 +66,20 @@ CXX = c++ -g
 # Compilation flags
 CXX_FLAGS = -Wall -Wextra -Werror -std=c++98
 
-# Executable file's name
+# Vector Executable file's name
 VNAME = ftvector
 
-# Executable file's name
+# Map Executable file's name
 MNAME = ftmap
+
+# Stack Executable file's name
+SNAME = ftstack
 
 NAME = ft
 
 all: header $(NAME) footer
 
-$(NAME) : $(MNAME)
+$(NAME) : $(SNAME)
 
 $(VNAME): nothing $(OBJ_DIR) $(VEC_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(VEC_OBJ_NAME) -o $(VNAME)
@@ -77,17 +89,25 @@ $(MNAME): nothing $(OBJ_DIR) $(MAP_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(MAP_OBJ_NAME) -o $(MNAME)
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
 
+$(SNAME): nothing $(OBJ_DIR) $(STACK_OBJ_NAME)
+	@$(CXX) ${CXX_FLAGS} $(STACK_OBJ_NAME) -o $(SNAME)
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
+
 nothing:
 	@echo "\n\n"
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR) && mkdir -p $(OBJ_DIR)$(VEC_DIR) && mkdir -p $(OBJ_DIR)$(MAP_DIR)
+	@mkdir -p $(OBJ_DIR) && mkdir -p $(OBJ_DIR)$(VEC_DIR) && mkdir -p $(OBJ_DIR)$(MAP_DIR) && mkdir -p $(OBJ_DIR)$(STACK_DIR)
 
 $(OBJ_DIR)$(VEC_DIR)%.o : $(SRC_DIR)$(VEC_DIR)%.cpp
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)generating $@\n$(NO_COLOR)"
 	@$(CXX) ${CXX_FLAGS} -c $< -o $@
 
 $(OBJ_DIR)$(MAP_DIR)%.o : $(SRC_DIR)$(MAP_DIR)%.cpp
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)generating $@\n$(NO_COLOR)"
+	@$(CXX) ${CXX_FLAGS} -c $< -o $@
+
+$(OBJ_DIR)$(STACK_DIR)%.o : $(SRC_DIR)$(STACK_DIR)%.cpp
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)generating $@\n$(NO_COLOR)"
 	@$(CXX) ${CXX_FLAGS} -c $< -o $@
 
@@ -145,6 +165,7 @@ clean_o_files:
 clean_exec_file:
 	@rm -rf $(VNAME)
 	@rm -rf $(MNAME)
+	@rm -rf $(SNAME)
 	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable file is Deleted\n$(NO_COLOR)"
 
 

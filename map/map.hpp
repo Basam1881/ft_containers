@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/26 08:38:54 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/28 11:04:48 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ namespace ft {
 
     /* ************************************** Constructors ************************************** */
     inline explicit map (const key_compare& comp = key_compare(),
-              const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc) {}
+              const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc), _uselessEnd(new avl_type) {}
 
     template <class InputIterator>
     inline map (InputIterator first, InputIterator last,
         const key_compare& comp = key_compare(),
-        const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc) {
+        const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc), _uselessEnd(new avl_type) {
      for ( ; first != last; first++) {
       _root = _root->insert(_root, *first);
       _root->setHighEnd(first.getHighEnd());
@@ -80,9 +80,9 @@ namespace ft {
      }
     }
 
-    inline map (const map& x) : _root(NULL), _size(x._size), _comp(x._comp), _alloc(x._alloc) { *this = x; }
+    inline map (const map& x) : _root(NULL), _size(x._size), _comp(x._comp), _alloc(x._alloc), _uselessEnd(new avl_type) { *this = x; }
     
-    inline ~map() { clear(); /* delete _root->getHighEnd(); delete _root->getLowEnd(); */ }
+    inline ~map() { clear(); delete _uselessEnd; /* delete _root->getHighEnd(); delete _root->getLowEnd(); */ }
 
     inline map& operator= (const map& x);
 
