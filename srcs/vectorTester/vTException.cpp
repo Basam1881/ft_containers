@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:26 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/26 12:08:31 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/29 08:54:06 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,9 +203,10 @@ bool  vectorExceptionTest7(bool printAllTests, size_t testnum) {
     v.assign(v.max_size() + 1, 0);
   } catch (std::length_error & e) {
     try {
-      ft_v.assign(v.max_size() + 1, 0);
+    ft_v.assign(v.max_size() + 1, 0);
     } catch (std::length_error & e) {
       try {
+
         v.assign(v.max_size(), 0);
       } catch (std::bad_alloc & e) {
         try {

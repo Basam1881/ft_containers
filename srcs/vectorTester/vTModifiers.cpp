@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTModifiers.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:51:19 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:35:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/29 09:37:20 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ bool  vectorModifiersTest2(bool printAllTests, size_t testnum) {
   ft::vector<int> ft_v2(15, 2);
   std::vector<int> v3(20, 3);
   ft::vector<int> ft_v3(20, 3);
-  v.assign(v.size(), *v.begin());
-  ft_v.assign(ft_v.size(), *ft_v.begin());
-  v1.assign(v.size(), *v.begin());
-  ft_v1.assign(ft_v.size(), *ft_v.begin());
-  v2.assign(v3.size(), *v3.begin());
-  ft_v2.assign(ft_v3.size(), *ft_v3.begin());
+  v.assign(v.size(), *v1.begin());
+  ft_v.assign(ft_v.size(), *ft_v1.begin());
+  v.assign(v1.size(), *v1.begin());
+  ft_v.assign(ft_v1.size(), *ft_v1.begin());
+  v1.assign(v.size(), *v1.begin());
+  ft_v1.assign(ft_v.size(), *ft_v1.begin());
+  v2.assign(v3.size(), *v.begin());
+  ft_v2.assign(ft_v3.size(), *ft_v.begin());
   v3.assign(v.size(), *v.begin());
   ft_v3.assign(ft_v.size(), *ft_v.begin());
   v3.assign(v2.size(), *v2.begin());

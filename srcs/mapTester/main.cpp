@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 15:33:09 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/28 16:36:36 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <sys/time.h>
 
 #include "../../algorithms/pair.hpp"
-#include "../../algorithms/make_pair.hpp"
+#include "../../algorithms/pair.hpp"
 #include "../../bst/avl.hpp"
 #include "../PerformanceChecker.hpp"
 
@@ -43,9 +43,9 @@ void  checkPerformace() {
     ftmap.insert(ft::pair<int, int>(i, i * 10));
   ftmap.clear();
   for (int i = 0; i < 1000; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 1000 * 2; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   ftmap.insert(ftmap.begin(), ftmap.end());
   ftmap.clear();
 
@@ -59,7 +59,7 @@ void  checkPerformace() {
   for (int i = 0; i < 1000; i++)
     stdmap[i] = i * 10;
   for (int i = 0; i < 1000 * 2; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   stdmap.insert(stdmap.begin(), stdmap.end());
   stdmap.clear();
   pcheck.stopStandard();
@@ -74,9 +74,9 @@ bool  checkCapcity() {
     return false;
 
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
 
   if (ftmap.size() != stdmap.size() || ftmap.empty() != stdmap.empty() || ftmap.max_size() != stdmap.max_size())
     return false;
@@ -103,9 +103,9 @@ bool  checkIterators() {
   std::map<int, int> stdmap;
   
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   ft::map<int, int>::iterator ftit = ftmap.begin();
   std::map<int, int>::iterator stdit = stdmap.begin();
   
@@ -127,9 +127,9 @@ bool  checkConstIterators() {
   std::map<int, int> stdmap;
   
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   ft::map<int, int>::const_iterator ftit = ftmap.begin();
   std::map<int, int>::const_iterator stdit = stdmap.begin();
   
@@ -152,9 +152,9 @@ bool  checkReverseIterators() {
   std::map<int, int> stdmap;
   
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   ft::map<int, int>::reverse_iterator ftit = ftmap.rbegin();
   std::map<int, int>::reverse_iterator stdit = stdmap.rbegin();
   
@@ -177,9 +177,9 @@ bool  checkConstReverseIterators() {
   std::map<int, int> stdmap;
   
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   ft::map<int, int>::const_reverse_iterator ftit = ftmap.rbegin();
   std::map<int, int>::const_reverse_iterator stdit = stdmap.rbegin();
   
@@ -202,9 +202,9 @@ bool  checkMixedIterators() {
   std::map<int, int> stdmap;
   
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   ft::map<int, int>::iterator ftit1 = ftmap.begin();
   std::map<int, int>::iterator stdit1 = stdmap.begin();
   ft::map<int, int>::const_iterator ftit2 = ftmap.begin();
@@ -231,9 +231,9 @@ bool  checkObservers() {
   std::map<int, int>::key_compare stdcomp = stdmap.key_comp();
   
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i, i * 10));
+    ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i, i * 10));
+    stdmap.insert(std::pair<int, int>(i, i * 10));
   if (ftcomp(ftmap.begin()->first, ftmap.rbegin()->first) != stdcomp(stdmap.begin()->first, stdmap.rbegin()->first)
     || ftcomp(ftmap.begin()->second, ftmap.rbegin()->second) != stdcomp(stdmap.begin()->second, stdmap.rbegin()->second))
     return false;
@@ -343,9 +343,9 @@ bool  checkOperations() {
   std::map<int, int>::const_iterator cstdit;
 
   for (int i = 0; i < 10; i++)
-    ftmap.insert(ft::make_pair<int, int>(i * size / 10, i * size));
+    ftmap.insert(ft::pair<int, int>(i * size / 10, i * size));
   for (int i = 0; i < 10; i++)
-    stdmap.insert(std::make_pair<int, int>(i * size / 10, i * size));
+    stdmap.insert(std::pair<int, int>(i * size / 10, i * size));
 
   // find()
   for (ftit = ftmap.begin(), stdit = stdmap.begin(); ftit != ftmap.end(); ftit++, stdit++)

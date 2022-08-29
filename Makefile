@@ -81,7 +81,7 @@ NAME = ft
 
 all: header $(NAME) footer
 
-$(NAME) : $(MNAME)
+$(NAME) : $(VNAME) $(MNAME) $(SNAME)
 
 $(VNAME): nothing $(OBJ_DIR) $(VEC_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(VEC_OBJ_NAME) -o $(VNAME)

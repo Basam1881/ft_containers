@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/20 15:12:31 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/29 09:29:07 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,14 @@ namespace ft {
   }
   template < class T, class Alloc>
   inline void             vector<T, Alloc>::assign (typename vector<T, Alloc>::size_type n, const typename vector<T, Alloc>::value_type& val) {
-    checkIfValid(*this, n, "cannot create std::vector larger than max_size()");
+    if (n > max_size()) {
+      clearMe(*this);
+      _size = 0;
+      _capacity = 0;
+      throw std::length_error("cannot create std::vector larger than max_size()");
+    }
+    pointer tmp = _alloc.allocate(n);
+    _alloc.deallocate(tmp, n);  
     n > _capacity ? reallocMe(*this, n, val) : replace(*this, n, val);
     _size = n;
   }
@@ -311,9 +318,11 @@ namespace ft {
 
   template < class T, class Alloc>
   inline void                   vector<T, Alloc>::clearMe(vector<T, Alloc> & v) {
-    for (iterator it = v.begin(); it != v.end(); it++)
-      v._alloc.destroy(it.base());
-    v._alloc.deallocate(v.begin().base(), v.capacity());
+    if (_capacity) {
+      for (iterator it = v.begin(); it != v.end(); it++)
+        v._alloc.destroy(it.base());
+      v._alloc.deallocate(v.begin().base(), v.capacity());
+    }
   }
 
   template < class T, class Alloc>
