@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 08:54:43 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/29 09:57:25 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <vector>
 #include <map>
 #include "vectorTests.hpp"
-#include "limits.h"
-#include <sys/time.h>
 
 void  help() {
   int i = 1;

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 17:23:08 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/29 14:10:12 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ namespace ft
 
       /* ************************************** Modifiers ************************************** */
       template <class InputIterator>
-      inline void                        assign (InputIterator first, InputIterator last);
+      inline void                        assign (InputIterator first, typename enable_if<!is_integral<InputIterator>::value,InputIterator>::type last);
 
       inline void                        assign (size_type n, const value_type& val);
 
@@ -147,8 +147,7 @@ namespace ft
 
       template <class InputIterator>
       inline void                        insert (iterator position, InputIterator first,
-                                          typename enable_if<!is_integral<InputIterator>::value,
-                                          InputIterator>::type last);
+                                          typename enable_if<!is_integral<InputIterator>::value,InputIterator>::type last);
 
       inline iterator                    erase (iterator position);
 
@@ -170,19 +169,24 @@ namespace ft
 
       inline void                        allocMe(vector & v, size_t & n, const value_type & val);
 
-      inline void                        allocMe(vector & v, size_t & n, iterator first, iterator last);
+      template < class InputIterator >
+      inline void                        allocMe(vector & v, size_t & n, InputIterator first, InputIterator last);
 
-      inline void                        allocMe(vector & v, size_t const & n, const_iterator first, const_iterator last);
+      template < class InputIterator >
+      inline void                        allocMe(vector & v, size_t const & n, const InputIterator first, const InputIterator last);
 
       inline void                        clearMe(vector & v);
 
       inline void                        reallocMe(vector & v, size_type & n, value_type const & val);
 
-      inline void                        reallocMe(vector & v, size_type & n, iterator first, iterator last);
+      template < class InputIterator >
+      inline void                        reallocMe(vector & v, size_type & n, InputIterator first, InputIterator last);
 
-      inline void                        reallocMe(vector & v, size_type const & n, const_iterator first, const_iterator last);
+      template < class InputIterator >
+      inline void                        reallocMe(vector & v, size_type const & n, const InputIterator first, const InputIterator last);
 
-      inline void                        replace(vector & v, size_type & n, iterator & first);
+      template < class InputIterator >
+      inline void                        replace(vector & v, size_type & n, InputIterator & first);
 
       inline void                        replace(vector & v, size_type n, const value_type& val);
 
@@ -190,9 +194,11 @@ namespace ft
 
       inline void                        isValidInsert(size_type n);
 
-      inline iterator                    storePositionAndReserve(vector & v, iterator & position, size_type reserveSize1, size_type reserveSize2);
+      template < class InputIterator >
+      inline iterator                    storePositionAndReserve(vector & v, InputIterator & position, size_type reserveSize1, size_type reserveSize2);
 
-      inline bool                        isIteratorInVector(vector & v, iterator & iter);
+      template < class InputIterator >
+      inline bool                        isIteratorInVector(vector & v, InputIterator & iter);
 
       inline void                        checkIfValid(vector & v, size_type & n, std::string str);
 

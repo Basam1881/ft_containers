@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 11:58:56 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/20 17:35:40 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/29 18:50:13 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ namespace ft
   Iterator operator+ (typename Iterator::difference_type n,
              const Iterator& it) { return (it + n); }
 
-  template <class Iterator>
-  typename Iterator::difference_type operator- (const Iterator& lhs,
-             const Iterator& rhs) { return abs(lhs.base() - rhs.base()); }
+  template <class Iterator1, class Iterator2>
+  typename Iterator2::difference_type operator- (const Iterator1& lhs,
+             const Iterator2& rhs) { return lhs.base() - rhs.base(); }
 
 }
 

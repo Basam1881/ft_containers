@@ -81,25 +81,26 @@ NAME = ft
 
 all: header $(NAME) footer
 
-$(NAME) : $(VNAME) $(MNAME) $(SNAME)
+$(NAME) : objs_tree $(VNAME) $(MNAME) $(SNAME)
 
-$(VNAME): nothing $(OBJ_DIR) $(VEC_OBJ_NAME)
+$(VNAME): objs_tree $(VEC_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(VEC_OBJ_NAME) -o $(VNAME)
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
 
-$(MNAME): nothing $(OBJ_DIR) $(MAP_OBJ_NAME)
+$(MNAME): objs_tree $(MAP_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(MAP_OBJ_NAME) -o $(MNAME)
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
 
-$(SNAME): nothing $(OBJ_DIR) $(STACK_OBJ_NAME)
+$(SNAME): objs_tree $(STACK_OBJ_NAME)
 	@$(CXX) ${CXX_FLAGS} $(STACK_OBJ_NAME) -o $(SNAME)
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable File Is Ready\n$(NO_COLOR)"
 
-nothing:
+objs_tree:
 	@echo "\n\n"
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR) && mkdir -p $(OBJ_DIR)$(VEC_DIR) && mkdir -p $(OBJ_DIR)$(MAP_DIR) && mkdir -p $(OBJ_DIR)$(STACK_DIR)
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)$(VEC_DIR)
+	@mkdir -p $(OBJ_DIR)$(MAP_DIR)
+	@mkdir -p $(OBJ_DIR)$(STACK_DIR)
 
 $(OBJ_DIR)$(VEC_DIR)%.o : $(SRC_DIR)$(VEC_DIR)%.cpp
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)generating $@\n$(NO_COLOR)"
@@ -164,16 +165,43 @@ clean_o_files:
 	@rm -rf $(OBJ_DIR)
 	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
 
-clean_exec_file:
+clean_vo_files:
+	@rm -rf $(OBJ_DIR)/$(VEC_DIR)
+	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
+
+clean_mo_files:
+	@rm -rf $(OBJ_DIR)/$(MAP_DIR)
+	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
+
+clean_so_files:
+	@rm -rf $(OBJ_DIR)/$(STACK_DIR)
+	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
+
+clean_vexec_file:
 	@rm -rf $(VNAME)
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Vector Executable file is Deleted\n$(NO_COLOR)"
+
+clean_mexec_file:
 	@rm -rf $(MNAME)
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Map Executable file is Deleted\n$(NO_COLOR)"
+
+clean_sexec_file:
 	@rm -rf $(SNAME)
-	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Executable file is Deleted\n$(NO_COLOR)"
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Stack Executable file is Deleted\n$(NO_COLOR)"
+
+clean_exec_file: clean_vexec_file clean_mexec_file clean_sexec_file
+	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)ALL Executable files are Deleted\n$(NO_COLOR)"
 
 
 clean: header clean_o_files footer
 
 fclean: header clean_o_files clean_exec_file footer
+
+rev: header clean_vo_files clean_vexec_file $(VNAME) footer
+
+rem: header clean_mo_files clean_mexec_file $(MNAME) footer
+
+res: header clean_so_files clean_sexec_file $(SNAME) footer
 
 re: header clean_o_files clean_exec_file $(NAME) footer
 
