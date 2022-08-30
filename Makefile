@@ -165,18 +165,6 @@ clean_o_files:
 	@rm -rf $(OBJ_DIR)
 	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
 
-clean_vo_files:
-	@rm -rf $(OBJ_DIR)/$(VEC_DIR)
-	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
-
-clean_mo_files:
-	@rm -rf $(OBJ_DIR)/$(MAP_DIR)
-	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
-
-clean_so_files:
-	@rm -rf $(OBJ_DIR)/$(STACK_DIR)
-	@echo "\n\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)object files are Deleted\n$(NO_COLOR)"
-
 clean_vexec_file:
 	@rm -rf $(VNAME)
 	@echo "\n\r\033[3A\033[0K\t$(NO_COLOR)[$(GREEN)✓$(NO_COLOR)]   $(IYELLOW)Vector Executable file is Deleted\n$(NO_COLOR)"
@@ -197,11 +185,11 @@ clean: header clean_o_files footer
 
 fclean: header clean_o_files clean_exec_file footer
 
-rev: header clean_vo_files clean_vexec_file $(VNAME) footer
+rev: header clean_o_files clean_vexec_file $(VNAME) footer
 
-rem: header clean_mo_files clean_mexec_file $(MNAME) footer
+rem: header clean_o_files clean_mexec_file $(MNAME) footer
 
-res: header clean_so_files clean_sexec_file $(SNAME) footer
+res: header clean_o_files clean_sexec_file $(SNAME) footer
 
 re: header clean_o_files clean_exec_file $(NAME) footer
 

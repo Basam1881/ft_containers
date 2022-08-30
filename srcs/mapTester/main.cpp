@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 16:36:36 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/30 18:59:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,10 +157,16 @@ bool  checkReverseIterators() {
     stdmap.insert(std::pair<int, int>(i, i * 10));
   ft::map<int, int>::reverse_iterator ftit = ftmap.rbegin();
   std::map<int, int>::reverse_iterator stdit = stdmap.rbegin();
-  
-  for ( stdit = stdmap.rbegin(); stdit != stdmap.rend(); stdit++, ftit++)
-    if (ftit->first != stdit->first || ftit->second != stdit->second)
-      return false;
+
+  ft::map<int, int>::iterator fttit = ftmap.end();
+  fttit--;
+  std::cout << fttit->first << ftmap.size() << " - " << stdit->first << stdmap.size()  << std::endl;
+  for ( stdit = stdmap.rbegin(); stdit != stdmap.rend(); stdit++, ftit++) {
+    // stdit++;
+    // ftit++;
+      if (ftit->first != stdit->first || ftit->second != stdit->second)
+        return false;
+  }
   ftit--;
   stdit--;
   for ( ; ftit != ftmap.rbegin(); ftit--, stdit--)

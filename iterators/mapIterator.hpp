@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterator.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/27 17:04:30 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/30 16:58:41 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,18 @@ namespace ft
       typedef Reference                                                                   reference;
       typedef Category                                                                    iterator_category;
 
-      iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _highEnd(NULL), _lowEnd(NULL) {}
+      iterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _highEnd(NULL) {}
       iterator(avl_type * node) : _node(node) {
         if (_node) {
-          _lowest = _node->getLowestKey(_node->getMasterRoot());
-          _Highest = _node->getHighestKey(_node->getMasterRoot());
+          if (_node == _node->getHighEnd()) {
+            _lowest = _node->getLowestKey(_node->getMasterRoot());
+            _Highest = _node->getHighestKey(_node->getMasterRoot());
+          }
+          else {
+            _lowest = _node->getLowestKey(_node->getMasterRoot());
+            _Highest = _node->getHighestKey(_node->getMasterRoot()); 
+          }
           _highEnd = _node->getHighEnd();
-          _lowEnd = _node->getLowEnd();
         }
       }
       iterator (iterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; }
@@ -57,7 +62,6 @@ namespace ft
 
       avl_type *              getHighEnd () const { return _highEnd; }
 
-      avl_type *              getLowEnd () const { return _lowEnd; }
 
       iterator &		            operator = ( iterator const & rhs ) {
         if (this != &rhs && _node != rhs._node) {
@@ -65,13 +69,12 @@ namespace ft
           _lowest = rhs._lowest;
           _Highest = rhs._Highest;
           _highEnd = rhs._node->getHighEnd();
-          _lowEnd = rhs._node->getLowEnd();
         }
         return *this;
       }
 
       iterator &                operator ++ () {
-        if (this->_node == _lowEnd)
+        if (this->_node == _highEnd)
           _node = _lowest;
         else
           _increment();
@@ -79,7 +82,7 @@ namespace ft
       }
       iterator                  operator ++ (int) { 
         iterator tmp(*this);
-        if (this->_node == _lowEnd)
+        if (this->_node == _highEnd)
           _node = _lowest;
         else
           _increment();
@@ -112,14 +115,13 @@ namespace ft
       avl_type *                             _Highest;
       avl_type *                             _lowest;
       avl_type *                             _highEnd;
-      avl_type *                             _lowEnd;
 
       void        _increment() {
         if (_node == _Highest)
           _node = _highEnd;
         else if (_node == _highEnd) {
           _node = NULL;
-          _node->getHighEnd();
+          // _node->getHighEnd();
         }
         else if (_node->getRight()) {
           _node = _node->getRight();
@@ -135,10 +137,10 @@ namespace ft
 
       void        _decrement() {
         if (_node == _lowest)
-          _node = _lowEnd;
-        else if (_node == _lowEnd) {
+          _node = _highEnd;
+        else if (_node == _highEnd) {
           _node = NULL;
-          _node->getLowEnd();
+          // _node->getHighEnd();
         }
         else if (_node->getLeft()) {
           _node = _node->getLeft();

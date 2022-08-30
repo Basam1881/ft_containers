@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/30 11:09:39 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/30 18:51:32 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ namespace ft {
     avl_allocator        _avlAlloc;
     value_type           _p;
     AVL                  *_highEnd;
-    AVL                  *_lowEnd;
     AVL                  *_masterRoot;
     AVL                  *_parent;
     AVL                  *_left;
@@ -53,17 +52,17 @@ namespace ft {
 
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     {}
 
     AVL(value_type p) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(p), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
+        _avlAlloc(avl_allocator()), _p(p), _highEnd(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
         _right(NULL), _height(0)
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(src._p), _highEnd(NULL), _lowEnd(NULL), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(src._p), _highEnd(NULL), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     { *this = src; }
 
@@ -72,7 +71,6 @@ namespace ft {
         _alloc = rhs._alloc;
         _avlAlloc = rhs._avlAlloc;
         _highEnd = rhs._highEnd;
-        _lowEnd = rhs._lowEnd;
         _parent = rhs._parent;
         _left = rhs._left;
         _right = rhs._right;
@@ -113,14 +111,6 @@ namespace ft {
     void setHighEnd(AVL * highEnd) {
       _highEnd = highEnd;
     }
-    
-    AVL * getLowEnd() {
-      return _lowEnd;
-    }
-
-    void setLowEnd(AVL * lowEnd) {
-      _lowEnd = lowEnd;
-    }
 
     AVL * getMasterRoot() {
       return _masterRoot;
@@ -155,6 +145,8 @@ namespace ft {
     }
 
     AVL * getLowestKey(AVL * root) {
+      if (!root)
+        return NULL;
       AVL * tmp = root;
       while (tmp && tmp->_left)
         tmp = tmp->_left;
@@ -344,8 +336,6 @@ namespace ft {
         _avlAlloc.construct(element, AVL(p));
         element->_highEnd = _avlAlloc.allocate(1);
         _avlAlloc.construct(element->_highEnd, AVL());
-        element->_lowEnd = _avlAlloc.allocate(1);
-        _avlAlloc.construct(element->_lowEnd, AVL());
         element->_masterRoot = element;
         return element;   
       }
@@ -353,23 +343,21 @@ namespace ft {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
-        if (root->_left->_p == p) {
+        if (root->_left->_p == p)
           root->freeMe(root->_left->_highEnd);
-          root->freeMe(root->_left->_lowEnd);
-        }
         root->_left->_highEnd = root->_highEnd;
-        root->_left->_lowEnd = root->_lowEnd;
+        root->_left->_highEnd->_highEnd = root->_highEnd;
+        root->_left->_highEnd->_masterRoot = root->_masterRoot;
       }
       else {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root;
         root->_right->_masterRoot = root->_masterRoot;
-        if (root->_right->_p == p) {
+        if (root->_right->_p == p)
           root->freeMe(root->_right->_highEnd);
-          root->freeMe(root->_right->_lowEnd);
-        }
         root->_right->_highEnd = root->_highEnd;
-        root->_right->_lowEnd = root->_lowEnd;
+        root->_right->_highEnd->_highEnd = root->_highEnd;
+        root->_right->_highEnd->_masterRoot = root->_masterRoot;
       }
 
       root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));

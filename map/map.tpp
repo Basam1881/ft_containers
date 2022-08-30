@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/30 11:11:29 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/08/30 16:21:06 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,29 @@ namespace ft {
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rbegin() {
     if (!_size)
       return reverse_iterator(_uselessEnd);
-    return reverse_iterator(_root->getHighestKey(_root));
+    return reverse_iterator(_root->getHighEnd());
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rbegin() const {
     if (!_size)
       return const_reverse_iterator(_uselessEnd);
-    return const_reverse_iterator(_root->getHighestKey(_root));
+    return const_reverse_iterator(_root->getHighEnd());
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::reverse_iterator						  map<Key, T, Compare, Alloc>::rend() {
     if (!_size)
       return reverse_iterator(_uselessEnd);
-    return reverse_iterator(_root->getLowEnd());    
+    return reverse_iterator(_root->getLowestKey(_root));    
   }
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::const_reverse_iterator 			map<Key, T, Compare, Alloc>::rend() const {
     if (!_size)
       return const_reverse_iterator(_uselessEnd);
-    return const_reverse_iterator(_root->getLowEnd());
+    return const_reverse_iterator(_root->getLowestKey(_root));
   }
-
 
   /* ************************************** Capacity ************************************** */
   template<class Key, class T, class Compare, class Alloc>
@@ -99,8 +98,6 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::size_type                   map<Key, T, Compare, Alloc>::max_size() const {
-    // return std::numeric_limits<typename ft::map<Key, T>::size_type >::max() / (sizeof(value_type));
-    // return (size_t)(-1) / (sizeof(value_type) * 10);
     return this->_alloc.max_size() / 5;
   }
 
@@ -171,7 +168,7 @@ namespace ft {
     if (_root->search(_root, k))
       _size--;
     if (!_size) {
-      delete _root->getHighEnd(); delete _root->getLowEnd();
+      delete _root->getHighEnd();
     }
     _root = _root->erase(_root, k);
     // if (_root)
