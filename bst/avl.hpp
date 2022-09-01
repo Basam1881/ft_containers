@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/30 18:51:32 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 08:01:21 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ namespace ft {
           _masterRoot = this;
         else
           _masterRoot = rhs._masterRoot;
+        if (_highEnd)
+          _highEnd->_masterRoot = _masterRoot;
       }
       return *this;
     }
@@ -278,6 +280,7 @@ namespace ft {
       
       if (root->_masterRoot == root) {
         left->_masterRoot = left;
+        left->_highEnd->_masterRoot = left;
         updateMasterRoot(left);
       }
 
@@ -301,6 +304,7 @@ namespace ft {
 
       if (root->_masterRoot == root) {
         right->_masterRoot = right;
+        right->_highEnd->_masterRoot = right;
         updateMasterRoot(right);
       }
 

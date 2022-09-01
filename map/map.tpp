@@ -6,11 +6,15 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/30 16:21:06 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 08:38:21 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.hpp"
+# include <memory>
+# include <iostream>
+# include <sstream>
+# include <string>
 
 namespace ft {
   
