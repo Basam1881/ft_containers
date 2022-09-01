@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 13:02:46 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 18:44:00 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 10:40:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string>
 # include <memory>
 # include <cstddef>
-# include "../iterators/vectorIterator.hpp"
+# include "../iterators/iterator_traits.hpp"
 
 namespace ft
 {
@@ -57,10 +57,16 @@ namespace ft
   typename iterator_traits<Iterator>::difference_type
   distance (Iterator first, Iterator last)
   {
-    // typename iterator_traits<Iterator>::difference_type diff;
-    // for(diff = 0; first != last; first++, diff++);
-    // return diff;
     return (distance(first, last, typename iterator_traits<Iterator>::iterator_category()));
+  }
+  
+  template<class Iterator1, class Iterator2>
+  typename iterator_traits<Iterator1>::difference_type
+  distance (Iterator1 first, Iterator2 last)
+  {
+    typename iterator_traits<Iterator1>::difference_type diff;
+    for(diff = 0; &(*first) != &(*last); first++, diff++);
+    return diff;
   }
 }
 

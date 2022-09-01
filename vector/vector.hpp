@@ -6,27 +6,15 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 14:10:12 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 11:43:52 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-# include <iostream>
-# include <sstream>
-# include <string>
-# include <memory>
-# include <cstddef>
-# include <stdexcept>
 # include "../iterators/vectorIterator.hpp"
-# include "../algorithms/distance.hpp"
-# include "../algorithms/copy.hpp"
-# include "../algorithms/copy_backward.hpp"
-# include "../algorithms/enable_if.hpp"
-# include "../algorithms/is_integral.hpp"
-# include "../algorithms/equal.hpp"
-# include "../algorithms/lexicographical_compare.hpp"
+# include "../algorithms/utility.hpp"
 
 namespace ft
 {

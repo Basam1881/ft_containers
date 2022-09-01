@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 11:58:56 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 18:50:13 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 09:19:57 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ namespace ft
 
       iterator() : _p(NULL) {}
       iterator(pointer p) : _p(p) {}
-      iterator (iterator const & src) : _p(NULL) { *this = src; }
+      iterator (iterator const & src) : _p(src._p) {}
       ~iterator() {}
 
       pointer                   base() const { return this->_p; }

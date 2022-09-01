@@ -6,20 +6,16 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 15:39:42 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 11:47:07 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include <iostream>
-# include <sstream>
-# include <string>
-# include <memory>
 # include "../bst/avl.hpp"
-# include "../algorithms/pair.hpp"
 # include "../iterators/mapIterator.hpp"
+# include "../algorithms/utility.hpp"
 
 namespace ft {
   template < class Key, class T, class Compare = std::less<Key>,

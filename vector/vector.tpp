@@ -6,13 +6,10 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/01 08:42:11 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/01 13:55:28 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <iostream>
-# include <string>
-# include <memory>
 # include "vector.hpp"
 
 namespace ft {
@@ -216,6 +213,8 @@ namespace ft {
 
   template < class T, class Alloc>
   inline typename vector<T, Alloc>::iterator             vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position, const typename vector<T, Alloc>::value_type& val) {
+    // (void)position;
+    // (void)val;
     if (_size == _capacity)
       position = storePositionAndReserve(*this, position, 1, _capacity * 2);
     _size++;
@@ -401,7 +400,7 @@ namespace ft {
   template < class InputIterator >
   inline bool                   vector<T, Alloc>::isIteratorInVector(vector<T, Alloc> & v, InputIterator & iter) {
     for (iterator it = v.begin(); it != v.end(); it++)
-      if (it == iter)
+      if (&(*it) == &(*iter))
         return true;
     return false;
   }
