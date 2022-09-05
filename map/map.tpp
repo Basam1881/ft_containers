@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/01 08:38:21 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/05 19:19:42 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ namespace ft {
   template < class Key, class T, class Compare, class Alloc>
   inline map<Key, T, Compare, Alloc>& map<Key, T, Compare, Alloc>::operator= (const map<Key, T, Compare, Alloc>& x) {
     if (this != &x) {
-      for (const_iterator it = x.begin(); it != x.end(); it++)
-        _root = _root->insert(_root, *it);
-      _size = x._size;
-      _comp = x._comp;
+      clear();
+      insert(x.begin(), x.end());
       _alloc = x._alloc;
+      _avlAlloc = x._avlAlloc;
+      _comp = x._comp;
     }
     return *this;
   }
@@ -113,6 +113,7 @@ namespace ft {
     if (!tmp) {
       _root = _root->insert(_root, value_type(k, mapped_type()));
       _size++;
+      tmp = _root->search(_root, k);
     }
     return tmp->getPair().second;
   }
@@ -161,7 +162,7 @@ namespace ft {
     for ( ; first != last; first++)
       insert(*first);
   }
-  
+
   template<class Key, class T, class Compare , class Alloc>
   inline void   map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator position) {
     erase(position.getNode()->getPair().first);
@@ -171,9 +172,8 @@ namespace ft {
   inline typename map<Key, T, Compare, Alloc>::size_type    map<Key, T, Compare, Alloc>::erase (const typename map<Key, T, Compare, Alloc>::key_type& k) {
     if (_root->search(_root, k))
       _size--;
-    if (!_size) {
+    if (!_size)
       delete _root->getHighEnd();
-    }
     _root = _root->erase(_root, k);
     // if (_root)
     // std::cout << "lowest: " << _root->getLowestKey(_root)->getPair().first << std::endl;
@@ -196,8 +196,12 @@ namespace ft {
 
     for ( count = 0, f = first; f != last; f++, count++)
       keys[count] = f.getNode()->getPair().first;
-    for (size_type cnt = 0; cnt < count; cnt++)
+    for (size_type cnt = 0; cnt < count; cnt++) {
+      // _root->printAll(_root);
       erase(keys[cnt]);
+      // std::cout << std::endl << std::endl;
+    }
+    // _root->printAll(_root);
     delete[] keys;
   }
 
@@ -317,5 +321,43 @@ namespace ft {
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::allocator_type map<Key, T, Compare, Alloc>::get_allocator() const {
     return _alloc;
+  }
+  
+  
+  /* ****************************** Non-Member Function Overloads ****************************** */
+  template< class Key, class T, class Compare, class Alloc >
+  void swap(map<Key,T,Compare,Alloc>& lhs, map<Key,T,Compare,Alloc>& rhs ) {
+    lhs.swap(rhs);
+  }
+
+  template< class Key, class T, class Compare, class Alloc >
+  bool operator==(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) {
+    if (lhs.size() != rhs.size()) return false;
+    return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+  }
+
+  template< class Key, class T, class Compare, class Alloc >
+  bool operator!=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) {
+    return !(lhs == rhs);  
+  }
+
+  template< class Key, class T, class Compare, class Alloc >
+  bool operator<(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) {
+    return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+  }
+
+  template< class Key, class T, class Compare, class Alloc >
+  bool operator<=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) {
+    return !(rhs < lhs);
+  }
+
+  template< class Key, class T, class Compare, class Alloc >
+  bool operator>(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) {
+    return rhs < lhs;
+  }
+
+  template< class Key, class T, class Compare, class Alloc >
+  bool operator>=(const map<Key,T,Compare,Alloc>& lhs, const map<Key,T,Compare,Alloc>& rhs ) {
+    return !(lhs < rhs);
   }
 }

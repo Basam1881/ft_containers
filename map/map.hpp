@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/01 11:47:07 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/05 15:43:15 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ namespace ft {
 
     /* ************************************** Constructors ************************************** */
     inline explicit map (const key_compare& comp = key_compare(),
-              const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc) {
+              const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc), _avlAlloc(std::allocator<avl_type>()) {
       _uselessEnd = _avlAlloc.allocate(1);
       _avlAlloc.construct(_uselessEnd, avl_type());
     }
@@ -71,23 +71,21 @@ namespace ft {
     template <class InputIterator>
     inline map (InputIterator first, InputIterator last,
         const key_compare& comp = key_compare(),
-        const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc) {
+        const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc), _avlAlloc(std::allocator<avl_type>()) {
       _uselessEnd = _avlAlloc.allocate(1);
       _avlAlloc.construct(_uselessEnd, avl_type());
-      for ( ; first != last; first++) {
-        _root = _root->insert(_root, *first);
-        _root->setHighEnd(first.getHighEnd());
-        _root->setLowEnd(first.getLowEnd());
-      }
+      insert(first, last);
+      // for ( ; first != last; first++)
+      //   _root = _root->insert(_root, *first);
     }
 
-    inline map (const map& x) : _root(NULL), _size(x._size), _comp(x._comp), _alloc(x._alloc) {
+    inline map (const map& x) : _root(NULL), _size(0), _comp(x._comp), _alloc(x._alloc), _avlAlloc(std::allocator<avl_type>()) {
       _uselessEnd = _avlAlloc.allocate(1);
       _avlAlloc.construct(_uselessEnd, avl_type());
       *this = x;
     }
     
-    inline ~map() { clear(); _avlAlloc.deallocate(_uselessEnd, 1); }
+    inline ~map() { _avlAlloc.deallocate(_uselessEnd, 1); }
 
     inline map& operator= (const map& x);
 

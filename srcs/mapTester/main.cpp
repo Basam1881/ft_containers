@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/01 08:46:55 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/05 19:42:47 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,15 +158,9 @@ bool  checkReverseIterators() {
   ft::map<int, int>::reverse_iterator ftit = ftmap.rbegin();
   std::map<int, int>::reverse_iterator stdit = stdmap.rbegin();
 
-  ft::map<int, int>::iterator fttit = ftmap.end();
-  fttit--;
-  std::cout << fttit->first << ftmap.size() << " - " << stdit->first << stdmap.size()  << std::endl;
-  for ( stdit = stdmap.rbegin(); stdit != stdmap.rend(); stdit++, ftit++) {
-    // stdit++;
-    // ftit++;
+  for ( stdit = stdmap.rbegin(); stdit != stdmap.rend(); stdit++, ftit++)
       if (ftit->first != stdit->first || ftit->second != stdit->second)
         return false;
-  }
   ftit--;
   stdit--;
   for ( ; ftit != ftmap.rbegin(); ftit--, stdit--)

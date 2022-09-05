@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/01 08:01:21 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/05 19:39:52 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,8 @@ namespace ft {
 
     AVL * getHighestKey(AVL * root) {
       AVL * tmp = root;
-      while (tmp && tmp->_right) {
+      while (tmp && tmp->_right)
         tmp = tmp->_right;
-      }
       return tmp;
     }
 
@@ -233,6 +232,9 @@ namespace ft {
         AVL * tmpRoot = _avlAlloc.allocate(1);
         _avlAlloc.construct(tmpRoot, AVL(tmp->_p));
         *tmpRoot = *root;
+        if (root->_left)
+          root->_left->_parent = tmpRoot;
+        updateMasterRoot(root->_masterRoot);
         freeMe(root);
         root = tmpRoot;
         root->_right = erase(root->_right, tmp->_p.first);
@@ -244,23 +246,23 @@ namespace ft {
     {
       if (!root)
           return;
-      std::cout << "<--- " << root->_p.second << " : ( left - ";
+      std::cout << "<--- " << root->_p.first << " : ( left - ";
       if (root->_left)
-        std::cout << root->_left->_p.second << " ) - ( right - ";
+        std::cout << root->_left->_p.first << " ) - ( right - ";
       else
         std::cout << "NULL" << " ) - ( right - ";
       if (root->_right)
-        std::cout << root->_right->_p.second << " ) - ( parent - ";
+        std::cout << root->_right->_p.first << " ) - ( parent - ";
       else
         std::cout << "NULL" << " ) - ( parent - ";
       if (root->_parent)
-        std::cout << root->_parent->_p.second << " ) - ( masterRoot - ";
+        std::cout << root->_parent->_p.first << " ) - ( masterRoot - ";
       else
         std::cout << "NULL" << " ) - ( masterRoot - ";
       if (root->_masterRoot)
-        std::cout << root->_masterRoot->_p.second << " )" << std::endl;
-      else  
-        std::cout << "NULL )" << std::endl;
+        std::cout << root->_masterRoot->_p.first << " ) - ( highEnd - " << _highEnd << " )" << std::endl;
+      else
+        std::cout << "NULL ) - ( highEnd - " << _highEnd << " )" << std::endl;
       printAll(root->_left);
       printAll(root->_right);
     }
@@ -347,21 +349,24 @@ namespace ft {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
-        if (root->_left->_p == p)
+        if (root->_left->_p.first == p.first) {
           root->freeMe(root->_left->_highEnd);
-        root->_left->_highEnd = root->_highEnd;
-        root->_left->_highEnd->_highEnd = root->_highEnd;
-        root->_left->_highEnd->_masterRoot = root->_masterRoot;
+          root->_left->_highEnd = root->_highEnd;
+          root->_left->_highEnd->_highEnd = root->_highEnd;
+          root->_left->_highEnd->_masterRoot = root->_masterRoot;
+        }
       }
       else {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root;
         root->_right->_masterRoot = root->_masterRoot;
-        if (root->_right->_p == p)
+        if (root->_right->_p.first == p.first) {
           root->freeMe(root->_right->_highEnd);
-        root->_right->_highEnd = root->_highEnd;
-        root->_right->_highEnd->_highEnd = root->_highEnd;
-        root->_right->_highEnd->_masterRoot = root->_masterRoot;
+          root->_right->_highEnd = root->_highEnd;
+          root->_right->_highEnd->_highEnd = root->_highEnd;
+          root->_right->_highEnd->_masterRoot = root->_masterRoot;
+          
+        }
       }
 
       root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
