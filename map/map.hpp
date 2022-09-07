@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/05 15:43:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/07 18:41:49 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ namespace ft {
     /* ************************************** Types ************************************** */
     typedef Key																													key_type;
     typedef T																														mapped_type;
-    typedef ft::pair<const key_type,mapped_type>												value_type;
-    typedef ft::AVL<const key_type, mapped_type>									      avl_type;
     typedef Compare																											key_compare;
     typedef Alloc																												allocator_type;
+    typedef ft::pair<const key_type,mapped_type>												value_type;
+    typedef ft::AVL<const key_type, mapped_type, key_compare>			      avl_type;
     typedef typename allocator_type::reference													reference;
     typedef typename allocator_type::const_reference										const_reference;
     typedef typename allocator_type::pointer														pointer;
     typedef typename allocator_type::const_pointer											const_pointer;
     typedef typename ft::iterator<ft::bidirectional_iterator_tag,
-                                                        value_type>     iterator;
+                                            value_type, key_compare>    iterator;
     typedef typename ft::iterator<ft::bidirectional_iterator_tag,
-                                                  const value_type>     const_iterator;
+                                      const value_type, key_compare>    const_iterator;
     typedef typename ft::reverse_iterator<iterator>                     reverse_iterator;
     typedef typename ft::reverse_iterator<const_iterator>               const_reverse_iterator;
     typedef ptrdiff_t																										difference_type;
@@ -85,7 +85,7 @@ namespace ft {
       *this = x;
     }
     
-    inline ~map() { _avlAlloc.deallocate(_uselessEnd, 1); }
+    inline ~map() { _avlAlloc.deallocate(_uselessEnd, 1); clear(); }
 
     inline map& operator= (const map& x);
 

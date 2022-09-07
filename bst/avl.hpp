@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 08:30:24 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/07 19:11:15 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ namespace ft {
     typedef ft::pair<key_type,mapped_type>		      value_type;
     typedef value_type *		                        pointer;
     typedef value_type &		                        reference;
-    typedef Compare																	key_compare_less;
-    typedef std::greater<Key>                       key_compare_greater;
-    typedef std::equal_to<Key>                      key_compare_equal;
+    typedef Compare																	key_compare;
     typedef Alloc																		allocator_type;
     typedef std::allocator<AVL>					            avl_allocator;
 
   private:
-    key_compare_less     _isLess;
-    key_compare_greater  _isGreater;
-    key_compare_equal    _isEqual;
+    key_compare          _comp;
     allocator_type       _alloc;
     avl_allocator        _avlAlloc;
     value_type           _p;
@@ -89,16 +85,8 @@ namespace ft {
     }
 
   /* ************************************** Getters ************************************** */
-    key_compare_less getLess() {
-      return _isLess;
-    }
-
-    key_compare_greater getGreater() {
-      return _isGreater;
-    }
-
-    key_compare_equal getEqual() {
-      return _isEqual;
+    key_compare getComp() {
+      return _comp;
     }
 
     value_type & getPair() {
@@ -351,7 +339,7 @@ namespace ft {
         element->_masterRoot = element;
         return element;   
       }
-      if (_isLess(p.first, root->_p.first)) {
+      if (_comp(p.first, root->_p.first)) {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
@@ -371,7 +359,6 @@ namespace ft {
           root->_right->_highEnd = root->_highEnd;
           root->_right->_highEnd->_highEnd = root->_highEnd;
           root->_right->_highEnd->_masterRoot = root->_masterRoot;
-          
         }
       }
 
@@ -380,9 +367,9 @@ namespace ft {
     }
 
     AVL * search(AVL * root, Key key) {
-      if (!root || _isEqual(key, root->_p.first))
+      if (!root || key == root->_p.first)
         return root;
-      if (_isLess(key, root->_p.first))
+      if (_comp(key, root->_p.first))
         return search(root->_left, key);
       else if (root == root->getHighestKey(_masterRoot))
         return NULL;
@@ -392,9 +379,9 @@ namespace ft {
     AVL * erase(AVL * root, Key key) {
       if (!root)
         return root;
-      if (_isLess(key, root->_p.first))
+      if (_comp(key, root->_p.first))
         root->_left = erase(root->_left, key);
-      else if (_isGreater(key, root->_p.first))
+      else if (!_comp(key, root->_p.first) && key != root->_p.first)
         root->_right  = erase(root->_right, key);
       else {
         root = checkChildrenAndErase(root);

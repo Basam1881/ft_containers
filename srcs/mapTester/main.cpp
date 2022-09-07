@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 08:30:48 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/07 19:13:45 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ bool  checkIterators() {
     ftmap.insert(ft::pair<int, int>(i, i * 10));
   for (int i = 0; i < 10; i++)
     stdmap.insert(std::pair<int, int>(i, i * 10));
+
   ft::map<int, int>::iterator ftit = ftmap.begin();
   std::map<int, int>::iterator stdit = stdmap.begin();
   
@@ -158,14 +159,17 @@ bool  checkReverseIterators() {
   ft::map<int, int>::reverse_iterator ftit = ftmap.rbegin();
   std::map<int, int>::reverse_iterator stdit = stdmap.rbegin();
 
-  for ( stdit = stdmap.rbegin(); stdit != stdmap.rend(); stdit++, ftit++)
+
+  for ( stdit = stdmap.rbegin(); stdit != stdmap.rend(); stdit++, ftit++) {
       if (ftit->first != stdit->first || ftit->second != stdit->second)
         return false;
+  }
   ftit--;
   stdit--;
-  for ( ; ftit != ftmap.rbegin(); ftit--, stdit--)
+  for ( ; ftit != ftmap.rbegin(); ftit--, stdit--) {
     if (ftit->first != stdit->first || ftit->second != stdit->second)
       return false;
+  }
   if ((*ftit).first != (*stdit).first || (*ftit).second != (*stdit).second)
     return false;
   
@@ -287,7 +291,7 @@ bool  checkModifiers() {
   fillMap< std::map<int, int>, std::pair<int, int> >(stdmap2, size);
   fillMap< ft::map<int, int>, ft::pair<int, int> >(ftmap3, size);
   fillMap< std::map<int, int>, std::pair<int, int> >(stdmap3, size);
-  
+
   for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++)
     if (ftmap1[ftit->first] != stdmap1[stdit->first])
       return false;
@@ -298,6 +302,10 @@ bool  checkModifiers() {
     if (ftmap3[ftit->first] != stdmap3[stdit->first])
       return false;
 
+  // for (ftit = ftmap1.begin(); ftit != ftmap1.end(); ftit++)
+  //   std::cout << ftit->first << " ";
+  // std::cout << std::endl;
+  // std::cout << "-------------------------\n";
   ftmap1.erase(ftmap1.begin());
   ftmap1.erase(ftmap1.begin());
   stdmap1.erase(stdmap1.begin());
@@ -316,12 +324,13 @@ bool  checkModifiers() {
   stdit++;
   ftmap3.erase(ftit, ftmap3.end());
   stdmap3.erase(stdit, stdmap3.end());
-  ftmap3.erase(ftmap3.begin(), ftmap3.end());
-  stdmap3.erase(stdmap3.begin(), stdmap3.end());
+  ftmap3.clear();
+  stdmap3.clear();
   
-  for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++)
+  for (ftit = ftmap1.begin(), stdit = stdmap1.begin(); ftit != ftmap1.end(); ftit++, stdit++) {
     if (ftmap1[ftit->first] != stdmap1[stdit->first])
       return false;
+  }
   for (ftit = ftmap2.begin(), stdit = stdmap2.begin(); ftit != ftmap2.end(); ftit++, stdit++)
     if (ftmap2[ftit->first] != stdmap2[stdit->first])
       return false;
