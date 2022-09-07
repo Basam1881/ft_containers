@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/05 19:19:42 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/07 08:52:15 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ namespace ft {
   inline typename map<Key, T, Compare, Alloc>::size_type    map<Key, T, Compare, Alloc>::erase (const typename map<Key, T, Compare, Alloc>::key_type& k) {
     if (_root->search(_root, k))
       _size--;
+    else
+      return 0;
     if (!_size)
       delete _root->getHighEnd();
     _root = _root->erase(_root, k);

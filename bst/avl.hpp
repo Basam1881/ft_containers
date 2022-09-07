@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/05 19:39:52 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/07 08:30:24 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ namespace ft {
         _left = rhs._left;
         _right = rhs._right;
         _height = rhs._height;
-        if (!_parent)
+        if (!_parent) {
           _masterRoot = this;
+          // updateMasterRoot(this->_left);
+          // updateMasterRoot(this);
+        }
         else
           _masterRoot = rhs._masterRoot;
         if (_highEnd)
@@ -232,11 +235,14 @@ namespace ft {
         AVL * tmpRoot = _avlAlloc.allocate(1);
         _avlAlloc.construct(tmpRoot, AVL(tmp->_p));
         *tmpRoot = *root;
-        if (root->_left)
+        if (root->_left) {
           root->_left->_parent = tmpRoot;
-        updateMasterRoot(root->_masterRoot);
-        freeMe(root);
+          root->_right->_parent = tmpRoot;
+        }
+        root = freeMe(root);
         root = tmpRoot;
+        if (root == root->_masterRoot)
+          updateMasterRoot(root);
         root->_right = erase(root->_right, tmp->_p.first);
       }
       return root;
@@ -390,8 +396,11 @@ namespace ft {
         root->_left = erase(root->_left, key);
       else if (_isGreater(key, root->_p.first))
         root->_right  = erase(root->_right, key);
-      else
+      else {
         root = checkChildrenAndErase(root);
+        // if (root == root->_masterRoot)
+        //   updateMasterRoot(root);
+      }
       root = balance(root, getBalanceFactor(getLeft(root)) < 0, getBalanceFactor(getRight(root)) > 0);
       return root;
     }
