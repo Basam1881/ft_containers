@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 10:01:23 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 13:36:22 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ namespace ft {
     typedef Alloc																												allocator_type;
     typedef ft::pair<const key_type,mapped_type>												value_type;
     typedef ft::AVL<const key_type, mapped_type, key_compare>			      avl_type;
+    typedef typename allocator_type::template rebind<avl_type>::other   avl_allocator_type;
+    typedef typename allocator_type::template rebind<key_type>::other   key_allocator_type;
     typedef typename allocator_type::reference													reference;
     typedef typename allocator_type::const_reference										const_reference;
     typedef typename allocator_type::pointer														pointer;
@@ -75,8 +77,6 @@ namespace ft {
       _uselessEnd = _avlAlloc.allocate(1);
       _avlAlloc.construct(_uselessEnd, avl_type());
       insert(first, last);
-      // for ( ; first != last; first++)
-      //   _root = _root->insert(_root, *first);
     }
 
     inline map (const map& x) : _root(NULL), _size(0), _comp(x._comp), _alloc(x._alloc), _avlAlloc(std::allocator<avl_type>()) {
@@ -177,9 +177,9 @@ namespace ft {
         size_type                       _size;
         key_compare                     _comp;
         allocator_type                  _alloc;
-        std::allocator<avl_type>        _avlAlloc;
+        avl_allocator_type              _avlAlloc;
+        key_allocator_type              _keyAlloc;
         avl_type *                      _uselessEnd;
-
   };
 }
 

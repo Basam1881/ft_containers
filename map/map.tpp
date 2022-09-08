@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 10:47:23 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 13:47:10 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <iostream>
 # include <sstream>
 # include <string>
+# include <limits>
 
 namespace ft {
   
@@ -90,11 +91,7 @@ namespace ft {
 
   template<class Key, class T, class Compare, class Alloc>
   inline typename map<Key, T, Compare, Alloc>::size_type                   map<Key, T, Compare, Alloc>::max_size() const {
-    // size_type t = std::numeric_limits<size_type>::max() / (sizeof(avl_type *)) * 2 / 10;
-    // return t; 
-    
-    // return (size_t)(-1) / sizeof(value_type);
-    return this->_alloc.max_size() / 5;
+    return std::numeric_limits<size_type>::max() / (sizeof(avl_type *)) * 2 / 10;
   }
 
 
@@ -125,7 +122,6 @@ namespace ft {
     std::ostringstream str;
     str << "map::_M_range_check: __n (which is " << k << ") >= this->size() (which is " << _size << ")";
     if (!tmp) throw std::out_of_range(str.str());
-    // std::cout << tmp->getPair().second << std::endl;
     return tmp->getPair().second;
   }
 
@@ -176,17 +172,21 @@ namespace ft {
   inline void map<Key, T, Compare, Alloc>::erase (map<Key, T, Compare, Alloc>::iterator first, map<Key, T, Compare, Alloc>::iterator last) {
     iterator f;
     size_type count;
+    size_type counttmp;
 
     if (!_size)
       return ;
     for ( count = 0, f = first; f != last; f++, count++);
-    key_type * keys = new key_type[count];
+    key_type * keys = _keyAlloc.allocate(count);
+    _keyAlloc.construct(keys, key_type());
 
-    for ( count = 0, f = first; f != last; f++, count++)
-      keys[count] = f.getNode()->getPair().first;
-    for (size_type cnt = 0; cnt < count; cnt++)
+
+    for ( counttmp = 0, f = first; f != last; f++, counttmp++)
+      keys[counttmp] = f.getNode()->getPair().first;
+    for (size_type cnt = 0; cnt < counttmp; cnt++)
       erase(keys[cnt]);
-    delete[] keys;
+    
+    _keyAlloc.deallocate(keys, count);
   }
 
   template<class Key, class T, class Compare, class Alloc>

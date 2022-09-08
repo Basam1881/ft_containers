@@ -6,14 +6,12 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 11:53:52 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 09:56:18 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 13:37:35 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
-
-// #include "../algorithms/distance.hpp"
 
 namespace ft {
   template <class Iterator>

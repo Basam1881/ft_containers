@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 09:24:24 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 11:43:30 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ namespace ft
 	{
 
 		public:
-    
+
       /* ************************************** Types ************************************** */
 			typedef T																														value_type;
 			typedef Alloc																												allocator_type;
@@ -39,12 +39,12 @@ namespace ft
 			typedef typename ft::reverse_iterator<const_iterator>               const_reverse_iterator;
 			typedef ptrdiff_t																										difference_type;
 			typedef size_t																											size_type;
-			
+
       /* ************************************** Constructors ************************************** */
 			inline explicit vector (const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(0), _capacity(0)
       {}
-      
+
 			inline explicit vector (size_type n, const value_type & val = value_type()
         , const allocator_type & alloc = allocator_type())
           : _alloc(alloc), _arr(NULL), _size(n), _capacity(n)
