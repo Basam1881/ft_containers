@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 19:11:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 10:45:49 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ namespace ft {
     allocator_type       _alloc;
     avl_allocator        _avlAlloc;
     value_type           _p;
-    AVL                  *_highEnd;
     AVL                  *_masterRoot;
     AVL                  *_parent;
     AVL                  *_left;
@@ -48,17 +47,17 @@ namespace ft {
 
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(), _highEnd(NULL), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     {}
 
     AVL(value_type p) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(p), _highEnd(NULL), _masterRoot(this), _parent(NULL), _left(NULL),
+        _avlAlloc(avl_allocator()), _p(p), _masterRoot(this), _parent(NULL), _left(NULL),
         _right(NULL), _height(0)
     {}
 
     AVL(AVL const & src) : _alloc(allocator_type()),
-        _avlAlloc(avl_allocator()), _p(src._p), _highEnd(NULL), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _p(src._p), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     { *this = src; }
 
@@ -66,20 +65,14 @@ namespace ft {
       if ( this != &rhs ) {
         _alloc = rhs._alloc;
         _avlAlloc = rhs._avlAlloc;
-        _highEnd = rhs._highEnd;
         _parent = rhs._parent;
         _left = rhs._left;
         _right = rhs._right;
         _height = rhs._height;
-        if (!_parent) {
+        if (!_parent)
           _masterRoot = this;
-          // updateMasterRoot(this->_left);
-          // updateMasterRoot(this);
-        }
         else
           _masterRoot = rhs._masterRoot;
-        if (_highEnd)
-          _highEnd->_masterRoot = _masterRoot;
       }
       return *this;
     }
@@ -95,14 +88,6 @@ namespace ft {
 
     value_type * getPairPointer() {
       return &_p;
-    }
-
-    AVL * getHighEnd() {
-      return _highEnd;
-    }
-
-    void setHighEnd(AVL * highEnd) {
-      _highEnd = highEnd;
     }
 
     AVL * getMasterRoot() {
@@ -254,9 +239,9 @@ namespace ft {
       else
         std::cout << "NULL" << " ) - ( masterRoot - ";
       if (root->_masterRoot)
-        std::cout << root->_masterRoot->_p.first << " ) - ( highEnd - " << _highEnd << " )" << std::endl;
+        std::cout << root->_masterRoot->_p.first << " )" << std::endl;
       else
-        std::cout << "NULL ) - ( highEnd - " << _highEnd << " )" << std::endl;
+        std::cout << "NULL )" << std::endl;
       printAll(root->_left);
       printAll(root->_right);
     }
@@ -276,7 +261,6 @@ namespace ft {
       
       if (root->_masterRoot == root) {
         left->_masterRoot = left;
-        left->_highEnd->_masterRoot = left;
         updateMasterRoot(left);
       }
 
@@ -300,7 +284,6 @@ namespace ft {
 
       if (root->_masterRoot == root) {
         right->_masterRoot = right;
-        right->_highEnd->_masterRoot = right;
         updateMasterRoot(right);
       }
 
@@ -334,8 +317,6 @@ namespace ft {
       if (!root) {
         AVL * element = _avlAlloc.allocate(1);
         _avlAlloc.construct(element, AVL(p));
-        element->_highEnd = _avlAlloc.allocate(1);
-        _avlAlloc.construct(element->_highEnd, AVL());
         element->_masterRoot = element;
         return element;   
       }
@@ -343,23 +324,11 @@ namespace ft {
         root->_left = insert(root->_left, p);
         root->_left->_parent = root;
         root->_left->_masterRoot = root->_masterRoot;
-        if (root->_left->_p.first == p.first) {
-          root->freeMe(root->_left->_highEnd);
-          root->_left->_highEnd = root->_highEnd;
-          root->_left->_highEnd->_highEnd = root->_highEnd;
-          root->_left->_highEnd->_masterRoot = root->_masterRoot;
-        }
       }
       else {
         root->_right = insert(root->_right, p);
         root->_right->_parent = root;
         root->_right->_masterRoot = root->_masterRoot;
-        if (root->_right->_p.first == p.first) {
-          root->freeMe(root->_right->_highEnd);
-          root->_right->_highEnd = root->_highEnd;
-          root->_right->_highEnd->_highEnd = root->_highEnd;
-          root->_right->_highEnd->_masterRoot = root->_masterRoot;
-        }
       }
 
       root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
@@ -383,11 +352,8 @@ namespace ft {
         root->_left = erase(root->_left, key);
       else if (!_comp(key, root->_p.first) && key != root->_p.first)
         root->_right  = erase(root->_right, key);
-      else {
+      else
         root = checkChildrenAndErase(root);
-        // if (root == root->_masterRoot)
-        //   updateMasterRoot(root);
-      }
       root = balance(root, getBalanceFactor(getLeft(root)) < 0, getBalanceFactor(getRight(root)) > 0);
       return root;
     }

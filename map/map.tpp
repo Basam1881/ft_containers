@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 09:09:48 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 20:02:15 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 10:47:23 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ namespace ft {
   inline typename map<Key, T, Compare, Alloc>::size_type                   map<Key, T, Compare, Alloc>::max_size() const {
     // size_type t = std::numeric_limits<size_type>::max() / (sizeof(avl_type *)) * 2 / 10;
     // return t; 
+    
     // return (size_t)(-1) / sizeof(value_type);
     return this->_alloc.max_size() / 5;
   }
@@ -165,10 +166,8 @@ namespace ft {
       _size--;
     else
       return 0;
-    if (!_size) {
-      delete _root->getHighEnd();
+    if (!_size)
       _root = NULL;
-    }
     _root = _root->erase(_root, k);
     return 1;
   }

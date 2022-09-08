@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/01 13:55:28 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 10:20:21 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ namespace ft {
       else
         ft::copy(rhs.begin(), rhs.end(), begin(), _alloc);
       _size = rhs._size;
-    } 
+    }
     return *this;
   }
 
@@ -34,7 +34,7 @@ namespace ft {
   inline typename vector<T, Alloc>::iterator                  vector<T, Alloc>::begin() { 
     return iterator(_arr);
   }
-  
+
   template < class T, class Alloc>
   inline typename vector<T, Alloc>::const_iterator            vector<T, Alloc>::begin() const {
     return const_iterator(_arr);
@@ -213,8 +213,6 @@ namespace ft {
 
   template < class T, class Alloc>
   inline typename vector<T, Alloc>::iterator             vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position, const typename vector<T, Alloc>::value_type& val) {
-    // (void)position;
-    // (void)val;
     if (_size == _capacity)
       position = storePositionAndReserve(*this, position, 1, _capacity * 2);
     _size++;
@@ -298,8 +296,11 @@ namespace ft {
   /* ************************************** Vector utils ************************************** */
   template < class T, class Alloc>
   inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, const typename vector<T, Alloc>::value_type & val) {
-    if (n)
+    if (n) {
       _arr = _alloc.allocate(n);
+      for (size_type i = 0; i < n; i++) 
+        v._alloc.construct(v._arr + i, value_type());
+    }
     for (size_t i = 0; i < n; i++)
       v.get_allocator().construct(v.begin().base() + i, val);
   }
@@ -307,22 +308,28 @@ namespace ft {
   template < class T, class Alloc>
   template < class InputIterator>
   inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, InputIterator first, InputIterator last) {
-    if (n) 
+    if (n){
       v._arr = v.get_allocator().allocate(n);
+      for (size_type i = 0; i < n; i++) 
+        v._alloc.construct(v._arr + i, value_type());
+    }
     ft::copy(first, last, v.begin(), v.get_allocator());
   }
 
   template < class T, class Alloc>
   template < class InputIterator>
   inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type const & n, const InputIterator first, const InputIterator last) {
-    if (n) 
+    if (n) {
       v._arr = v.get_allocator().allocate(n);
+      for (size_type i = 0; i < n; i++) 
+        v._alloc.construct(v._arr + i, value_type());
+    }
     ft::copy(first, last, v.begin(), v.get_allocator());
   }
 
   template < class T, class Alloc>
   inline void                   vector<T, Alloc>::clearMe(vector<T, Alloc> & v) {
-    if (_capacity) {
+    if (v._capacity) {
       for (iterator it = v.begin(); it != v.end(); it++)
         v._alloc.destroy(it.base());
       v._alloc.deallocate(v.begin().base(), v.capacity());

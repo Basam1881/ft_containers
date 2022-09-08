@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 18:41:49 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 10:01:23 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ namespace ft {
     typedef typename allocator_type::const_reference										const_reference;
     typedef typename allocator_type::pointer														pointer;
     typedef typename allocator_type::const_pointer											const_pointer;
-    typedef typename ft::iterator<ft::bidirectional_iterator_tag,
+    typedef typename ft::MapIterator<ft::bidirectional_iterator_tag,
                                             value_type, key_compare>    iterator;
-    typedef typename ft::iterator<ft::bidirectional_iterator_tag,
+    typedef typename ft::MapIterator<ft::bidirectional_iterator_tag,
                                       const value_type, key_compare>    const_iterator;
     typedef typename ft::reverse_iterator<iterator>                     reverse_iterator;
     typedef typename ft::reverse_iterator<const_iterator>               const_reverse_iterator;

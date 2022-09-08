@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 11:53:52 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 19:17:30 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 09:56:18 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ namespace ft {
       reference                 operator * () const { iterator_type tmp = _it; return *(--tmp); }
       pointer                   operator -> () const { return &(operator*()); }
 
-      operator reverse_iterator<iterator<iterator_category, const value_type> >() { return reverse_iterator<iterator<iterator_category, const value_type> >(this->base()); }
+      operator reverse_iterator<const Iterator>() { return reverse_iterator<const Iterator>(this->base()); }
 
       reference                 operator [] (difference_type n) const { return _it.base()[-n-1]; } 
 

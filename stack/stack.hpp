@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/28 14:49:52 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/08 08:09:44 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ namespace ft
       template <class T1, class Container1>
       friend bool operator>= (const stack<T1,Container1>& lhs, const stack<T1,Container1>& rhs);
       
-		private:
+		protected:
 			container_type	_container;
 	};
 
