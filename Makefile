@@ -66,7 +66,7 @@ OBJ_DIR = objs/
 CXX = c++ -g
 
 # Compilation flags
-CXX_FLAGS = -Wall -Wextra -Werror -std=c++98
+CXX_FLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 
 # Vector Executable file's name
 VNAME = ftvector

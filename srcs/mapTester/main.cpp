@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/07 19:13:45 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/09 12:16:54 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #include <string>
 #include <functional>
 #include <map>
+#include <vector>
 #include "../../map/map.hpp"
+#include "../../vector/vector.hpp"
 #include "../../bst/avl.hpp"
 #include "limits.h"
 #include <sys/time.h>
@@ -412,6 +414,39 @@ bool  checkExceptions() {
   return false;
 }
 
+bool checkNestedMapVector() {
+  // FT
+  ft::map<int, int> mp1;
+  mp1.insert(ft::pair<int, int>(1, 10));
+  ft::vector<std::string> v1(1, "V1");
+  ft::vector<ft::map<int, int> > v2(1, mp1);
+  ft::map<std::string, std::string> mp2;
+  mp2.insert(ft::pair<std::string, std::string>("1", "10"));
+  ft::map<ft::vector<std::string>, ft::vector<ft::map<int, int> > > mp3;
+  mp3.insert(ft::pair<ft::vector<std::string>, ft::vector<ft::map<int, int> > >(v1, v2));
+
+  ft::map<ft::map<std::string, std::string>, ft::map<ft::vector<std::string>, ft::vector<ft::map<int, int> > > > mp;
+  mp.insert(ft::pair<ft::map<std::string, std::string>, ft::map<ft::vector<std::string>, ft::vector<ft::map<int, int> > > >(mp2, mp3));
+
+  // STD
+  std::map<int, int> smp1;
+  smp1.insert(std::pair<int, int>(1, 10));
+  std::vector<std::string> sv1(1, "V1");
+  std::vector<std::map<int, int> > sv2(1, smp1);
+  std::map<std::string, std::string> smp2;
+  smp2.insert(std::pair<std::string, std::string>("1", "10"));
+  std::map<std::vector<std::string>, std::vector<std::map<int, int> > > smp3;
+  smp3.insert(std::pair<std::vector<std::string>, std::vector<std::map<int, int> > >(sv1, sv2));
+
+  std::map<std::map<std::string, std::string>, std::map<std::vector<std::string>, std::vector<std::map<int, int> > > > smp;
+  smp.insert(std::pair<std::map<std::string, std::string>, std::map<std::vector<std::string>, std::vector<std::map<int, int> > > >(smp2, smp3));
+
+  if (mp[mp2][v1][0][1] != smp[smp2][sv1][0][1] || mp[mp2].find(v1)->first[0] != smp[smp2].find(sv1)->first[0])
+    return false;
+
+  return true;
+}
+
 int main() {
   std::cout << PURPLE << "checkPerformace:" << RESET << std::endl;
   checkPerformace();
@@ -448,4 +483,7 @@ int main() {
 
   std::cout << PURPLE << "checkExceptions:" << RESET;
   checkExceptions() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
+
+  std::cout << PURPLE << "checkNestedMapVector:" << RESET;
+  checkNestedMapVector() ? std::cout << GREEN <<" OK" << RESET << std::endl : std::cout << RED <<" KO" << RESET << std::endl;
 }

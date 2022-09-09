@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 10:28:43 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/09 19:45:30 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ namespace ft
       reference                 operator * () const { return this->_node->getPair(); }
       pointer                   operator -> () const { return this->_node->getPairPointer(); }
 
-      template <class Iterator1, class Iterator2>
+      template <class Iterator1, class Iterator2> 
       friend bool operator== ( const Iterator1 & lhs, const Iterator2 & rhs);
 
       template <class Iterator1, class Iterator2>

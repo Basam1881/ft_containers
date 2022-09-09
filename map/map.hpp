@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 13:36:22 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/09 20:16:17 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ namespace ft {
       *this = x;
     }
     
-    inline ~map() { _avlAlloc.deallocate(_uselessEnd, 1); clear(); }
-
+    inline ~map() { clear(); _avlAlloc.destroy(_uselessEnd); _avlAlloc.deallocate(_uselessEnd, 1); }
+  
     inline map& operator= (const map& x);
 
 

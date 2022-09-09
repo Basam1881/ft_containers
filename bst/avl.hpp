@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 10:45:49 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/09 10:25:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ namespace ft {
 
   /* ************************************** Constructors ************************************** */
     AVL(allocator_type alloc = allocator_type()) : _alloc(alloc),
-        _avlAlloc(avl_allocator()), _p(), _masterRoot(this), _parent(NULL),
+        _avlAlloc(avl_allocator()), _masterRoot(this), _parent(NULL),
         _left(NULL), _right(NULL), _height(0)
     {}
 
@@ -164,23 +164,19 @@ namespace ft {
 
   /* ************************************** Utils ************************************** */
     AVL * freeMe(AVL * root) {
+      root->_avlAlloc.destroy(root);
       root->_avlAlloc.deallocate(root, 1);
       return NULL;
     }
 
     AVL * replace(AVL * dst, AVL * src) {
-      AVL * tmpDst = _avlAlloc.allocate(1);
-      _avlAlloc.construct(tmpDst, AVL(src->_p));
-      *tmpDst = *src;
-      tmpDst->_parent = dst->_parent;
-      if (!tmpDst->_parent)
-        tmpDst->_masterRoot = tmpDst;
+      src->_parent = dst->_parent;
+      if (!src->_parent)
+        src->_masterRoot = src;
       else
-        tmpDst->_masterRoot = dst->_masterRoot;
+        src->_masterRoot = dst->_masterRoot;
       dst = freeMe(dst);
-      src = freeMe(src);
-      dst = tmpDst;
-      return dst;
+      return src;
     }
 
     void updateHeight(AVL * root) {

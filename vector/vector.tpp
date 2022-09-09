@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 13:53:25 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/09 19:24:29 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,9 +257,14 @@ namespace ft {
   template < class T, class Alloc>
   inline typename vector<T, Alloc>::iterator            vector<T, Alloc>::erase (typename vector<T, Alloc>::iterator first, typename vector<T, Alloc>::iterator last) {
     size_type size = ft::distance(first, last);
+    if (!size) return first;
     ft::copy(last, end(), first);
-    for (size_type i = 0; i < size; i++)
-      _alloc.destroy(_arr + _size - i);
+    // std::cout <<"->"<< size <<std::endl;
+    for ( iterator it = end() - size; it != end(); it++) {
+      // std::cout << size <<std::endl;
+      _alloc.destroy(it.base());
+    }
+    // std::cout << "---" <<std::endl;
     _size -= size;
     return first;
   }
@@ -284,8 +289,11 @@ namespace ft {
 
   template < class T, class Alloc>
   inline void              vector<T, Alloc>::clear() {
-    for (size_type i = _size; i > 0; i--, _size--)
-      _alloc.destroy(_arr + i);
+    // for (size_type i = _size; i > 0; i--, _size--)
+    //   _alloc.destroy(_arr + i);
+    for (iterator it = begin(); it != end(); it++)
+        _alloc.destroy(it.base());
+    _size = 0;
   }
 
   /* ************************************** Allocator ************************************** */
@@ -298,11 +306,12 @@ namespace ft {
   inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, const typename vector<T, Alloc>::value_type & val) {
     if (n) {
       _arr = _alloc.allocate(n);
-      for (size_type i = 0; i < n; i++) 
-        v._alloc.construct(v._arr + i, value_type());
+      for (size_type i = 0; i < n; i++) {
+        v._alloc.construct(v._arr + i, val);
+      }
     }
-    for (size_t i = 0; i < n; i++)
-      v.get_allocator().construct(v.begin().base() + i, val);
+    // for (size_type i = 0; i < n; i++)
+    //   v.get_allocator().construct(v.begin().base() + i, val);
   }
 
   template < class T, class Alloc>
@@ -313,7 +322,7 @@ namespace ft {
       for (size_type i = 0; i < n; i++) 
         v._alloc.construct(v._arr + i, value_type());
     }
-    ft::copy(first, last, v.begin(), v.get_allocator());
+    ft::copy(first, last, v.begin());
   }
 
   template < class T, class Alloc>
@@ -324,7 +333,7 @@ namespace ft {
       for (size_type i = 0; i < n; i++) 
         v._alloc.construct(v._arr + i, value_type());
     }
-    ft::copy(first, last, v.begin(), v.get_allocator());
+    ft::copy(first, last, v.begin());
   }
 
   template < class T, class Alloc>

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:26 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 08:54:06 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/09 10:03:01 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ bool  vectorExceptionTest6(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest7(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.assing(size_t, val)                    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.assign(size_t, val)                    : " << RESET;
   
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);
