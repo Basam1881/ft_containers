@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:52:50 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/09 12:16:54 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:55:00 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@
 #include <vector>
 #include "../../map/map.hpp"
 #include "../../vector/vector.hpp"
-#include "../../bst/avl.hpp"
-#include "limits.h"
-#include <sys/time.h>
-
-#include "../../algorithms/pair.hpp"
-#include "../../algorithms/pair.hpp"
-#include "../../bst/avl.hpp"
 #include "../PerformanceChecker.hpp"
 
 
@@ -304,10 +297,6 @@ bool  checkModifiers() {
     if (ftmap3[ftit->first] != stdmap3[stdit->first])
       return false;
 
-  // for (ftit = ftmap1.begin(); ftit != ftmap1.end(); ftit++)
-  //   std::cout << ftit->first << " ";
-  // std::cout << std::endl;
-  // std::cout << "-------------------------\n";
   ftmap1.erase(ftmap1.begin());
   ftmap1.erase(ftmap1.begin());
   stdmap1.erase(stdmap1.begin());

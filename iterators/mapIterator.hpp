@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 10:14:34 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/09 19:45:30 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 17:24:50 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,41 @@
 
 namespace ft
 {
-  template <class Category, class T, class Compare = std::less<typename T::first_type>, class Distance = std::ptrdiff_t,
-	  	class Pointer = T*, class Reference = T&>
+  template <class Category, class T, class Compare = std::less<typename T::first_type>,
+    class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
 	class MapIterator
 	{
     public:
-      typedef T                                                                                                 value_type;
-      typedef Compare                                                                                           key_compare;
-      typedef ft::AVL<typename value_type::first_type, typename value_type::second_type, key_compare>           avl_type;
-      typedef Distance                                                                                          difference_type;
-      typedef Pointer                                                                                           pointer;
-      typedef Reference                                                                                         reference;
-      typedef Category                                                                                          iterator_category;
+      typedef T                                                          value_type;
+      typedef Compare                                                    key_compare;
+      typedef ft::AVL<typename value_type::first_type,
+                      typename value_type::second_type, key_compare>     avl_type;
+      typedef Distance                                                   difference_type;
+      typedef Pointer                                                    pointer;
+      typedef Reference                                                  reference;
+      typedef Category                                                   iterator_category;
 
       MapIterator() : _node(NULL), _Highest(NULL), _lowest(NULL), _End(NULL) {}
-      MapIterator(avl_type * node, avl_type * highEnd, avl_type * masterRoot) : _node(node), _End(highEnd), _masterRoot(masterRoot) {
+
+      MapIterator(avl_type * node, avl_type * highEnd, avl_type * masterRoot) 
+      : _node(node), _End(highEnd), _masterRoot(masterRoot) {
         if (_node && _masterRoot) {
           _lowest = _node->getLowestKey(_masterRoot);
           _Highest = _node->getHighestKey(_masterRoot);
         }
       }
-      MapIterator (MapIterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) { *this = src; }
-      ~MapIterator() {}
-
-      avl_type *              getNode () const { return _node; }
       
-      avl_type *              base () const { return _node; }
+      MapIterator (MapIterator const & src) : _node(NULL), _Highest(NULL), _lowest(NULL) {
+        *this = src;
+      }
 
-      avl_type *              getHighEnd () const { return _End; }
+      ~MapIterator() {}
+      
+      avl_type *  base () const {
+        return _node;
+      }
 
-
-      MapIterator &		            operator = ( MapIterator const & rhs ) {
+      MapIterator & operator = ( MapIterator const & rhs ) {
         if (this != &rhs && _node != rhs._node) {
           _node  = rhs._node;
           _lowest = rhs._lowest;
@@ -69,42 +73,43 @@ namespace ft
         return *this;
       }
 
-      MapIterator &                operator ++ () {
-        if (this->_node == _End)
-          _node = _lowest;
-        else
+      MapIterator & operator ++ () {
+        if (checkIfIncrementOrDecrement(true))
           _increment();
         return *this;
       }
-      MapIterator                  operator ++ (int) {
+
+      MapIterator operator ++ (int) {
         MapIterator tmp(*this);
-        if (this->_node == _End)
-          _node = _lowest;
-        else
+        if (checkIfIncrementOrDecrement(true))
           _increment();
         return (tmp);  
       }
 
-      MapIterator &                operator -- () {
-        if (this->_node == _End)
-          _node = _Highest;
-        else
+      MapIterator & operator -- () {
+        if (checkIfIncrementOrDecrement(false))
           _decrement();
         return *this;
       }
-      MapIterator                  operator -- (int) {
+
+      MapIterator operator -- (int) {
         MapIterator tmp(*this);
-        if (this->_node == _End)
-          _node = _Highest;
-        else
+        if (checkIfIncrementOrDecrement(false))
           _decrement();
         return (tmp);
       }
 
-      operator                  MapIterator<Category, const value_type, key_compare>() { return MapIterator<Category, const value_type, key_compare>(_node, _End, _masterRoot); }
+      operator  MapIterator<Category, const value_type, key_compare>() {
+        return MapIterator<Category, const value_type, key_compare>(_node, _End, _masterRoot);
+      }
 
-      reference                 operator * () const { return this->_node->getPair(); }
-      pointer                   operator -> () const { return this->_node->getPairPointer(); }
+      reference operator * () const {
+        return this->_node->getPair();
+      }
+
+      pointer operator -> () const {
+        return this->_node->getPairPointer();
+      }
 
       template <class Iterator1, class Iterator2> 
       friend bool operator== ( const Iterator1 & lhs, const Iterator2 & rhs);
@@ -119,40 +124,53 @@ namespace ft
       avl_type *                             _End;
       avl_type *                             _masterRoot;
 
-      void        _increment() {
-        if (_node == _Highest)
-          _node = _End;
-        else if (_node == _End)
-          _node = NULL;
-        else if (_node->getRight()) {
+      void  _increment() {
+        if (_node->getRight()) {
           _node = _node->getRight();
           while (_node->getLeft())
             _node = _node->getLeft();
         }
         else if (_node->getParent()) {
-          while (_node->getComp()(_node->getParent()->getPair().first, _node->getPair().first))
+          while (_node->getComp()(_node->getParent()
+            ->getPair().first, _node->getPair().first))
             _node = _node->getParent();
           _node = _node->getParent();
         }
       }
 
-      void        _decrement() {
-        if (_node == _lowest)
-          _node = _End;
-        else if (_node == _End)
-          _node = NULL;
-        else if (_node->getLeft()) {
+      void  _decrement() {
+        if (_node->getLeft()) {
           _node = _node->getLeft();
           while (_node->getRight())
             _node = _node->getRight();
         }
         else if (_node->getParent()) {
-          while (!_node->getComp()(_node->getParent()->getPair().first, _node->getPair().first)) {
+          while (!_node->getComp()(_node->getParent()
+            ->getPair().first, _node->getPair().first))
             _node = _node->getParent();
-          }
           if (_node->getParent())
             _node = _node->getParent();
         }
+      }
+
+      bool  checkIfIncrementOrDecrement(bool isIncrement) {
+        if (isIncrement) {
+          if (_node == _End)
+            _node = _lowest;
+          else if (_node == _Highest)
+            _node = _End;
+          else
+            return true;
+        }
+        else {
+          if (_node == _End)
+            _node = _Highest;
+          else if (_node == _lowest)
+            _node = _End;
+          else
+            return true;
+        }
+        return false;
       }
 	};
 }

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 12:08:41 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/26 09:02:46 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 16:43:38 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ std::ostream &			operator<<( std::ostream & o, PerformanceChecker const & i )
 {
   o << PURPLE << "  Time measured (1) : " << std::setprecision(5) << std::fixed << YELLOW << i.getElapsedFirst() * 1e+6 << WHITE << " Ms" << RESET << std::endl;
   o << PURPLE << "  Time measured (2) : " << std::setprecision(5) << std::fixed << YELLOW << i.getElapsedSecond() * 1e+6 << WHITE << " Ms" << RESET << std::endl;
-  o << PURPLE << "  Faster by         : " << std::setprecision(5) << std::fixed << YELLOW << i.getElapsedSecond() / i.getElapsedFirst() << WHITE << " (ft_v/v)" << RESET<< std::endl;
-  o << PURPLE << "  Slower by         : " << std::setprecision(5) << std::fixed << YELLOW << i.getElapsedFirst() / i.getElapsedSecond() << WHITE << " (v/ft_v)" << RESET<< std::endl;
+  if (i.getElapsedSecond() / i.getElapsedFirst() >= 1)
+    o << PURPLE << "  Faster by         : " << std::setprecision(5) << std::fixed << YELLOW << i.getElapsedSecond() / i.getElapsedFirst() << WHITE << " (ft_v/v)" << RESET<< std::endl;
+  else
+    o << PURPLE << "  Slower by         : " << std::setprecision(5) << std::fixed << YELLOW << i.getElapsedFirst() / i.getElapsedSecond() << WHITE << " (v/ft_v)" << RESET<< std::endl;
 	return o;
 }
 

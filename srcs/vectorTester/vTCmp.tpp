@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTCmp.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:39:23 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:36:31 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:48:29 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,14 @@ bool  cmpBasicPerformance(size_t testnum, bool printAllTests, T value) {
   struct timeval begin, end;
   static double elapsed, elapsed1;
   if (printAllTests) {
-    std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed * 1e+6 << WHITE << " Ms" << RESET << std::endl;
-    std::cout << PURPLE << "Time measured : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 * 1e+6 << WHITE << " Ms" << RESET << std::endl;
-    std::cout << PURPLE << "Faster by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed / elapsed1 << WHITE << " (ft_v/v)" << RESET<< std::endl;
-    std::cout << PURPLE << "Slower by     : " << std::setprecision(5) << std::fixed << YELLOW << elapsed1 / elapsed << WHITE << " (v/ft_v)" << RESET<< std::endl;
+    std::cout << PURPLE << "Time measured : " << std::setprecision(5)
+      << std::fixed << YELLOW << elapsed * 1e+6 << WHITE << " Ms" << RESET << std::endl;
+    std::cout << PURPLE << "Time measured : " << std::setprecision(5)
+      << std::fixed << YELLOW << elapsed1 * 1e+6 << WHITE << " Ms" << RESET << std::endl;
+    std::cout << PURPLE << "Faster by     : " << std::setprecision(5)
+      << std::fixed << YELLOW << elapsed / elapsed1 << WHITE << " (ft_v/v)" << RESET<< std::endl;
+    std::cout << PURPLE << "Slower by     : " << std::setprecision(5)
+      << std::fixed << YELLOW << elapsed1 / elapsed << WHITE << " (v/ft_v)" << RESET<< std::endl;
     return true;
   }
   gettimeofday(&begin, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTCRIterators.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 19:03:30 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:36:23 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:48:50 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include <string>
 #include "vectorTests.hpp"
 
-bool  vectorConstReverseIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.rbegin()                               : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.rbegin()                               : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it(ft_v.rbegin());
   std::vector<int>::const_reverse_iterator it(v.rbegin());
   if (*it == *ft_it) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -25,9 +27,11 @@ bool  vectorConstReverseIteratorsTest1(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest2(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.rend()                                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.rend()                                 : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it(ft_v.rend() - 1);
   std::vector<int>::const_reverse_iterator it(v.rend() - 1);
   if (*ft_it == *it) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -36,9 +40,11 @@ bool  vectorConstReverseIteratorsTest2(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : const_reverse_iterator(const_reverse_iterator)     : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : const_reverse_iterator(const_reverse_iterator)     : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it(ft_v.rbegin() + testnum);
   std::vector<int>::const_reverse_iterator it(v.rbegin() + testnum);
   if (*ft_it == *it) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -47,9 +53,11 @@ bool  vectorConstReverseIteratorsTest3(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest4(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_reverse_iterator.operator=()    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_reverse_iterator.operator=()    : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it;
   ft_it = ft_v.rbegin() + testnum;
   std::vector<int>::const_reverse_iterator it;
@@ -60,9 +68,11 @@ bool  vectorConstReverseIteratorsTest4(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_reverse_iterator.operator+()    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_reverse_iterator.operator+()    : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it;
   ft_it = ft_v.rbegin() + testnum;
   std::vector<int>::const_reverse_iterator it;
@@ -73,9 +83,11 @@ bool  vectorConstReverseIteratorsTest5(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest6(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_reverse_iterator.operator-()    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_reverse_iterator.operator-()    : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it;
   ft_it = ft_v.rend() - (ft_v.size() - testnum);
   std::vector<int>::const_reverse_iterator it;
@@ -86,9 +98,11 @@ bool  vectorConstReverseIteratorsTest6(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_reverse_iterator.operator+=()   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_reverse_iterator.operator+=()   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rbegin();
   ft_it += testnum;
   std::vector<int>::const_reverse_iterator it = v.rbegin();
@@ -99,9 +113,11 @@ bool  vectorConstReverseIteratorsTest7(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest8(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_reverse_iterator.operator-=()   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_reverse_iterator.operator-=()   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rend();
   ft_it -= (ft_v.size() - testnum);
   std::vector<int>::const_reverse_iterator it = v.rend();
@@ -112,9 +128,11 @@ bool  vectorConstReverseIteratorsTest8(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_reverse_iterator.operator++()   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_reverse_iterator.operator++()   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rbegin();
   ++ft_it;
   std::vector<int>::const_reverse_iterator it = v.rbegin();
@@ -125,9 +143,11 @@ bool  vectorConstReverseIteratorsTest9(std::vector<int> & v, ft::vector<int> & f
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest10(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_rev_iterator.operator++(int)   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_rev_iterator.operator++(int)   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rbegin();
   ft_it++;
   std::vector<int>::const_reverse_iterator it = v.rbegin();
@@ -138,9 +158,11 @@ bool  vectorConstReverseIteratorsTest10(std::vector<int> & v, ft::vector<int> & 
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest11(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_rev_iterator.operator--()      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_rev_iterator.operator--()      : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rend();
   --ft_it;
   std::vector<int>::const_reverse_iterator it = v.rend();
@@ -151,9 +173,11 @@ bool  vectorConstReverseIteratorsTest11(std::vector<int> & v, ft::vector<int> & 
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest12(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_rev_iterator.operator--(int)   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_rev_iterator.operator--(int)   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rend();
   ft_it--;
   std::vector<int>::const_reverse_iterator it = v.rend();
@@ -164,9 +188,11 @@ bool  vectorConstReverseIteratorsTest12(std::vector<int> & v, ft::vector<int> & 
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest13(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::const_rev_iterator.operator[]()      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::const_rev_iterator.operator[]()      : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rbegin();
   std::vector<int>::const_reverse_iterator it = v.rbegin();
   if (ft_it[testnum] == it[testnum]) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -175,9 +201,11 @@ bool  vectorConstReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & 
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest14(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : constRevIterator = ptrdiff_t + constRevIterator   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : constRevIterator = ptrdiff_t + constRevIterator   : " << RESET;
   ft::vector<int>::const_reverse_iterator ft_it = ft_v.rbegin();
   ft_it = testnum + ft_it;
   std::vector<int>::const_reverse_iterator it = v.rbegin();
@@ -188,9 +216,11 @@ bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & 
   return test;
 }
 
-bool  vectorConstReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorConstReverseIteratorsTest15(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ptrdiff_t = constRevIterator - constRevIterator   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ptrdiff_t = constRevIterator - constRevIterator   : " << RESET;
   size_t mt;
   ft::vector<int>::const_reverse_iterator ft_it1 = ft_v.rbegin();
   ft::vector<int>::const_reverse_iterator ft_it2 = ft_v.rend();

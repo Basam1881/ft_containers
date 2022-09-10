@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 12:59:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/09 10:25:51 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 16:51:56 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,7 +327,8 @@ namespace ft {
         root->_right->_masterRoot = root->_masterRoot;
       }
 
-      root = balance(root, p.first > getLeftKey(root, _p.first), p.first < getRightKey(root, _p.first));
+      root = balance(root, p.first > getLeftKey(root, _p.first),
+        p.first < getRightKey(root, _p.first));
       return root;
     }
 
@@ -350,7 +351,8 @@ namespace ft {
         root->_right  = erase(root->_right, key);
       else
         root = checkChildrenAndErase(root);
-      root = balance(root, getBalanceFactor(getLeft(root)) < 0, getBalanceFactor(getRight(root)) > 0);
+      root = balance(root, getBalanceFactor(getLeft(root)) < 0,
+        getBalanceFactor(getRight(root)) > 0);
       return root;
     }
   };

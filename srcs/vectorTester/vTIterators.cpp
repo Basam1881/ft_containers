@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTIterators.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 18:35:18 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:35:45 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:49:59 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,33 @@
 #include <string>
 #include "vectorTests.hpp"
 
-bool  vectorIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.begin()                                : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.begin()                                : " << RESET;
   if (*ft_v.begin() == *v.begin()) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
   else std::cout << RED << "KO" << RESET << std::endl;
   if (!test || printAllTests) printVecIters<int>(*ft_v.begin(), *v.begin());
   return test;
 }
 
-bool  vectorIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest2(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.end()                                  : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.end()                                  : " << RESET;
   if (*--ft_v.end() == *--v.end()) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
   else std::cout << RED << "KO" << RESET << std::endl;
   if (!test || printAllTests) printVecIters<int>(*--ft_v.end(), *--v.end());
   return test;
 }
 
-bool  vectorIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator(iterator)                    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator(iterator)                    : " << RESET;
   ft::vector<int>::iterator ft_it(ft_v.begin() + testnum);
   std::vector<int>::iterator it(v.begin() + testnum);
   if (*ft_it == *it) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -43,9 +49,11 @@ bool  vectorIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest4(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator=()                  : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator=()                  : " << RESET;
   ft::vector<int>::iterator ft_it;
   ft_it = ft_v.begin() + testnum;
   std::vector<int>::iterator it;
@@ -56,9 +64,11 @@ bool  vectorIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator+()                  : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator+()                  : " << RESET;
   ft::vector<int>::iterator ft_it;
   ft_it = ft_v.begin() + testnum;
   std::vector<int>::iterator it;
@@ -69,9 +79,11 @@ bool  vectorIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest6(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator-()                  : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator-()                  : " << RESET;
   ft::vector<int>::iterator ft_it;
   ft_it = ft_v.end() - (ft_v.size() - testnum);
   std::vector<int>::iterator it;
@@ -82,9 +94,11 @@ bool  vectorIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator+=()                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator+=()                 : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.begin();
   ft_it += testnum;
   std::vector<int>::iterator it = v.begin();
@@ -95,9 +109,11 @@ bool  vectorIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest8(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator-=()                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator-=()                 : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.end();
   ft_it -= (ft_v.size() - testnum);
   std::vector<int>::iterator it = v.end();
@@ -108,9 +124,11 @@ bool  vectorIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator++()                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator++()                 : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.begin();
   ++ft_it;
   std::vector<int>::iterator it = v.begin();
@@ -121,9 +139,11 @@ bool  vectorIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool pr
   return test;
 }
 
-bool  vectorIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest10(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator++(int)             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator++(int)             : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.begin();
   ft_it++;
   std::vector<int>::iterator it = v.begin();
@@ -134,9 +154,11 @@ bool  vectorIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool p
   return test;
 }
 
-bool  vectorIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest11(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator--()                : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator--()                : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.end();
   --ft_it;
   std::vector<int>::iterator it = v.end();
@@ -147,9 +169,11 @@ bool  vectorIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool p
   return test;
 }
 
-bool  vectorIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest12(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator--(int)             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator--(int)             : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.end();
   ft_it--;
   std::vector<int>::iterator it = v.end();
@@ -160,9 +184,11 @@ bool  vectorIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool p
   return test;
 }
 
-bool  vectorIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest13(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>::iterator.operator[]()                : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>::iterator.operator[]()                : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.begin();
   std::vector<int>::iterator it = v.begin();
   if (ft_it[testnum] == it[testnum]) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -171,9 +197,11 @@ bool  vectorIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool p
   return test;
 }
 
-bool  vectorIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest14(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : iterator = ptrdiff_t + iterator                   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : iterator = ptrdiff_t + iterator                   : " << RESET;
   ft::vector<int>::iterator ft_it = ft_v.begin();
   ft_it = testnum + ft_it;
   std::vector<int>::iterator it = v.begin();
@@ -184,9 +212,11 @@ bool  vectorIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool p
   return test;
 }
 
-bool  vectorIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool  vectorIteratorsTest15(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ptrdiff_t = iterator - iterator                   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ptrdiff_t = iterator - iterator                   : " << RESET;
   size_t mt;
   mt = ft_v.end() - ft_v.begin();
   size_t t;

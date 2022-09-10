@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 10:02:45 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 09:57:48 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:42:44 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,84 +122,154 @@ bool  vBasicTest14(bool printAllTests);
 bool  vBasicTest15(bool printAllTests);
 bool  vectorBasic(bool printAllTests);
 
-bool  vectorIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest2(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest4(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest6(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest8(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest10(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest11(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest12(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest13(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest14(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorIteratorsTest15(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorIterators(bool printAllTests);
 
-bool  vectorConstIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest2(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest4(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest6(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest8(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest10(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest11(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest12(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest13(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest14(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstIteratorsTest15(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorConstIterators(bool printAllTests);
 
-bool  vectorReverseIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest2(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest4(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest6(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest8(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest10(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest11(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest12(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest13(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest14(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorReverseIteratorsTest15(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorReverseIterators(bool printAllTests);
 
-bool  vectorConstReverseIteratorsTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest2(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest4(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest6(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest8(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest10(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest11(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest12(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest13(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest14(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorConstReverseIteratorsTest15(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest2(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest4(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest6(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest8(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest10(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest11(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest12(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest13(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest14(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorConstReverseIteratorsTest15(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
 bool  vectorConstReverseIterators(bool printAllTests);
 
-bool  vectorElementAccessTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest2(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest4(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest6(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest8(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
-bool  vectorElementAccessTest10(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest2(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest4(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest6(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest8(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum);
+bool  vectorElementAccessTest10(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum);
 bool  vectorElementAccess(bool printAllTests);
 
 bool  vectorCapacityTest1(bool printAllTests, size_t testnum);

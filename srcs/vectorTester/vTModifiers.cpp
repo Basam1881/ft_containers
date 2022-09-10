@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 07:51:19 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 09:51:31 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:51:22 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void printVecInsertPosition(int pos, int ft_pos) {
 
 bool  vectorModifiersTest1(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.assign(iterator, iterator)             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.assign(iterator, iterator)             : " << RESET;
   
   std::vector<int> v;
   ft::vector<int> ft_v;
@@ -42,7 +43,9 @@ bool  vectorModifiersTest1(bool printAllTests, size_t testnum) {
   v3.assign(v2.begin(), v2.end());
   ft_v3.assign(ft_v2.begin(), ft_v2.end());
   
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+    }
   else std::cout << RED << "KO" << RESET << std::endl;
   
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -55,7 +58,8 @@ bool  vectorModifiersTest1(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest2(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.assign(size_t, val)                    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.assign(size_t, val)                    : " << RESET;
   
   std::vector<int> v;
   ft::vector<int> ft_v;
@@ -78,7 +82,9 @@ bool  vectorModifiersTest2(bool printAllTests, size_t testnum) {
   v3.assign(v2.size(), *v2.begin());
   ft_v3.assign(ft_v2.size(), *ft_v2.begin());
   
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
   
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -91,7 +97,8 @@ bool  vectorModifiersTest2(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest3(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.push_back()                            : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.push_back()                            : " << RESET;
   
   std::vector<int> v;
   ft::vector<int> ft_v;
@@ -104,7 +111,9 @@ bool  vectorModifiersTest3(bool printAllTests, size_t testnum) {
     ft_v1.push_back(1);
   }
   
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
   
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -115,7 +124,8 @@ bool  vectorModifiersTest3(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest4(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.pop_back()                             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.pop_back()                             : " << RESET;
   
   std::vector<int> v(1);
   ft::vector<int> ft_v(1);
@@ -128,7 +138,9 @@ bool  vectorModifiersTest4(bool printAllTests, size_t testnum) {
     ft_v1.pop_back();
   }
   
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
   
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -139,7 +151,8 @@ bool  vectorModifiersTest4(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest5(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.insert(iter, val)                      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.insert(iter, val)                      : " << RESET;
   
   std::vector<int> v(0);
   ft::vector<int> ft_v(0);
@@ -169,7 +182,9 @@ bool  vectorModifiersTest5(bool printAllTests, size_t testnum) {
   ft_v1.insert(ft_v1.begin() + ft_v1.size(), 5);
   it1 = v1.insert(v1.begin() + v1.size(), 5);
   ft_it1 = ft_v1.insert(ft_v1.begin() + ft_v1.size(), 5);
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && *it == *ft_it && *it1 == *ft_it1) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && *it == *ft_it && *it1 == *ft_it1) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); printVecInsertPosition(*it, *ft_it); std::cout << std::endl;}
@@ -180,7 +195,8 @@ bool  vectorModifiersTest5(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest6(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.insert(iter, size_t, val)              : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.insert(iter, size_t, val)              : " << RESET;
   
   std::vector<int> v(0);
   ft::vector<int> ft_v(0);
@@ -206,7 +222,9 @@ bool  vectorModifiersTest6(bool printAllTests, size_t testnum) {
   v1.insert(v1.begin() + v1.size(), 0, 5);
   ft_v1.insert(ft_v1.begin() + ft_v1.size(), 0, 5);
   
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -217,7 +235,8 @@ bool  vectorModifiersTest6(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest7(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.insert(iter, iter, iter)               : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.insert(iter, iter, iter)               : " << RESET;
   
   std::vector<int> v(0);
   ft::vector<int> ft_v(0);
@@ -251,7 +270,9 @@ bool  vectorModifiersTest7(bool printAllTests, size_t testnum) {
   
 
   
-  if (cmpAll(v, ft_v)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) printAll<int>(v, ft_v);
@@ -261,7 +282,8 @@ bool  vectorModifiersTest7(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest8(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.erase(iter)                            : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.erase(iter)                            : " << RESET;
   
   std::vector<int> v(0);
   ft::vector<int> ft_v(0);
@@ -286,7 +308,9 @@ bool  vectorModifiersTest8(bool printAllTests, size_t testnum) {
   ft_v2.erase(ft_v2.begin());
   
 
-  if (cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v1, ft_v1); std::cout << std::endl; }
@@ -297,7 +321,8 @@ bool  vectorModifiersTest8(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest9(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.erase(iter, iter)                      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.erase(iter, iter)                      : " << RESET;
   
   std::vector<int> v(4, 1);
   ft::vector<int> ft_v(4, 1);
@@ -324,7 +349,9 @@ bool  vectorModifiersTest9(bool printAllTests, size_t testnum) {
   ft_v2.erase(ft_v2.begin() + 1, ft_v2.end() - 1);
   
 
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -336,7 +363,8 @@ bool  vectorModifiersTest9(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest10(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.swap(vector)                          : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.swap(vector)                          : " << RESET;
   
   std::vector<int> v;
   ft::vector<int> ft_v;
@@ -355,7 +383,9 @@ bool  vectorModifiersTest10(bool printAllTests, size_t testnum) {
   ft_v2.swap(ft_v3);
   
 
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -368,7 +398,8 @@ bool  vectorModifiersTest10(bool printAllTests, size_t testnum) {
 
 bool  vectorModifiersTest11(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.clear()                               : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.clear()                               : " << RESET;
   
   std::vector<int> v;
   ft::vector<int> ft_v;
@@ -387,7 +418,9 @@ bool  vectorModifiersTest11(bool printAllTests, size_t testnum) {
   ft_v2.clear();
   
 
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -396,24 +429,3 @@ bool  vectorModifiersTest11(bool printAllTests, size_t testnum) {
 
   return test;
 }
-// bool  vectorModifiersTest2(bool printAllTests, size_t testnum) {
-  
-// }
-
-// bool  vectorModifiersTest3(bool printAllTests, size_t testnum) {
-  
-// }
-
-// bool  vectorModifiersTest4(bool printAllTests, size_t testnum) {
-  
-// }
-
-// bool  vectorModifiersTest5(bool printAllTests, size_t testnum) {
-  
-// }
-
-// bool  vectorModifiersTest6(bool printAllTests, size_t testnum) {
-  
-// }
-
-

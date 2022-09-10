@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 09:35:09 by bnaji             #+#    #+#             */
-/*   Updated: 2022/08/29 09:23:24 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:40:23 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "vectorTests.hpp"
 
 bool  vectorBasic(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Basic Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Basic Test " << PURPLE << "====================>" << RESET << std::endl;
   bool test = true;
   if (!vBasicTest1(printAllTests)) test = false;
   if (!vBasicTest2(printAllTests)) test = false;
@@ -36,7 +37,8 @@ bool  vectorBasic(bool printAllTests) {
 }
 
 bool  vectorIterators(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -62,7 +64,8 @@ bool  vectorIterators(bool printAllTests) {
 }
 
 bool  vectorConstIterators(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Const Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Const Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -88,7 +91,8 @@ bool  vectorConstIterators(bool printAllTests) {
 }
 
 bool  vectorReverseIterators(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Reverse Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Reverse Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -114,7 +118,8 @@ bool  vectorReverseIterators(bool printAllTests) {
 }
 
 bool  vectorConstReverseIterators(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Const Reverse Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Const Reverse Iterators Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -140,7 +145,8 @@ bool  vectorConstReverseIterators(bool printAllTests) {
 }
 
 bool  vectorElementAccess(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Element Access Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Element Access Test " << PURPLE << "====================>" << RESET << std::endl;
   size_t n = 20;
   std::vector<int> v(n); ft::vector<int> ft_v(n);
   for (size_t i = 0; i < n; i++) {
@@ -161,7 +167,8 @@ bool  vectorElementAccess(bool printAllTests) {
 }
 
 bool  vectorCapacity(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Capacity Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Capacity Test " << PURPLE << "====================>" << RESET << std::endl;
   bool test = true;
   if (!vectorCapacityTest1(printAllTests, 1)) test = false;
   if (!vectorCapacityTest2(printAllTests, 2)) test = false;
@@ -173,7 +180,8 @@ bool  vectorCapacity(bool printAllTests) {
 }
 
 bool  vectorModifiers(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Modifier Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Modifier Test " << PURPLE << "====================>" << RESET << std::endl;
   bool test = true;
   if (!vectorModifiersTest1(printAllTests, 1)) test = false;
   if (!vectorModifiersTest2(printAllTests, 2)) test = false;
@@ -190,7 +198,8 @@ bool  vectorModifiers(bool printAllTests) {
 }
 
 bool  vectorNonMemberFunctions(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Non-Member Functions Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Non-Member Functions Test " << PURPLE << "====================>" << RESET << std::endl;
   bool test = true;
   if (!vectorNonMemberFunctionsTest1(printAllTests, 1)) test = false;
   if (!vectorNonMemberFunctionsTest2(printAllTests, 2)) test = false;
@@ -203,7 +212,8 @@ bool  vectorNonMemberFunctions(bool printAllTests) {
 }
 
 bool  vectorException(bool printAllTests) {
-  std::cout << PURPLE << "<====================" << WHITE << " vector Exception Test " << PURPLE << "====================>" << RESET << std::endl;
+  std::cout << PURPLE << "<====================" << WHITE
+    << " vector Exception Test " << PURPLE << "====================>" << RESET << std::endl;
   bool test = true;
   if (!vectorExceptionTest1(printAllTests, 1)) test = false;
   if (!vectorExceptionTest2(printAllTests, 2)) test = false;

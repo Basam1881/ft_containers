@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 13:15:13 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 08:09:44 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:06:45 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,20 @@ namespace ft
 			typedef size_t																											size_type;
 
       /* ********************************* Member Functions ********************************* */
-			inline explicit stack (const container_type& ctnr = container_type()) : _container(ctnr)
-      {}
+			inline explicit stack (const container_type& ctnr = container_type()) : _container(ctnr) {}
 
       /* ************************************** Capacity ************************************** */
-      inline bool                        empty() const {
-        return _container.empty();
-      }
+      inline bool empty() const { return _container.empty(); }
 
-      inline size_type                   size() const {
-        return _container.size();
-      }
+      inline size_type  size() const { return _container.size(); }
 
-      inline value_type&                 top() {
-        return _container.back();
-      }
+      inline value_type&  top() { return _container.back(); }
 
-      inline const value_type&           top() const {
-        return _container.back();
-      }
+      inline const value_type&  top() const { return _container.back(); }
 
-      inline void                        push(const value_type& val) {
-        return _container.push_back(val);
-      }
+      inline void push(const value_type& val) { return _container.push_back(val); }
 
-      inline void                        pop() {
-        return _container.pop_back();
-      }
+      inline void pop() { return _container.pop_back(); }
 
       /* ******************************* Non Member Functions ******************************* */
 

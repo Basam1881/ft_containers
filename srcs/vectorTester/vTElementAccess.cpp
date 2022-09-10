@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTElementAccess.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 07:54:36 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:36:04 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:49:20 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include <string>
 #include "vectorTests.hpp"
 
-bool vectorElementAccessTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest1(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.operator[]                             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.operator[]                             : " << RESET;
   
   size_t i = 0;
   for  ( ; ft_v[i] == v[i] && i < v.size() - 1; i++);
@@ -29,9 +31,11 @@ bool vectorElementAccessTest1(std::vector<int> & v, ft::vector<int> & ft_v, bool
   return test;
 }
 
-bool vectorElementAccessTest2(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest2(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_operator[]                       : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.const_operator[]                       : " << RESET;
   
   size_t i = 0;
   for  ( ; ft_v[i] == v[i] && i < v.size() - 1; i++);
@@ -44,9 +48,11 @@ bool vectorElementAccessTest2(std::vector<int> const & v, ft::vector<int> const 
   return test;
 }
 
-bool vectorElementAccessTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest3(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.at()                                   : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.at()                                   : " << RESET;
   
   size_t i = 0;
   for  ( ; ft_v.at(i) == v.at(i) && i < v.size() - 1; i++);
@@ -59,9 +65,11 @@ bool vectorElementAccessTest3(std::vector<int> & v, ft::vector<int> & ft_v, bool
   return test;
 }
 
-bool vectorElementAccessTest4(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest4(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_at()                             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.const_at()                             : " << RESET;
 
   size_t i = 0;
   for  ( ; ft_v.at(i) == v.at(i) && i < v.size() - 1; i++);
@@ -74,9 +82,11 @@ bool vectorElementAccessTest4(std::vector<int> const & v, ft::vector<int> const 
   return test;
 }
 
-bool vectorElementAccessTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest5(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.back()                                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.back()                                 : " << RESET;
 
   
   if (ft_v.front() == v.front()) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -87,9 +97,11 @@ bool vectorElementAccessTest5(std::vector<int> & v, ft::vector<int> & ft_v, bool
   return test;
 }
 
-bool vectorElementAccessTest6(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest6(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_front()                          : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.const_front()                          : " << RESET;
   
   if (ft_v.front() == v.front()) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
   else std::cout << RED << "KO" << RESET << std::endl;
@@ -99,9 +111,11 @@ bool vectorElementAccessTest6(std::vector<int> const & v, ft::vector<int> const 
   return test;
 }
 
-bool vectorElementAccessTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest7(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.back()                                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.back()                                 : " << RESET;
 
   
   if (ft_v.back() == v.back()) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
@@ -112,9 +126,11 @@ bool vectorElementAccessTest7(std::vector<int> & v, ft::vector<int> & ft_v, bool
   return test;
 }
 
-bool vectorElementAccessTest8(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest8(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_back()                           : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.const_back()                           : " << RESET;
   
   if (ft_v.back() == v.back()) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
   else std::cout << RED << "KO" << RESET << std::endl;
@@ -124,9 +140,11 @@ bool vectorElementAccessTest8(std::vector<int> const & v, ft::vector<int> const 
   return test;
 }
 
-bool vectorElementAccessTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest9(std::vector<int> & v,
+    ft::vector<int> & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.data()                                 : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.data()                                 : " << RESET;
 
   size_t i = 0;
   for  ( ; ft_v.at(i) == v.at(i) && i < v.size() - 1; i++);
@@ -139,9 +157,11 @@ bool vectorElementAccessTest9(std::vector<int> & v, ft::vector<int> & ft_v, bool
   return test;
 }
 
-bool vectorElementAccessTest10(std::vector<int> const & v, ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
+bool vectorElementAccessTest10(std::vector<int> const & v,
+    ft::vector<int> const & ft_v, bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.const_data()                          : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.const_data()                          : " << RESET;
   
   size_t i = 0;
   for  ( ; ft_v.at(i) == v.at(i) && i < v.size() - 1; i++);

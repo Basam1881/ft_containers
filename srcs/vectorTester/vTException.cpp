@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 12:19:26 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/09 10:03:01 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:49:35 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 
 bool  vectorExceptionTest1(bool printAllTests, size_t testnum) {
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.vector(size_t, val)                    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.vector(size_t, val)                    : " << RESET;
   
   (void)printAllTests;
   std::vector<int> vec;
@@ -44,7 +45,8 @@ bool  vectorExceptionTest1(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest2(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.operator=(vector)                      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.operator=(vector)                      : " << RESET;
   
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);
@@ -74,7 +76,8 @@ bool  vectorExceptionTest2(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest3(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.resize(size_t, val)                    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.resize(size_t, val)                    : " << RESET;
   
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);
@@ -104,7 +107,8 @@ bool  vectorExceptionTest3(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest4(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.reserve(size_t)                        : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.reserve(size_t)                        : " << RESET;
   
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);
@@ -134,7 +138,8 @@ bool  vectorExceptionTest4(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest5(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.at(size_t)                             : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.at(size_t)                             : " << RESET;
 
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);
@@ -163,7 +168,8 @@ bool  vectorExceptionTest5(bool printAllTests, size_t testnum) {
 }
 
 bool  vectorExceptionTest6(bool printAllTests, size_t testnum) {
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.at(size_t) const                       : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.at(size_t) const                       : " << RESET;
 
   const std::vector<int> v(5, testnum);
   const ft::vector<int> ft_v(5, testnum);
@@ -195,7 +201,8 @@ bool  vectorExceptionTest6(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest7(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.assign(size_t, val)                    : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.assign(size_t, val)                    : " << RESET;
   
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);
@@ -226,7 +233,8 @@ bool  vectorExceptionTest7(bool printAllTests, size_t testnum) {
 
 bool  vectorExceptionTest8(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : vector<int>.insert(iterator, size_t, val)          : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : vector<int>.insert(iterator, size_t, val)          : " << RESET;
 
   std::vector<int> v(5, testnum);
   ft::vector<int> ft_v(5, testnum);

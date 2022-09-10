@@ -6,13 +6,18 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 07:48:29 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/09 20:16:17 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:24:25 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 # define MAP_HPP
 
+# include <memory>
+# include <iostream>
+# include <sstream>
+# include <string>
+# include <limits>
 # include "../bst/avl.hpp"
 # include "../iterators/mapIterator.hpp"
 # include "../algorithms/utility.hpp"
@@ -65,27 +70,27 @@ namespace ft {
 
     /* ************************************** Constructors ************************************** */
     inline explicit map (const key_compare& comp = key_compare(),
-              const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc), _avlAlloc(std::allocator<avl_type>()) {
-      _uselessEnd = _avlAlloc.allocate(1);
-      _avlAlloc.construct(_uselessEnd, avl_type());
-    }
+      const allocator_type& alloc = allocator_type())
+      : _root(NULL), _size(0), _comp(comp), _alloc(alloc),
+      _avlAlloc(avl_allocator_type()), _keyAlloc(key_allocator_type()) { _createUselessEnd(); }
 
     template <class InputIterator>
     inline map (InputIterator first, InputIterator last,
         const key_compare& comp = key_compare(),
-        const allocator_type& alloc = allocator_type()) : _root(NULL), _size(0), _comp(comp), _alloc(alloc), _avlAlloc(std::allocator<avl_type>()) {
-      _uselessEnd = _avlAlloc.allocate(1);
-      _avlAlloc.construct(_uselessEnd, avl_type());
+        const allocator_type& alloc = allocator_type())
+        : _root(NULL), _size(0), _comp(comp), _alloc(alloc),
+        _avlAlloc(avl_allocator_type()), _keyAlloc(key_allocator_type()) {
+      _createUselessEnd();
       insert(first, last);
     }
 
-    inline map (const map& x) : _root(NULL), _size(0), _comp(x._comp), _alloc(x._alloc), _avlAlloc(std::allocator<avl_type>()) {
-      _uselessEnd = _avlAlloc.allocate(1);
-      _avlAlloc.construct(_uselessEnd, avl_type());
+    inline map (const map& x) : _root(NULL), _size(0), _comp(x._comp),
+      _alloc(x._alloc), _avlAlloc(avl_allocator_type()), _keyAlloc(key_allocator_type()) {
+      _createUselessEnd();
       *this = x;
     }
     
-    inline ~map() { clear(); _avlAlloc.destroy(_uselessEnd); _avlAlloc.deallocate(_uselessEnd, 1); }
+    inline ~map() { clear(); _deleteUselessEnd(); }
   
     inline map& operator= (const map& x);
 
@@ -180,6 +185,8 @@ namespace ft {
         avl_allocator_type              _avlAlloc;
         key_allocator_type              _keyAlloc;
         avl_type *                      _uselessEnd;
+        void                            _createUselessEnd();
+        void                            _deleteUselessEnd();
   };
 }
 

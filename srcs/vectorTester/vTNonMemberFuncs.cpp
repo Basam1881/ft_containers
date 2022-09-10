@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vTNonMemberFuncs.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bnaji <bnaji@student.42abudhabi.ae>        +#+  +:+       +#+        */
+/*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 09:26:27 by bnaji             #+#    #+#             */
-/*   Updated: 2022/07/02 07:35:35 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:52:51 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 bool  vectorNonMemberFunctionsTest1(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::swap(vector, vector)                           : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::swap(vector, vector)                           : " << RESET;
   
   std::vector<int> v;
   ft::vector<int> ft_v;
@@ -34,7 +35,9 @@ bool  vectorNonMemberFunctionsTest1(bool printAllTests, size_t testnum) {
   std::swap(v2, v3);
   ft::swap(ft_v2, ft_v3);
 
-  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (cmpAll(v, ft_v) && cmpAll(v1, ft_v1) && cmpAll(v2, ft_v2) && cmpAll(v3, ft_v3)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -47,7 +50,8 @@ bool  vectorNonMemberFunctionsTest1(bool printAllTests, size_t testnum) {
 
 bool  vectorNonMemberFunctionsTest2(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::operator==(vector, vector)                     : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::operator==(vector, vector)                     : " << RESET;
   
   std::vector<int> v(4, 1);
   ft::vector<int> ft_v(4, 1);
@@ -58,7 +62,10 @@ bool  vectorNonMemberFunctionsTest2(bool printAllTests, size_t testnum) {
   v2.push_back(2);
   ft_v2.push_back(2);
 
-  if (v == v && v == v1 && !(v == v2) && !(v2 == v1) && ft_v == ft_v && ft_v == ft_v1 && !(ft_v == ft_v2) && !(ft_v2 == ft_v1)) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (v == v && v == v1 && !(v == v2) && !(v2 == v1) && ft_v == ft_v && ft_v == ft_v1
+    && !(ft_v == ft_v2) && !(ft_v2 == ft_v1)) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -70,7 +77,8 @@ bool  vectorNonMemberFunctionsTest2(bool printAllTests, size_t testnum) {
 
 bool  vectorNonMemberFunctionsTest3(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::operator!=(vector, vector)                     : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::operator!=(vector, vector)                     : " << RESET;
   
   std::vector<int> v(4, 1);
   ft::vector<int> ft_v(4, 1);
@@ -81,7 +89,10 @@ bool  vectorNonMemberFunctionsTest3(bool printAllTests, size_t testnum) {
   v2.push_back(2);
   ft_v2.push_back(2);
 
-  if (!(v != v) && !(v != v1) && v != v2 && v2 != v1 && !(ft_v != ft_v) && !(ft_v != ft_v1) && ft_v != ft_v2 && ft_v2 != ft_v1) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (!(v != v) && !(v != v1) && v != v2 && v2 != v1 && !(ft_v != ft_v) && !(ft_v != ft_v1)
+    && ft_v != ft_v2 && ft_v2 != ft_v1) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -93,7 +104,8 @@ bool  vectorNonMemberFunctionsTest3(bool printAllTests, size_t testnum) {
 
 bool  vectorNonMemberFunctionsTest4(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::operator<(vector, vector)                      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::operator<(vector, vector)                      : " << RESET;
   
   std::vector<int> v(2, 1);
   ft::vector<int> ft_v(2, 1);
@@ -103,7 +115,10 @@ bool  vectorNonMemberFunctionsTest4(bool printAllTests, size_t testnum) {
   ft::vector<int> ft_v2(4, 2);
 
 
-  if (!(v < v) && v < v1 && v < v2 && v1 < v2 && !(ft_v < ft_v) && ft_v < ft_v1 && ft_v < ft_v2 && ft_v1 < ft_v2) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (!(v < v) && v < v1 && v < v2 && v1 < v2 && !(ft_v < ft_v) && ft_v < ft_v1
+    && ft_v < ft_v2 && ft_v1 < ft_v2) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -115,7 +130,8 @@ bool  vectorNonMemberFunctionsTest4(bool printAllTests, size_t testnum) {
 
 bool  vectorNonMemberFunctionsTest5(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::operator<=(vector, vector)                     : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::operator<=(vector, vector)                     : " << RESET;
   
   std::vector<int> v(2, 1);
   ft::vector<int> ft_v(2, 1);
@@ -125,7 +141,10 @@ bool  vectorNonMemberFunctionsTest5(bool printAllTests, size_t testnum) {
   ft::vector<int> ft_v2(4, 2);
 
 
-  if (v <= v && v <= v1 && v <= v2 && v1 <= v2 && ft_v <= ft_v && ft_v <= ft_v1 && ft_v <= ft_v2 && ft_v1 <= ft_v2) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (v <= v && v <= v1 && v <= v2 && v1 <= v2 && ft_v <= ft_v && ft_v <= ft_v1
+    && ft_v <= ft_v2 && ft_v1 <= ft_v2) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -137,7 +156,8 @@ bool  vectorNonMemberFunctionsTest5(bool printAllTests, size_t testnum) {
 
 bool  vectorNonMemberFunctionsTest6(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::operator>(vector, vector)                      : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::operator>(vector, vector)                      : " << RESET;
   
   std::vector<int> v(2, 1);
   ft::vector<int> ft_v(2, 1);
@@ -147,7 +167,10 @@ bool  vectorNonMemberFunctionsTest6(bool printAllTests, size_t testnum) {
   ft::vector<int> ft_v2(4, 2);
 
 
-  if (!(v2 > v2) && v2 > v1 && v2 > v && v1 > v && !(ft_v2 > ft_v2) && ft_v2 > ft_v1 && ft_v2 > ft_v && ft_v1 > ft_v) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (!(v2 > v2) && v2 > v1 && v2 > v && v1 > v && !(ft_v2 > ft_v2) && ft_v2 > ft_v1
+    && ft_v2 > ft_v && ft_v1 > ft_v) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }
@@ -159,7 +182,8 @@ bool  vectorNonMemberFunctionsTest6(bool printAllTests, size_t testnum) {
 
 bool  vectorNonMemberFunctionsTest7(bool printAllTests, size_t testnum) {
   bool test = false;
-  std::cout << "\n" << WHITE << testnum << BLUE << " : ft::operator>=(vector, vector)                     : " << RESET;
+  std::cout << "\n" << WHITE << testnum << BLUE
+    << " : ft::operator>=(vector, vector)                     : " << RESET;
   
   std::vector<int> v(2, 1);
   ft::vector<int> ft_v(2, 1);
@@ -169,7 +193,10 @@ bool  vectorNonMemberFunctionsTest7(bool printAllTests, size_t testnum) {
   ft::vector<int> ft_v2(4, 2);
 
 
-  if (v2 >= v2 && v2 >= v1 && v2 >= v && v1 >= v && ft_v2 >= ft_v2 && ft_v2 >= ft_v1 && ft_v2 >= ft_v && ft_v1 >= ft_v) { std::cout << GREEN << "OK" << RESET << std::endl; test = true; }
+  if (v2 >= v2 && v2 >= v1 && v2 >= v && v1 >= v && ft_v2 >= ft_v2 && ft_v2 >= ft_v1
+    && ft_v2 >= ft_v && ft_v1 >= ft_v) {
+    std::cout << GREEN << "OK" << RESET << std::endl; test = true;
+  }
   else std::cout << RED << "KO" << RESET << std::endl;
 
   if (!test || printAllTests) { printAll<int>(v, ft_v); std::cout << std::endl; }

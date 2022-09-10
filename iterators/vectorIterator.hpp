@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 11:58:56 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/08 09:23:37 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 17:48:29 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,39 @@ namespace ft
       VectorIterator (VectorIterator const & src) : _p(src._p) {}
       ~VectorIterator() {}
 
-      pointer                   base() const { return this->_p; }
+      pointer base() const { return this->_p; }
 
-      VectorIterator &		            operator = ( VectorIterator<Category, const T> const & rhs ) { if (this != &rhs) this->_p  = rhs.base(); return *this; }
-      VectorIterator  		            operator + ( difference_type n ) const { return (this->_p + n); }
-      VectorIterator  		            operator - ( difference_type n ) const { return (this->_p - n); }
+      VectorIterator &  operator = ( VectorIterator<Category, const T> const & rhs ) {
+        if (this != &rhs) this->_p  = rhs.base();
+        return *this;
+      }
+      VectorIterator  operator + ( difference_type n ) const { return (this->_p + n); }
+      VectorIterator  operator - ( difference_type n ) const { return (this->_p - n); }
 
-      VectorIterator &                operator += (difference_type n) { this->_p = this->_p + n; return *this; }
-      VectorIterator &                operator ++ () { ++this->_p; return *this; }
-      VectorIterator                  operator ++ (int) { VectorIterator tmp(*this); this->_p++; return (tmp); }
+      VectorIterator &  operator += (difference_type n) {
+        this->_p = this->_p + n; return *this;
+      }
+      VectorIterator &  operator ++ () { ++this->_p; return *this; }
+      VectorIterator  operator ++ (int) {
+        VectorIterator tmp(*this); this->_p++; return (tmp);
+      }
 
-      VectorIterator &                operator -= (difference_type n) { this->_p = this->_p - n; return *this; }
-      VectorIterator &                operator -- () { --this->_p; return *this; }
-      VectorIterator                  operator -- (int) { VectorIterator tmp(*this); this->_p--; return (tmp); }
+      VectorIterator &  operator -= (difference_type n) {
+        this->_p = this->_p - n; return *this;
+      }
+      VectorIterator &  operator -- () { --this->_p; return *this; }
+      VectorIterator  operator -- (int) {
+        VectorIterator tmp(*this); this->_p--; return (tmp);
+      }
 
-      reference                 operator * () const { return *(this->_p); }
-      pointer                   operator -> () const { return this->_p; }
+      reference operator * () const { return *(this->_p); }
+      pointer operator -> () const { return this->_p; }
 
-      operator                  VectorIterator<Category, const value_type>() { return VectorIterator<Category, const value_type>(_p); }
+      operator  VectorIterator<Category, const value_type>() {
+        return VectorIterator<Category, const value_type>(_p);
+      }
 
-      reference                 operator [] (difference_type const & n) { return this->_p[n]; }
+      reference operator [] (difference_type const & n) { return this->_p[n]; }
 
       template <class Iterator1, class Iterator2>
       friend bool operator== ( const Iterator1 & lhs, const Iterator2 & rhs);
@@ -83,7 +96,8 @@ namespace ft
       friend Iterator operator+ (typename Iterator::difference_type n, const Iterator& it);
 
       template <class Iterator1, class Iterator2>
-      friend typename Iterator2::difference_type operator- (const Iterator1& lhs, const Iterator2& rhs);
+      friend typename Iterator2::difference_type operator- (const Iterator1& lhs,
+        const Iterator2& rhs);
 
       protected:
         pointer     _p;

@@ -6,7 +6,7 @@
 /*   By: bnaji <bnaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 21:59:53 by bnaji             #+#    #+#             */
-/*   Updated: 2022/09/09 19:24:29 by bnaji            ###   ########.fr       */
+/*   Updated: 2022/09/10 18:21:09 by bnaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,42 @@ namespace ft {
 
   /* ************************************** Iterators ************************************** */
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::iterator                  vector<T, Alloc>::begin() { 
+  inline typename vector<T, Alloc>::iterator  vector<T, Alloc>::begin() { 
     return iterator(_arr);
   }
 
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_iterator            vector<T, Alloc>::begin() const {
+  inline typename vector<T, Alloc>::const_iterator  vector<T, Alloc>::begin() const {
     return const_iterator(_arr);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::iterator                  vector<T, Alloc>::end() {
+  inline typename vector<T, Alloc>::iterator  vector<T, Alloc>::end() {
     return iterator(_arr + _size);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_iterator            vector<T, Alloc>::end() const {
+  inline typename vector<T, Alloc>::const_iterator  vector<T, Alloc>::end() const {
     return const_iterator(_arr + _size);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::reverse_iterator          vector<T, Alloc>::rbegin() {
+  inline typename vector<T, Alloc>::reverse_iterator  vector<T, Alloc>::rbegin() {
     return reverse_iterator(_arr + _size);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_reverse_iterator    vector<T, Alloc>::rbegin() const {
+  inline typename vector<T, Alloc>::const_reverse_iterator  vector<T, Alloc>::rbegin() const {
     return const_reverse_iterator(_arr + _size);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::reverse_iterator          vector<T, Alloc>::rend() {
+  inline typename vector<T, Alloc>::reverse_iterator  vector<T, Alloc>::rend() {
     return reverse_iterator(_arr);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_reverse_iterator    vector<T, Alloc>::rend() const {
+  inline typename vector<T, Alloc>::const_reverse_iterator  vector<T, Alloc>::rend() const {
     return const_reverse_iterator(_arr);
   }
   
@@ -74,58 +74,61 @@ namespace ft {
 
   /* ************************************** Element Access ************************************** */
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::reference             vector<T, Alloc>::operator[](size_type n) {
+  inline typename vector<T, Alloc>::reference   vector<T, Alloc>::operator[](size_type n) {
     return _arr[n];
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_reference       vector<T, Alloc>::operator[](size_type n) const {
+  inline typename vector<T, Alloc>::const_reference   vector<T, Alloc>::operator[](size_type n)
+      const {
     return _arr[n];
   }
 
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::reference             vector<T, Alloc>::at(size_type n) {
+  inline typename vector<T, Alloc>::reference   vector<T, Alloc>::at(size_type n) {
     std::ostringstream str;
-    str << "vector::_M_range_check: __n (which is " << n << ") >= this->size() (which is " << _size << ")";
+    str << "vector::_M_range_check: __n (which is " << n
+      << ") >= this->size() (which is " << _size << ")";
     if (n >= _size) throw std::out_of_range(str.str());
     return _arr[n];
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_reference       vector<T, Alloc>::at(size_type n) const {
+  inline typename vector<T, Alloc>::const_reference   vector<T, Alloc>::at(size_type n) const {
     std::ostringstream str;
-    str << "vector::_M_range_check: __n (which is " << n << ") >= this->size() (which is " << _size << ")";
+    str << "vector::_M_range_check: __n (which is " << n
+      << ") >= this->size() (which is " << _size << ")";
     if (n >= _size) throw std::out_of_range(str.str());
     return _arr[n];
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::reference             vector<T, Alloc>::front() {
+  inline typename vector<T, Alloc>::reference   vector<T, Alloc>::front() {
     return *_arr;
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_reference       vector<T, Alloc>::front() const {
+  inline typename vector<T, Alloc>::const_reference   vector<T, Alloc>::front() const {
     return *_arr;
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::reference             vector<T, Alloc>::back() {
+  inline typename vector<T, Alloc>::reference    vector<T, Alloc>::back() {
     return *(_arr + size() - 1);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_reference       vector<T, Alloc>::back() const {
+  inline typename vector<T, Alloc>::const_reference   vector<T, Alloc>::back() const {
     return *(_arr + size() - 1);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::pointer               vector<T, Alloc>::data() {
+  inline typename vector<T, Alloc>::pointer   vector<T, Alloc>::data() {
     return _arr;
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::const_pointer         vector<T, Alloc>::data() const {
+  inline typename vector<T, Alloc>::const_pointer   vector<T, Alloc>::data() const {
     return _arr;
   }
   
@@ -133,27 +136,27 @@ namespace ft {
 
   /* ************************************** Capacity ************************************** */
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::size() const {
+  inline typename vector<T, Alloc>::size_type   vector<T, Alloc>::size() const {
     return _size;
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::max_size() const {
+  inline typename vector<T, Alloc>::size_type   vector<T, Alloc>::max_size() const {
     return (size_t)(-1) / sizeof(T);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::size_type    vector<T, Alloc>::capacity() const {
+  inline typename vector<T, Alloc>::size_type   vector<T, Alloc>::capacity() const {
     return _capacity;
   }
   
   template < class T, class Alloc>
-  inline bool                                    vector<T, Alloc>::empty() const {
+  inline bool   vector<T, Alloc>::empty() const {
     return (_size == 0);
   }
   
   template < class T, class Alloc>
-  inline void                                    vector<T, Alloc>::resize(size_type n, value_type val) {
+  inline void   vector<T, Alloc>::resize(size_type n, value_type val) {
     checkIfValid(*this, n, "vector::_M_fill_insert");
     if (n <= _size)
       ft::copy(begin() + n, _size - n, val, _alloc);
@@ -166,7 +169,7 @@ namespace ft {
   }
   
   template < class T, class Alloc>
-  inline void                                    vector<T, Alloc>::reserve (size_type n) {
+  inline void   vector<T, Alloc>::reserve (size_type n) {
     checkIfValid(*this, n, "vector::reserve");
     if (n > _capacity) {
       vector tmp(*this);
@@ -178,13 +181,15 @@ namespace ft {
   /* ************************************** Modifiers ************************************** */
   template < class T, class Alloc>
   template <class InputIterator>
-  inline void             vector<T, Alloc>::assign (InputIterator first, typename enable_if<!is_integral<InputIterator>::value,InputIterator>::type last) {
+  inline void   vector<T, Alloc>::assign (InputIterator first,
+      typename enable_if<!is_integral<InputIterator>::value,InputIterator>::type last) {
     size_type n = ft::distance(first, last);
     n > _capacity ? reallocMe(*this, n, first, last) : replace(*this, n, first);
     _size = n;
   }
   template < class T, class Alloc>
-  inline void             vector<T, Alloc>::assign (typename vector<T, Alloc>::size_type n, const typename vector<T, Alloc>::value_type& val) {
+  inline void   vector<T, Alloc>::assign (typename vector<T, Alloc>::size_type n,
+      const typename vector<T, Alloc>::value_type& val) {
     if (n > max_size()) {
       clearMe(*this);
       _size = 0;
@@ -198,7 +203,7 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void             vector<T, Alloc>::push_back (const typename vector<T, Alloc>::value_type& val) {
+  inline void   vector<T, Alloc>::push_back (const typename vector<T, Alloc>::value_type& val) {
     if (!_capacity)
       reserve(1);
     else if (_size == _capacity)
@@ -207,12 +212,14 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void             vector<T, Alloc>::pop_back() {
+  inline void   vector<T, Alloc>::pop_back() {
     _alloc.destroy(_arr + _size-- - 1);
   }
 
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::iterator             vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position, const typename vector<T, Alloc>::value_type& val) {
+  inline typename vector<T, Alloc>::iterator    vector<T, Alloc>::insert 
+      (typename vector<T, Alloc>::iterator position,
+      const typename vector<T, Alloc>::value_type& val) {
     if (_size == _capacity)
       position = storePositionAndReserve(*this, position, 1, _capacity * 2);
     _size++;
@@ -222,7 +229,8 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void             vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position, typename vector<T, Alloc>::size_type n, const typename vector<T, Alloc>::value_type& val) {
+  inline void   vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,
+      typename vector<T, Alloc>::size_type n, const typename vector<T, Alloc>::value_type& val) {
     isValidInsert(_size + n);
     size_type oldEnd = _size;
     if (_size + n > _capacity)
@@ -235,7 +243,9 @@ namespace ft {
 
   template < class T, class Alloc>
   template <class InputIterator>
-  inline void             vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position, InputIterator first, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type last) {
+  inline void   vector<T, Alloc>::insert (typename vector<T, Alloc>::iterator position,
+      InputIterator first, typename enable_if<!is_integral<InputIterator>::value,
+      InputIterator>::type last) {
     size_type toPos = ft::distance(begin(), position);
     bool exist = isIteratorInVector(*this, first);
     size_type size = ft::distance(first, last);
@@ -250,27 +260,25 @@ namespace ft {
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::iterator            vector<T, Alloc>::erase (typename vector<T, Alloc>::iterator position) {
+  inline typename vector<T, Alloc>::iterator    vector<T, Alloc>::erase 
+      (typename vector<T, Alloc>::iterator position) {
     return erase(position, position + 1);
   }
   
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::iterator            vector<T, Alloc>::erase (typename vector<T, Alloc>::iterator first, typename vector<T, Alloc>::iterator last) {
+  inline typename vector<T, Alloc>::iterator    vector<T, Alloc>::erase 
+      (typename vector<T, Alloc>::iterator first, typename vector<T, Alloc>::iterator last) {
     size_type size = ft::distance(first, last);
     if (!size) return first;
     ft::copy(last, end(), first);
-    // std::cout <<"->"<< size <<std::endl;
-    for ( iterator it = end() - size; it != end(); it++) {
-      // std::cout << size <<std::endl;
+    for ( iterator it = end() - size; it != end(); it++)
       _alloc.destroy(it.base());
-    }
-    // std::cout << "---" <<std::endl;
     _size -= size;
     return first;
   }
 
   template < class T, class Alloc>
-  inline void              vector<T, Alloc>::swap(vector<T, Alloc> & x) {
+  inline void   vector<T, Alloc>::swap(vector<T, Alloc> & x) {
     allocator_type  tmpAlloc = x._alloc;
     pointer					tmpArr = x._arr;
     size_type				tmpSize = x._size;
@@ -288,9 +296,7 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void              vector<T, Alloc>::clear() {
-    // for (size_type i = _size; i > 0; i--, _size--)
-    //   _alloc.destroy(_arr + i);
+  inline void   vector<T, Alloc>::clear() {
     for (iterator it = begin(); it != end(); it++)
         _alloc.destroy(it.base());
     _size = 0;
@@ -298,25 +304,27 @@ namespace ft {
 
   /* ************************************** Allocator ************************************** */
   template < class T, class Alloc>
-  inline typename vector<T, Alloc>::allocator_type             vector<T, Alloc>::get_allocator() const { return _alloc; }
+  inline typename vector<T, Alloc>::allocator_type    vector<T, Alloc>::get_allocator() const {
+    return _alloc;
+  }
 
   
   /* ************************************** Vector utils ************************************** */
   template < class T, class Alloc>
-  inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, const typename vector<T, Alloc>::value_type & val) {
+  inline void   vector<T, Alloc>::allocMe(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type & n, const typename vector<T, Alloc>::value_type & val) {
     if (n) {
       _arr = _alloc.allocate(n);
       for (size_type i = 0; i < n; i++) {
         v._alloc.construct(v._arr + i, val);
       }
     }
-    // for (size_type i = 0; i < n; i++)
-    //   v.get_allocator().construct(v.begin().base() + i, val);
   }
 
   template < class T, class Alloc>
   template < class InputIterator>
-  inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, InputIterator first, InputIterator last) {
+  inline void   vector<T, Alloc>::allocMe(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type & n, InputIterator first, InputIterator last) {
     if (n){
       v._arr = v.get_allocator().allocate(n);
       for (size_type i = 0; i < n; i++) 
@@ -327,7 +335,9 @@ namespace ft {
 
   template < class T, class Alloc>
   template < class InputIterator>
-  inline void                     vector<T, Alloc>::allocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type const & n, const InputIterator first, const InputIterator last) {
+  inline void   vector<T, Alloc>::allocMe(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type const & n,
+      const InputIterator first, const InputIterator last) {
     if (n) {
       v._arr = v.get_allocator().allocate(n);
       for (size_type i = 0; i < n; i++) 
@@ -337,7 +347,7 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void                   vector<T, Alloc>::clearMe(vector<T, Alloc> & v) {
+  inline void   vector<T, Alloc>::clearMe(vector<T, Alloc> & v) {
     if (v._capacity) {
       for (iterator it = v.begin(); it != v.end(); it++)
         v._alloc.destroy(it.base());
@@ -346,7 +356,9 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void                   vector<T, Alloc>::reallocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, typename vector<T, Alloc>::value_type const & val) {
+  inline void   vector<T, Alloc>::reallocMe(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type & n,
+      typename vector<T, Alloc>::value_type const & val) {
     clearMe(v);
     allocMe(v, n, val);
     v._capacity = n;
@@ -354,7 +366,9 @@ namespace ft {
 
   template < class T, class Alloc>
   template < class InputIterator >
-  inline void                   vector<T, Alloc>::reallocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, InputIterator first, InputIterator last) {
+  inline void   vector<T, Alloc>::reallocMe(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type & n,
+      InputIterator first, InputIterator last) {
     clearMe(v);
     allocMe(v, n, first, last);
     v._capacity = n;
@@ -362,7 +376,9 @@ namespace ft {
 
   template < class T, class Alloc>
   template < class InputIterator >
-  inline void                   vector<T, Alloc>::reallocMe(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type const & n, const InputIterator first, const InputIterator last) {
+  inline void   vector<T, Alloc>::reallocMe(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type const & n,
+      const InputIterator first, const InputIterator last) {
     clearMe(v);
     allocMe(v, n, first, last);
     v._capacity = n;
@@ -370,7 +386,8 @@ namespace ft {
   
   template < class T, class Alloc>
   template < class InputIterator >
-  inline void                     vector<T, Alloc>::replace(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type & n, InputIterator & first) {
+  inline void   vector<T, Alloc>::replace(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type & n, InputIterator & first) {
     for (size_type i = 0; i < v._capacity; i++) {
       v._alloc.destroy(v._arr + i);
       if (i < n) {
@@ -381,7 +398,9 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void                     vector<T, Alloc>::replace(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type n, const typename vector<T, Alloc>::value_type& val) {
+  inline void   vector<T, Alloc>::replace(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type n,
+      const typename vector<T, Alloc>::value_type& val) {
     for (size_type i = 0; i < v._capacity; i++) {
       v._alloc.destroy(v._arr + i);
       if (i < n)
@@ -390,7 +409,9 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void                     vector<T, Alloc>::checkAndReserve(vector<T, Alloc> & v, typename vector<T, Alloc>::size_type m, typename vector<T, Alloc>::size_type n) {
+  inline void   vector<T, Alloc>::checkAndReserve(vector<T, Alloc> & v,
+      typename vector<T, Alloc>::size_type m,
+      typename vector<T, Alloc>::size_type n) {
     if (!v._capacity)
       v.reserve(m);
     else if (n >= v._capacity)
@@ -398,7 +419,7 @@ namespace ft {
   }
   
   template < class T, class Alloc>
-  inline void                   vector<T, Alloc>::isValidInsert(typename vector<T, Alloc>::size_type n) {
+  inline void   vector<T, Alloc>::isValidInsert(typename vector<T, Alloc>::size_type n) {
     checkIfValid(*this, n, "vector::_M_fill_insert");
     pointer tmp = _alloc.allocate(_size + n);
     _alloc.deallocate(tmp, _size + n);
@@ -406,7 +427,10 @@ namespace ft {
 
   template < class T, class Alloc>
   template < class InputIterator >
-  inline typename vector<T, Alloc>::iterator                     vector<T, Alloc>::storePositionAndReserve(vector<T, Alloc> & v, InputIterator & position, typename vector<T, Alloc>::size_type reserveSize1, typename vector<T, Alloc>::size_type reserveSize2) {
+  inline typename vector<T, Alloc>::iterator    vector<T, Alloc>::storePositionAndReserve
+      (vector<T, Alloc> & v, InputIterator & position,
+      typename vector<T, Alloc>::size_type reserveSize1,
+      typename vector<T, Alloc>::size_type reserveSize2) {
     size_type i = ft::distance(v.begin(), position);
     checkAndReserve(v, reserveSize1, reserveSize2);
     return (begin() + i);
@@ -414,7 +438,7 @@ namespace ft {
 
   template < class T, class Alloc>
   template < class InputIterator >
-  inline bool                   vector<T, Alloc>::isIteratorInVector(vector<T, Alloc> & v, InputIterator & iter) {
+  inline bool   vector<T, Alloc>::isIteratorInVector(vector<T, Alloc> & v, InputIterator & iter) {
     for (iterator it = v.begin(); it != v.end(); it++)
       if (&(*it) == &(*iter))
         return true;
@@ -422,7 +446,8 @@ namespace ft {
   }
 
   template < class T, class Alloc>
-  inline void                        vector<T, Alloc>::checkIfValid(vector<T, Alloc> & v, vector<T, Alloc>::size_type & n, std::string str) {
+  inline void   vector<T, Alloc>::checkIfValid(vector<T, Alloc> & v,
+      vector<T, Alloc>::size_type & n, std::string str) {
     if (n > v.max_size())
       throw std::length_error(str);
     pointer tmp = v._alloc.allocate(n);
